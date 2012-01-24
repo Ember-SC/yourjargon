@@ -1,0 +1,1 @@
+Feature: user deletes a definition for a term without deleting the word, phrase, or acronym itself.
