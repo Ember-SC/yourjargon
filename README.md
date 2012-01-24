@@ -11,16 +11,13 @@ experience.
 
 ## Prerequisites
 
-Building and running this application presumes that you have already done the following:
-
-1.  This presumes you are running:
  * Mac OS X
  * **Snow Leopard** or **Lion**
  * 64 bit
 
 ## Preparation
 
-A number of open-source packages are required; here's how to get them:
+A number of open-source packages are required:
 
 ### Xcode
 
@@ -40,8 +37,6 @@ To install:
     bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 
 ### Install Ruby 1.9.3-p0 and the Ruby Gems
-
-Do this section if you haven't installed Ruby version `1.9.3-p0`.
 
 Using *rvm*:
 
@@ -85,7 +80,24 @@ This will cause *rvm* to ask you to confirm whether you want to use the `.rvmrc`
 
 ### Running the Web Application
 
-[Browse](http://localhost:3000/todos)
+[Browse](http://localhost:3000/)
+
+### Running the Browser Tests
+
+#### Method 1
+
+In your project home directory:
+
+    guard
+
+Observe the test report. *NOTE: this is set up so that everytime you save a javascript file,
+all the client tests are run again.*
+
+#### Method 2
+
+[Browse](http://localhost:3000/jasmine)
+
+This will show a **Jasmine** dashboard in which you can run tests and see results.
 
 # Miscellaneous
 
