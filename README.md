@@ -1,7 +1,7 @@
 # yourjargon - A Private Maintainable Glossary
 
 This web application shows the power of Rails and [EmberJS](http://emberjs.com) to provide a powerful client side
-experience.
+experience.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are used to drive out the functionality.
 
 # What Does this Web Application Do?
 
@@ -56,6 +56,15 @@ a javascript engine for running unit tests.  The 3rd command below copies its bi
     git clone git://github.com/ariya/phantomjs.git && cd phantomjs && git checkout 1.3
     qmake -spec macx-g++ && make
     cp bin/phantomjs /usr/local/bin
+
+### Cucumber.js
+
+Cucumber needs the following support:
+
+1.  Install [node.js](http://www.nodejs.org/#download) Macintosh installer
+1.  Install `npm`:
+
+    curl http://npmjs.org/install.sh | sh
 
 ## Installation
 
