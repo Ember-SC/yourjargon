@@ -3,8 +3,8 @@ Feature: add a term
   I want to add a term to the dictionary
   So that someone can fill in the definition or someone will benefit from my definition of it.
 
-  Before:
-  I am logged into yourjargon
+  Background:
+    Given I am logged into yourjargon
 
   Scenario Outline: add a term with a definition
     When I enter a term and definition

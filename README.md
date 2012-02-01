@@ -66,6 +66,10 @@ Cucumber needs the following support:
 
     curl http://npmjs.org/install.sh | sh
 
+1.  Now you can install ```Cucumber``` using ```npm```:
+
+
+
 ## Installation
 
 Now, with the prep work finished, we can install the application.
