@@ -42,4 +42,5 @@ group :development, :test do
   gem 'jasmine'
   gem 'jasminerice'
   gem 'guard-jasmine'
+  gem 'cucumber'
 end
