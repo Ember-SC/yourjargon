@@ -11,14 +11,3 @@ YJ.definedTermsController = Em.ArrayProxy.create({
 
 });
 
-YJ.Api = Em.Object.extend({
-
-  submitTerm: function(term) {
-    if (term.get('description') != null) {
-      YJ.definedTermsController.pushObject(term);
-    }
-  }
-
-});
-
-YJ.api = YJ.Api.create();

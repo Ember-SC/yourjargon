@@ -14,8 +14,8 @@ describe ("Add item", function(){
     var	term=YJ.Term.create({
 			 term:"a term"
 		});
-    term.set('definition', 'a definition');
-		YJ.api.submitTerm(term);
+		term.set("definition", "a definition");
+    definedTerms.pushObject(term);
     expect(definedTerms.get("length")).toBe(1);
 	});
 });
