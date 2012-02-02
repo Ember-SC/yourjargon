@@ -1,3 +1,4 @@
+
 YJ = Em.Application.create();
 
 YJ.Term = Em.Object.extend({
@@ -8,5 +9,5 @@ YJ.Term = Em.Object.extend({
 YJ.definedTermsController = Em.ArrayProxy.create({
   content: []
 
-
 });
+
