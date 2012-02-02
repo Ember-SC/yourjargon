@@ -68,7 +68,7 @@ Cucumber needs the following support:
 
 1.  Now you can install ```Cucumber``` using ```npm```:
 
-
+*NOTE: we don't actually have Cucumber.js working quite yet.*
 
 ## Installation
 
