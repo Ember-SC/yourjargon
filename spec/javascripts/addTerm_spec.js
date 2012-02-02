@@ -14,5 +14,5 @@ describe ("Add item", function(){
 		});
 		term.set("definition", "a definition");	
 		expect(YJ.definedTerms.get("length")).toBe(0);
-	}
-}
+	});
+});

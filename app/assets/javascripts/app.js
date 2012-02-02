@@ -1,1 +1,1 @@
-YJ = Em.Appliation.create();
+var YJ = Em.Appliation.create();
