@@ -12,8 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
-//= require ember 
-
-YJ = Em.Appliation.create();
-
+//= require_tree ./support
+//= require app.js
