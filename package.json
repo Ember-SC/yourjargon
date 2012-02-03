@@ -1,0 +1,18 @@
+{
+  "author": "Scott Smith <scottnelsonsmith@gmail.com> (oldfartdeveloper)",
+  "name": "yourjargon",
+  "description": "The client side of a private glossary app",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/OC-Emberjs/yourjargon.git"
+  },
+  "engines": {
+    "node": "~0.6.8"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cucumber": "latest"
+  },
+  "optionalDependencies": {}
+}
