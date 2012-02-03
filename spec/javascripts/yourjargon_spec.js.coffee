@@ -1,12 +1,14 @@
-describe "Dummy", ->
-  it "shows that jasmine works ", ->
-    expect(false).toEqual(false)
+describe "Submiting a term", ->
 
-describe "Add a term with a definition", ->
-	it "will be added to the list of defined terms", ->
-    definedTerms = YJ.definedTermsController
-    expect(definedTerms.get("length")).toBe 0
+  it "with no definition will be added to the list of undefined terms", ->
     term = YJ.Term.create(term: "a term")
-    term.set "definition", "a definition"
-    definedTerms.pushObject term
-    expect(definedTerms.get("length")).toBe 1
+    alert("The term attribute looks like '#{term.get('term')}'")
+    alert("The undefined term definition looks like '#{term.get('not_there')}'")
+    YJ.submitTerm(term)
+    expect(YJ.undefinedTermsController.get("length")).toBe 1
+
+  it "with definition will be added to the list of defined terms", ->
+    term = YJ.Term.create(term: "another term")
+    term.set("definition", "a definition")
+    YJ.submitTerm(term)
+    expect(YJ.definedTermsController.get("length")).toBe 1
