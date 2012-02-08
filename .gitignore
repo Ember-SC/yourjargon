@@ -13,6 +13,4 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-
-# Ignore rvm config file
-.rvmrc
+db/schema.rb
