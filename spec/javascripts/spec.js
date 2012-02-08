@@ -7,6 +7,7 @@
 // Date: 1/21/12
 // Time: 11:36 PM
 //
+//= require_tree ./support
 //= require application
 //= require_tree ./
 
