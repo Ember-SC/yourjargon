@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require tabs
+//= require_tree ./support
+//= require app.js
