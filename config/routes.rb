@@ -6,6 +6,8 @@ Yourjargon::Application.routes.draw do
     mount Jasminerice::Engine => "/jasmine"
   end
 
+  resources :home
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
@@ -52,7 +54,7 @@ Yourjargon::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
