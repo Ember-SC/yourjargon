@@ -92,12 +92,23 @@ a:hover { color: #036; }
   height: 50px;
   margin-top: -25px;
 }
+
+.fixed-height-foo {
+  position:absolute;
+  width: 100%;
+  height: 50px;
+}
 /*
 Allow children to absolutely position themselves inside
 */
 .pane {
   position: relative;
   display: block;
+}
+
+.vertical-align-to-parent {
+  vertical-align: middle;
+  display: inline-block;
 }
 
 .search_pane_middle {
@@ -127,9 +138,10 @@ Allow children to absolutely position themselves inside
 }
 
 .float-right {
-  float: right;
-  margin: 5px;
+  position: absolute;
+  right: 5px;
 }
+
 
 .ul-left-margin-adj {
   margin-left: -1px;
