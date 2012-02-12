@@ -130,7 +130,6 @@ GEM
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
       rubyzip
-    skeleton-rails (0.0.2)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -161,6 +160,5 @@ DEPENDENCIES
   rails (= 3.2.0)
   rspec
   sass-rails (~> 3.2.3)
-  skeleton-rails
   sqlite3
   uglifier (>= 1.0.3)
