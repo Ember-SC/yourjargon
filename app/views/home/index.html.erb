@@ -1,51 +1,72 @@
 <!-- This is a basic layout started for the term list layout page.  To be turned into hamlbar template -->
-<div class="top-fixed">
-  <div class="pane use-all-height">
-    <div class="use-all-height"><p class="absolute-left your jargon">Your Jargon</p></div>
-    <button class="absolute-right button-middle">New</button>
-    <div class="use-all-height">
-      <h1 class="search-all-terms">All Terms</h1>
+<div class="container">
+
+  <div class="sixteen columns allwide">
+    <div class="row clearfix" style="position: fixed; top: 0px;">
+      <div class="two columns yourjargon">
+        <h2 style="position: absolute; left: 0px;">Your Jargon</h2>
+      </div>
+      <div class="twelve columns offset-by-two allterms">
+        <h1 style="text-align: center;">All Terms</h1>
+      </div>
+      <div class="two columns newterm">
+        <button style="position: absolute; right: 0px; top: 5px;">New</button>
+      </div>
     </div>
-  </div>
-  <div class="pane search_pane_middle">
-    <input type="search" class="search_full_width">
-  </div>
-</div>
-<div class="bottom-scrollable">
-  <div class="pane use-all-available">
-    <ul class="absolute-left absolute-top ul-left-margin-adj">
-      <li>FDIC</li>
-      <li>TTFM</li>
-      <li>LOL</li>
-      <li>TMI</li>
-      <li>ROFL</li>
-    </ul>
-    <ul class="absolute-right absolute-top">
-      <li>A</li>
-      <li>B</li>
-      <li>C</li>
-      <li>D</li>
-      <li>E</li>
-      <li>A</li>
-      <li>B</li>
-      <li>C</li>
-      <li>D</li>
-      <li>E</li>
-      <li>A</li>
-      <li>B</li>
-      <li>C</li>
-      <li>D</li>
-      <li>E</li>
-      <li>A</li>
-      <li>B</li>
-      <li>C</li>
-      <li>D</li>
-      <li>E</li>
-      <li>A</li>
-      <li>B</li>
-      <li>C</li>
-      <li>D</li>
-      <li>E</li>
-    </ul>
+    <div class="row clearfix" style="position: fixed; top: 50px; overflow-y: scroll; height: 100%">
+      <div class="fifteen columns termslist">
+        <ul style="position: absolute; left: 0px; margin-left: 1px">
+          <li>Term One</li>
+          <li>Term One</li>
+          <li>Term One</li>
+          <li>Term One</li>
+          <li>Term One</li>
+          <li>Term One</li>
+          <li>Term One</li>
+          <li>Term One</li>
+          <li>Term One</li>
+          <li>Term One</li>
+        </ul>
+      </div>
+      <div class="one column offset-by-15 alphabet">
+        <ul style="position: absolute; right: 0px;">
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+          <li>A</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
