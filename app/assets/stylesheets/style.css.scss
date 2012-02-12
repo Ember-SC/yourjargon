@@ -88,6 +88,11 @@ a:hover { color: #036; }
 // Define the top part of the terms list page:
 $search-top-height: 32px;
 
+.fixed-row {
+  position: fixed;
+  top: 0px !important;
+}
+
 .top-fixed {
   position: fixed;
   top: 0px;
@@ -109,6 +114,12 @@ $search-top-height: 32px;
   text-align: center;
   width: 100%;
   line-height: $search-top-height;
+}
+
+.position-top-right {
+  position: absolute;
+  right: 0px;
+  top: 0px;
 }
 
 // Define the middle part of the terms list page:
@@ -149,10 +160,6 @@ Allow children to absolutely position themselves inside
   display: inline-block;
 }
 
-.search_pane_middle {
-  height: 30px;
-}
-
 .use-all-height {
   height: 100%;
 }
@@ -162,58 +169,6 @@ Allow children to absolutely position themselves inside
   width: 100%;
 }
 
-.absolute-top {
-  position:absolute;
-  top: 5px;
-}
-.absolute-left {
-  position: absolute;
-  left: 5px;
-}
-
 .center {
   text-align: center;
-}
-
-.button-middle {
-  top: 6px;
-}
-
-.absolute-right {
-  position: absolute;
-  right: 5px;
-}
-
-.float-right {
-  position: absolute;
-  right: 5px;
-}
-
-// Hide the bullet in the ul list:
-.ul-left-margin-adj {
-  margin-left: -1px;
-}
-
-.header-top {
-  top: 5px;
-}
-
-.header-middle {
-  float: left;
-  height: 50%;
-  margin-bottom: -30px;
-}
-
-.header-size {
-  clear: both;
-  height: 60px;
-  position: relative;
-}
-
-.search_full_width {
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  right: 5px;
-  bottom: 5px;
 }
