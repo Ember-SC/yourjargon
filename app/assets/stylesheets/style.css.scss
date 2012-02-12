@@ -86,12 +86,18 @@ a:hover { color: #036; }
     \\ ========================================== //
 */
 // Define the top part of the terms list page:
-$search-top-height: 40px;
+$search-top-height: 32px;
 
 .top-fixed {
   position: fixed;
   top: 0px;
   height: $search-top-height;
+}
+
+.your-jargon {
+  width: 100%;
+  line-height: $search-top-height;
+  font-style: italic;
 }
 
 .search-all-terms {
@@ -156,6 +162,10 @@ Allow children to absolutely position themselves inside
 
 .center {
   text-align: center;
+}
+
+.button-middle {
+  top: 6px;
 }
 
 .absolute-right {
