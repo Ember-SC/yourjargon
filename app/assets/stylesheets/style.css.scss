@@ -123,11 +123,18 @@ $search-bottom-top: $search-top-height + $search-middle-height;
 }
 
 // Define the scrollable bottom part of the terms list page:
-.bottom-scrollable {
-  position: fixed;
+// NOTE: Seem to have to attach this via the ID rather
+// than class.
+#bottom-scrollable {
   top: $search-bottom-top;
-  height: 100%;
+  position: fixed;
   overflow-y: scroll;
+  height: 100%;
+}
+
+.bottom-top {
+  top: $search-bottom-top;
+  position: fixed;
 }
 /*
 Allow children to absolutely position themselves inside
