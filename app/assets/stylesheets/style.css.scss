@@ -293,8 +293,6 @@ $search-bottom-top: $search-top-height + $search-middle-height;
 // Define the scrollable bottom part of the terms list page:
 // NOTE: Seem to have to attach this via the ID rather
 // than class.
-
-
 #bottom-scrollable {
   top: $search-bottom-top;
   position: fixed;
@@ -302,31 +300,9 @@ $search-bottom-top: $search-top-height + $search-middle-height;
   height: 100%;
 }
 
-.bottom-top {
+.position-alphabet-list {
   top: $search-bottom-top;
   position: fixed;
-}
-
-/*
-Allow children to absolutely position themselves inside
-*/
-.pane {
-  position: relative;
-  display: block;
-}
-
-.vertical-align-to-parent {
-  vertical-align: middle;
-  display: inline-block;
-}
-
-.use-all-height {
-  height: 100%;
-}
-
-.use-all-available {
-  height: 100%;
-  width: 100%;
 }
 
 .center {
