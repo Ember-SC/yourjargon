@@ -249,7 +249,7 @@ $new-button-top-offset: 3px;
   top: 0px;
 }
 
-.your-jargon {
+.your-jargon-title {
   width: 100%;
   line-height: $search-top-height;
   font-style: italic;
@@ -260,17 +260,6 @@ $new-button-top-offset: 3px;
   line-height: $search-top-height;
 }
 
-.search-top {
-  position: fixed;
-  top: $search-top-height;
-}
-
-.search-all-terms {
-  text-align: center;
-  width: 100%;
-  line-height: $search-top-height;
-}
-
 .new-button-position {
   position: absolute;
   right: 0px;
@@ -278,10 +267,13 @@ $new-button-top-offset: 3px;
 }
 
 // Define the middle part of the terms list page:
-
-
 $search-middle-height: 30px;
 $search-bottom-top: $search-top-height + $search-middle-height;
+
+.search-top {
+  position: fixed;
+  top: $search-top-height;
+}
 
 .search-box {
   position: absolute;
