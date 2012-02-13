@@ -1,6 +1,9 @@
 exports = this
 exports.YJ = Em.Application.create()
 
+YJ.ready = ->
+  YJ.alphabetController.populate()
+
 YJ.Term = Em.Object.extend(
     term: null
     description: null
@@ -8,7 +11,7 @@ YJ.Term = Em.Object.extend(
 
 YJ.termsController = Em.ArrayProxy.create(content: [])
 
-YJ.alphabetController = Em.ArrayProxy.create(
+YJ.alphabetController = Em.ArrayController.create(
     content: []
 
     populate: ->
@@ -19,9 +22,7 @@ YJ.alphabetController = Em.ArrayProxy.create(
       i = startChar.charCodeAt()
       j = i + count
       while i < j
-        this.pushObject(String.fromCharCode(i))
-        i++
-
+        this.pushObject(String.fromCharCode(i++))
 )
 
 YJ.submitTerm = (term) ->
