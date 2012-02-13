@@ -10,17 +10,18 @@ YJ.termsController = Em.ArrayProxy.create(content: [])
 
 YJ.alphabetController = Em.ArrayProxy.create(
     content: []
+
     populate: ->
-      codeA = 'A'.charCodeAt()
-      codeZ = codeA + 26
-      while codeA < codeZ
-        this.pushObject(String.fromCharCode(codeA))
-        codeA++
-      code0 = '0'.charCodeAt()
-      code9 = code0 + 10
-      while code0 < code9
-        this.pushObject(String.fromCharCode(code0))
-        code0++
+      this.populateRange('A', 26)
+      this.populateRange('0', 10)
+
+    populateRange: (startChar, count) ->
+      i = startChar.charCodeAt()
+      j = i + count
+      while i < j
+        this.pushObject(String.fromCharCode(i))
+        i++
+
 )
 
 YJ.submitTerm = (term) ->
