@@ -107,7 +107,7 @@ In your project home directory:
 
     guard
 
-Observe the test report. *NOTE: this is set up so that everytime you save a javascript file,
+Observe the test report. *NOTE: this is set up so that every time you save a javascript file,
 all the client tests are run again.*
 
 #### Method 2
