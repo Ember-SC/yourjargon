@@ -1,17 +1,30 @@
 exports = this
 exports.YJ = Em.Application.create()
 
-YJ.submitTerm = (term) ->
-  if term.get('definition') is undefined
-    this.undefinedTermsController.pushObject(term)
-  else
-    this.definedTermsController.pushObject(term)
+YJ.ready = ->
+  YJ.alphabetController.populate()
 
 YJ.Term = Em.Object.extend(
-  term: null
-  description: null
+    term: null
+    description: null
 )
 
-YJ.definedTermsController = Em.ArrayProxy.create(content: [])
-YJ.undefinedTermsController = Em.ArrayProxy.create(content: [])
+YJ.termsController = Em.ArrayProxy.create(content: [])
+
+YJ.alphabetController = Em.ArrayController.create(
+    content: []
+
+    populate: ->
+      this.populateRange('A', 26)
+      this.populateRange('0', 10)
+
+    populateRange: (startChar, count) ->
+      i = startChar.charCodeAt()
+      j = i + count
+      while i < j
+        this.pushObject(String.fromCharCode(i++))
+)
+
+YJ.submitTerm = (term) ->
+  this.termsController.pushObject(term)
 
