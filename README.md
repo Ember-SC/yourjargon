@@ -53,22 +53,26 @@ This last step will take a few minutes.  When done:
 [phantomJS](http://code.google.com/p/phantomjs/) is a headless WebKit with JavaScript API.  We're going to use it as
 a javascript engine for running unit tests.  The 3rd command below copies its binary to a location in your path.
 
-    git clone git://github.com/ariya/phantomjs.git && cd phantomjs && git checkout 1.3
-    qmake -spec macx-g++ && make
-    cp bin/phantomjs /usr/local/bin
+    git clone git://github.com/ariya/phantomjs.git
+    cd phantomjs
+    git checkout 1.3 qmake -spec macx-g++
+    make cp bin/phantomjs /usr/local/bin
 
-### Cucumber.js
+### Node.js
 
-Cucumber needs the following support:
+[This link will download the Mac OSX version of node.js](http://nodejs.org/dist/v0.6.11/node-v0.6.11.pkg) so that
+Cucumber can use
+its javascript engine
+and its ```npm```
+packaging capability
 
-1.  Install [node.js](http://www.nodejs.org/#download) Macintosh installer
-1.  Install `npm`:
+### Install Cucumber.js
 
-    curl http://npmjs.org/install.sh | sh
+    sudo npm install cucumber
 
-1.  Now you can install ```Cucumber``` using ```npm```:
+This will place ```cucumber.js``` and all of its ```npm``` packaging dependencies into
 
-*NOTE: we don't actually have Cucumber.js working quite yet.*
+    node_modules/cucumber
 
 ## Installation
 
@@ -103,7 +107,7 @@ In your project home directory:
 
     guard
 
-Observe the test report. *NOTE: this is set up so that everytime you save a javascript file,
+Observe the test report. *NOTE: this is set up so that every time you save a javascript file,
 all the client tests are run again.*
 
 #### Method 2
