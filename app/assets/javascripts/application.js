@@ -15,3 +15,4 @@
 //= require ember-dev
 //= require tabs
 //= require app.js
+//= require templates/all.js
