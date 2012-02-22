@@ -12,6 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ember-dev
 //= require tabs
-//= require_tree ./support
 //= require app.js
