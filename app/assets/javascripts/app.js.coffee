@@ -9,12 +9,14 @@ YJ.Term = Em.Object.extend(
 YJ.termController = Em.Object.create(
   newTerm: ->
     YJ.editTermView.set('term', YJ.Term.create())
-
 )
 
 YJ.termsController = Em.ArrayProxy.create(
   content: [],
   init: ->
+    @load()
+
+  load: ->
     t1 = YJ.Term.create(term: "Mitt")
     t1.set('description', 'has a lot of money')
     t2 = YJ.Term.create(term: "Newt")
@@ -39,7 +41,8 @@ YJ.editTermView = Em.View.create(
   term: null
 )
 
-YJ.newButtonView = Em.View.create(
-  click: ->
-    YJ.termController.newTerm()
+YJ.NewButtonView = Em.View.extend(
+
+  new: ->
+    YJ.termController.newTerm();
 )
