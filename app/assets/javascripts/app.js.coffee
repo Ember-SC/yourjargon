@@ -30,5 +30,4 @@ YJ.editTermView = Em.View.create(
 YJ.newButtonView = Em.View.create(
   click: ->
     YJ.termController.newTerm()
-
 )
