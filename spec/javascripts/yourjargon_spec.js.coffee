@@ -1,14 +1,19 @@
 describe "Submiting a term", ->
 
-  it "with no definition will be added to the list of undefined terms", ->
-    term = YJ.Term.create(term: "a term")
-    alert("The term attribute looks like '#{term.get('term')}'")
-    alert("The undefined term definition looks like '#{term.get('not_there')}'")
-    YJ.submitTerm(term)
-    expect(YJ.undefinedTermsController.get("length")).toBe 1
+  beforeEach ->
+    tc = YJ.termsController
+    len = tc.get('length')
+    tc.removeAt(0, len) if (len > 0)
 
-  it "with definition will be added to the list of defined terms", ->
+  it "with no definition will be added to the list of terms", ->
+    term = YJ.Term.create(term: "a term")
+    expect(YJ.termsController.get("length")).toBe 0
+    YJ.submitTerm(term)
+    expect(YJ.termsController.get("length")).toBe 1
+
+  it "with definition will be added to the list of terms", ->
     term = YJ.Term.create(term: "another term")
     term.set("definition", "a definition")
+    expect(YJ.termsController.get("length")).toBe 0
     YJ.submitTerm(term)
-    expect(YJ.definedTermsController.get("length")).toBe 1
+    expect(YJ.termsController.get("length")).toBe 1
