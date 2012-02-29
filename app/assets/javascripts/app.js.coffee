@@ -16,6 +16,7 @@ YJ.termsController = Em.ArrayProxy.create(
   init: ->
     @load()
 
+  # This is temporary so that we can see some generated data on the list page.  It will come out soon.
   load: ->
     t1 = YJ.Term.create(term: "Mitt")
     t1.set('description', 'has a lot of money')
