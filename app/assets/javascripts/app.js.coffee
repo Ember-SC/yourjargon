@@ -7,8 +7,20 @@ YJ.Term = Em.Object.extend(
 )
 
 YJ.termController = Em.Object.create(
+  currentTerm: null
+
   newTerm: ->
-    YJ.editTermView.set('term', YJ.Term.create())
+    $("#indexTermView").hide()
+    @currentTerm = YJ.Term.create(term: "A term", definition: "A description")
+    YJ.editTermView = YJ.EditTermView.create()
+    YJ.editTermView.append()
+
+  updateTerm: ->
+    console.log("update term controller")
+    YJ.termsController.pushObject(@currentTerm)
+    YJ.editTermView.remove()
+    $("#indexTermView").show()
+
 )
 
 YJ.termsController = Em.ArrayProxy.create(
@@ -32,18 +44,21 @@ YJ.termsController = Em.ArrayProxy.create(
 YJ.submitTerm = (term) ->
   this.termsController.pushObject(term)
 
-YJ.indexTermView = Em.View.extend(
+YJ.IndexTermView = Em.View.extend(
   templateName: 'templates/terms/index'
 )
 
-YJ.editTermView = Em.View.create(
-  tagName: 'form'
+YJ.EditTermView = Em.View.extend(
+  termBinding: 'YJ.termController.currentTerm'
   templateName: 'templates/terms/edit'
-  term: null
+
+  update: ->
+    alert('Yeee')
+    YJ.termController.updateTerm()
 )
 
 YJ.NewButtonView = Em.View.extend(
 
   new: ->
-    YJ.termController.newTerm();
+    YJ.termController.newTerm()
 )
