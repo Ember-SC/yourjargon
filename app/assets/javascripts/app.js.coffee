@@ -18,6 +18,7 @@ YJ.termController = Em.Object.create(
   updateTerm: ->
     console.log("update term controller")
     YJ.termsController.pushObject(@currentTerm)
+    console.log("update term controller - length: " + YJ.termsController.content.length)
     YJ.editTermView.remove()
     $("#indexTermView").show()
 
@@ -53,7 +54,6 @@ YJ.EditTermView = Em.View.extend(
   templateName: 'templates/terms/edit'
 
   update: ->
-    alert('Yeee')
     YJ.termController.updateTerm()
 )
 
