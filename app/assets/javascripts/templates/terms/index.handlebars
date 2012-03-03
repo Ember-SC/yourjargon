@@ -5,7 +5,9 @@
         <h2 class="your-jargon-title">Your Jargon</h2>
     </div>
     <div class="one columns offset-by-fifteen omega fixed-row">
-      <button class="new-button-position">New</button>
+      {{#view YJ.NewButtonView}}
+       <button {{action "new" }} class="new-button-position">New</button>
+      {{/view}}
     </div>
   </div>
   <div class="row fixed-row">
@@ -23,60 +25,9 @@
   <div class="row" id="bottom-scrollable">
     <div class="fifteen columns alpha">
       <ul class="terms-list-position">
-        <li>Term One</li>
-        <li>Term One</li>
-        <li>Term One</li>
-        <li>Term One</li>
-        <li>Term One</li>
-        <li>Term One</li>
-        <li>Term One</li>
-        <li>Term One</li>
-        <li>Term One</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Two</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Three</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
-        <li>Term Four</li>
+        {{#each YJ.termsController}}
+          <li>{{term}}</li>
+        {{/each}}
       </ul>
     </div>
     <div class="one columns offset-by-fifteen omega">
