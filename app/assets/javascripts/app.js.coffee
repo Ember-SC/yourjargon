@@ -10,8 +10,13 @@ YJ.termController = Em.Object.create(
   currentTerm: null
 
   newTerm: ->
+    term = YJ.Term.create(term: "A term", definition: "A description")
+    @editTerm(term)
+
+
+  editTerm: (term) ->
     $("#indexTermView").hide()
-    @set('currentTerm', YJ.Term.create(term: "A term", definition: "A description"))
+    @set('currentTerm', term)
     YJ.editTermView = YJ.EditTermView.create()
     YJ.editTermView.append()
 
@@ -58,6 +63,17 @@ YJ.IndexTermView = Em.View.extend(
 YJ.ListTermsView = Em.View.extend(
   templateName: 'templates/terms/list'
   termsBinding: 'YJ.termsController'
+
+)
+
+YJ.LinkView = Em.View.extend(
+  term: null
+
+  edit: (event) ->
+    event.preventDefault() # this keeps the browser from trying to refresh/reload the page
+    term = this.get('term')
+    console.log(this.get('term'))
+    YJ.termController.editTerm(term)
 )
 
 YJ.EditTermView = Em.View.extend(
@@ -72,6 +88,11 @@ YJ.NewButtonView = Em.View.extend(
 
   new: ->
     YJ.termController.newTerm()
+)
+
+YJ.AlphabetView = Em.View.extend(
+  templateName: 'templates/alphabet'
+
 )
 
 # load test terms.
