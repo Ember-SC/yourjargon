@@ -1,13 +1,9 @@
 <div class="container">
-
   <div class="row fixed-row">
     <div class="three columns alpha">
         <h2 class="your-jargon-title">Your Jargon</h2>
     </div>
     <div class="one columns offset-by-fifteen omega fixed-row">
-      {{#view YJ.NewButtonView}}
-       <button {{action "new" }} class="new-button-position">New</button>
-      {{/view}}
     </div>
   </div>
   <div class="row fixed-row">
@@ -17,48 +13,20 @@
   </div>
   <div class="row search-top">
     <div class="sixteen columns">
-      <form>
         <input type="search" id="regularInput" class="search-box">
-      </form>
     </div>
   </div>
   <div class="row" id="bottom-scrollable">
     <div class="fifteen columns alpha">
-      <ul class="terms-list-position">
-        {{#each YJ.termsController}}
-          <li>{{term}}</li>
-        {{/each}}
-      </ul>
+        {{view YJ.ListTermsView}}
     </div>
     <div class="one columns offset-by-fifteen omega">
-      <ul class="position-alphabet-list">
-        <li>A</li>
-        <li>B</li>
-        <li>C</li>
-        <li>D</li>
-        <li>E</li>
-        <li>F</li>
-        <li>G</li>
-        <li>H</li>
-        <li>I</li>
-        <li>J</li>
-        <li>K</li>
-        <li>L</li>
-        <li>M</li>
-        <li>N</li>
-        <li>O</li>
-        <li>P</li>
-        <li>Q</li>
-        <li>R</li>
-        <li>S</li>
-        <li>T</li>
-        <li>U</li>
-        <li>V</li>
-        <li>W</li>
-        <li>X</li>
-        <li>Y</li>
-        <li>Z</li>
-      </ul>
+        {{view YJ.AlphabetView}}
     </div>
+  </div>
+  <div>
+  {{#view YJ.NewButtonView}}
+  <button {{action "new" }} class="new-button-position">New</button>
+  {{/view}}
   </div>
 </div>

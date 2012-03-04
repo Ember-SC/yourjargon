@@ -10,8 +10,13 @@ YJ.termController = Em.Object.create(
   currentTerm: null
 
   newTerm: ->
+    term = YJ.Term.create(term: "A term", definition: "A description")
+    @editTerm(term)
+
+
+  editTerm: (term) ->
     $("#indexTermView").hide()
-    @currentTerm = YJ.Term.create(term: "A term", definition: "A description")
+    @set('currentTerm', term)
     YJ.editTermView = YJ.EditTermView.create()
     YJ.editTermView.append()
 
@@ -25,9 +30,7 @@ YJ.termController = Em.Object.create(
 )
 
 YJ.termsController = Em.ArrayProxy.create(
-  content: [],
-  init: ->
-    @load()
+  content: []
 
   # This is temporary so that we can see some generated data on the list page.  It will come out soon.
   load: ->
@@ -40,13 +43,37 @@ YJ.termsController = Em.ArrayProxy.create(
     @pushObject(t1)
     @pushObject(t2)
     @pushObject(t3)
+
+  # Another debugger function. Will come out
+  addTestTerm: ->
+    t = YJ.Term.create(term: "Obama", description: "Good speaker")
+    @pushObject(t)
+
 )
 
-YJ.submitTerm = (term) ->
-  this.termsController.pushObject(term)
+####
+# VIEWS
+####
+
 
 YJ.IndexTermView = Em.View.extend(
   templateName: 'templates/terms/index'
+)
+
+YJ.ListTermsView = Em.View.extend(
+  templateName: 'templates/terms/list'
+  termsBinding: 'YJ.termsController'
+
+)
+
+YJ.LinkView = Em.View.extend(
+  term: null
+
+  edit: (event) ->
+    event.preventDefault() # this keeps the browser from trying to refresh/reload the page
+    term = this.get('term')
+    console.log(this.get('term'))
+    YJ.termController.editTerm(term)
 )
 
 YJ.EditTermView = Em.View.extend(
@@ -62,3 +89,12 @@ YJ.NewButtonView = Em.View.extend(
   new: ->
     YJ.termController.newTerm()
 )
+
+YJ.AlphabetView = Em.View.extend(
+  templateName: 'templates/alphabet'
+
+)
+
+# load test terms.
+
+YJ.termsController.load()
