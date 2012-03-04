@@ -11,22 +11,21 @@ YJ.termController = Em.Object.create(
 
   newTerm: ->
     $("#indexTermView").hide()
-    @currentTerm = YJ.Term.create(term: "A term", definition: "A description")
+    @set('currentTerm', YJ.Term.create(term: "A term", definition: "A description"))
     YJ.editTermView = YJ.EditTermView.create()
     YJ.editTermView.append()
 
   updateTerm: ->
     console.log("update term controller")
     YJ.termsController.pushObject(@currentTerm)
+    console.log(YJ.termsController.get('content').length)
     YJ.editTermView.remove()
     $("#indexTermView").show()
 
 )
 
 YJ.termsController = Em.ArrayProxy.create(
-  content: [],
-  init: ->
-    @load()
+  content: []
 
   # This is temporary so that we can see some generated data on the list page.  It will come out soon.
   load: ->
@@ -39,13 +38,26 @@ YJ.termsController = Em.ArrayProxy.create(
     @pushObject(t1)
     @pushObject(t2)
     @pushObject(t3)
+
+  # Another debugger function. Will come out
+  addTestTerm: ->
+    t = YJ.Term.create(term: "Obama", description: "Good speaker")
+    @pushObject(t)
+
 )
 
-YJ.submitTerm = (term) ->
-  this.termsController.pushObject(term)
+####
+# VIEWS
+####
+
 
 YJ.IndexTermView = Em.View.extend(
   templateName: 'templates/terms/index'
+)
+
+YJ.ListTermsView = Em.View.extend(
+  templateName: 'templates/terms/list'
+  termsBinding: 'YJ.termsController'
 )
 
 YJ.EditTermView = Em.View.extend(
@@ -53,7 +65,6 @@ YJ.EditTermView = Em.View.extend(
   templateName: 'templates/terms/edit'
 
   update: ->
-    alert('Yeee')
     YJ.termController.updateTerm()
 )
 
@@ -62,3 +73,7 @@ YJ.NewButtonView = Em.View.extend(
   new: ->
     YJ.termController.newTerm()
 )
+
+# load test terms.
+
+YJ.termsController.load()
