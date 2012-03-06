@@ -6,31 +6,31 @@ YJ.Term = Em.Object.extend(
     description: null
 )
 
-YJ.termController = Em.Object.create(
+####
+# CONTROLLERS
+####
+
+YJ.termsController = Em.ArrayProxy.create(
+  content: []
   currentTerm: null
 
   newTerm: ->
-    term = YJ.Term.create(term: "A term", definition: "A description")
-    @editTerm(term)
+    @editTerm(YJ.Term.create(term: "A term", definition: "A description"))
 
 
   editTerm: (term) ->
+    console.log("editTerm: #{term.term} => #{term.description}")
     $("#indexTermView").hide()
     @set('currentTerm', term)
     YJ.editTermView = YJ.EditTermView.create()
     YJ.editTermView.append()
 
-  updateTerm: ->
-    console.log("update term controller")
+  updateTerm: () ->
+    console.log("termsController#updateTerm - term: '#{@currentTerm.get('term')}'; description: '#{@currentTerm.get('description')}'")
     YJ.termsController.pushObject(@currentTerm)
     console.log("update term controller - length: " + YJ.termsController.content.length)
     YJ.editTermView.remove()
     $("#indexTermView").show()
-
-)
-
-YJ.termsController = Em.ArrayProxy.create(
-  content: []
 
   # This is temporary so that we can see some generated data on the list page.  It will come out soon.
   load: ->
@@ -63,7 +63,6 @@ YJ.IndexTermView = Em.View.extend(
 YJ.ListTermsView = Em.View.extend(
   templateName: 'templates/terms/list'
   termsBinding: 'YJ.termsController'
-
 )
 
 YJ.LinkView = Em.View.extend(
@@ -73,21 +72,21 @@ YJ.LinkView = Em.View.extend(
     event.preventDefault() # this keeps the browser from trying to refresh/reload the page
     term = this.get('term')
     console.log(this.get('term'))
-    YJ.termController.editTerm(term)
+    YJ.termsController.editTerm(term)
 )
 
 YJ.EditTermView = Em.View.extend(
-  termBinding: 'YJ.termController.currentTerm'
+  termBinding: 'YJ.termsController.currentTerm'
   templateName: 'templates/terms/edit'
 
   update: ->
-    YJ.termController.updateTerm()
+    YJ.termsController.updateTerm()
 )
 
 YJ.NewButtonView = Em.View.extend(
 
   new: ->
-    YJ.termController.newTerm()
+    YJ.termsController.newTerm()
 )
 
 YJ.AlphabetView = Em.View.extend(
