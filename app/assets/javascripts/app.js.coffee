@@ -19,7 +19,7 @@ YJ.termsController = Em.ArrayProxy.create(
 
 
   editTerm: (term) ->
-    console.log("editTerm: #{term.term} => #{term.description}")
+    console.log("editTerm: '#{term.term}' => '#{term.description}'")
     $("#indexTermView").hide()
     @set('currentTerm', term)
     YJ.editTermView = YJ.EditTermView.create()
