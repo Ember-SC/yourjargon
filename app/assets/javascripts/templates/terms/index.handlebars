@@ -18,7 +18,12 @@
   </div>
   <div class="row" id="bottom-scrollable">
     <div class="fifteen columns alpha">
-        {{view YJ.ListTermsView}}
+    <!--
+      {{#collection contentBinding="YJ.termsController" tagName="ul" action="update"}}
+        {{view Ember.Checkbox valueBinding="content.term"}}
+      {{/collection}}
+    -->
+      {{view YJ.ListTermsView action="update"}}
     </div>
     <div class="one columns offset-by-fifteen omega">
         {{view YJ.AlphabetView}}
