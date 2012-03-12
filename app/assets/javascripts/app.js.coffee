@@ -4,33 +4,47 @@ exports.YJ = Em.Application.create()
 YJ.Term = Em.Object.extend(
     term: null
     description: null
+
+    firstLetter: (->
+      return @get('term').charAt(0).toUpperCase()
+    ).property('term')
+
 )
 
-YJ.termController = Em.Object.create(
+####
+# CONTROLLERS
+####
+
+YJ.termsController = Em.ArrayProxy.create(
+  content: []
   currentTerm: null
+  searchLetter: null
 
   newTerm: ->
-    term = YJ.Term.create(term: "A term", definition: "A description")
-    @editTerm(term)
+    @editTerm(YJ.Term.create(term: "A term", definition: "A description"))
 
 
   editTerm: (term) ->
+    console.log("editTerm: '#{term.term}' => '#{term.description}'")
     $("#indexTermView").hide()
     @set('currentTerm', term)
     YJ.editTermView = YJ.EditTermView.create()
     YJ.editTermView.append()
 
-  updateTerm: ->
-    console.log("update term controller")
+  updateTerm: () ->
+    console.log("termsController#updateTerm - term: '#{@currentTerm.get('term')}'; description: '#{@currentTerm.get('description')}'")
     YJ.termsController.pushObject(@currentTerm)
-    console.log(YJ.termsController.get('content').length)
+    console.log("update term controller - length: " + YJ.termsController.content.length)
     YJ.editTermView.remove()
     $("#indexTermView").show()
 
-)
+  filtered: (->
+    if @get("searchLetter") is null
+      @get('content')
+    else
+      filteredList = @get('content').filterProperty 'firstLetter', @get('searchLetter')
+  ).property('searchLetter').cacheable()
 
-YJ.termsController = Em.ArrayProxy.create(
-  content: []
 
   # This is temporary so that we can see some generated data on the list page.  It will come out soon.
   load: ->
@@ -51,6 +65,10 @@ YJ.termsController = Em.ArrayProxy.create(
 
 )
 
+YJ.alphabetController = Em.ArrayProxy.create(
+  content: ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+)
+
 ####
 # VIEWS
 ####
@@ -62,8 +80,7 @@ YJ.IndexTermView = Em.View.extend(
 
 YJ.ListTermsView = Em.View.extend(
   templateName: 'templates/terms/list'
-  termsBinding: 'YJ.termsController'
-
+  termsBinding: 'YJ.termsController.filtered'
 )
 
 YJ.LinkView = Em.View.extend(
@@ -73,26 +90,38 @@ YJ.LinkView = Em.View.extend(
     event.preventDefault() # this keeps the browser from trying to refresh/reload the page
     term = this.get('term')
     console.log(this.get('term'))
-    YJ.termController.editTerm(term)
+    YJ.termsController.editTerm(term)
 )
 
 YJ.EditTermView = Em.View.extend(
-  termBinding: 'YJ.termController.currentTerm'
+  termBinding: 'YJ.termsController.currentTerm'
   templateName: 'templates/terms/edit'
 
   update: ->
-    YJ.termController.updateTerm()
+    YJ.termsController.updateTerm()
 )
 
 YJ.NewButtonView = Em.View.extend(
 
   new: ->
-    YJ.termController.newTerm()
+    YJ.termsController.newTerm()
 )
 
 YJ.AlphabetView = Em.View.extend(
   templateName: 'templates/alphabet'
 
+  all: (event) ->
+    event.preventDefault()
+    YJ.termsController.set('searchLetter', null)
+
+)
+
+YJ.AlphabetLinkView = Em.View.extend(
+
+
+  click: (event) ->
+    event.preventDefault() # this keeps the browser from trying to refresh/reload the page
+    YJ.termsController.set('searchLetter', @get('content').valueOf())
 )
 
 # load test terms.
