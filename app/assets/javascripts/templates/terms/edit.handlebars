@@ -1,5 +1,5 @@
 {{#view YJ.EditTermView id="editTermView"}}
   term: {{view Ember.TextField valueBinding="term.term"}}
-  definition: {{view Ember.TextField valueBinding="term.definition"}}
+  definition: {{view Ember.TextArea valueBinding="term.description"}}
   <button {{action "update"}}> Submit </button>
 {{/view}}
