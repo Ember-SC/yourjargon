@@ -17,3 +17,5 @@ describe "Submiting a term", ->
     @tc.set('currentTerm', @term)
     @tc.add(@term)
     expect(@tc.get("length")).toBe 1
+
+

@@ -22,17 +22,18 @@ YJ.termsController = Em.ArrayProxy.create(
   content: []
   currentTerm: null
   searchLetter: null
+  dummySomething = 47
 
   # Start insert of code from examples.  This does the sorting
 
   # content: []
   add: (term) ->
     length = @get("length")
-    idx = undefined
+#    idx = undefined
     srtValue = term.get('sortValue')
     console.log("termsController#add: sortValue='#{srtValue}'")
     idx = @binarySearch(srtValue, 0, length)
-    console.log("termsController#add: sortValue='#{srtValue}'; idx='#{idx}'; length='#{length}'")
+    console.log("termsController#add: sortValue='#{srtValue}'; idx='#{idx}'; length='#{@.get('content').length}'")
     @insertAt idx, term
     term.addObserver "sortValue", this, "termSortValueDidChange"
 
@@ -72,7 +73,7 @@ YJ.termsController = Em.ArrayProxy.create(
 
   updateTerm: () ->
     console.log("termsController#updateTerm - term: '#{@currentTerm.get('term')}'; description: '#{@currentTerm.get('description')}'")
-    YJ.termsController.add(@currentTerm)
+#    YJ.termsController.add(@currentTerm)
     console.log("update term controller - length: " + YJ.termsController.content.length)
     YJ.editTermView.remove()
     $("#indexTermView").show()
@@ -89,7 +90,7 @@ YJ.termsController = Em.ArrayProxy.create(
   load: ->
     t = YJ.Term.create(term: "Newt")
     t.set('description', 'plays fast and loose in debates')
-    YJ.termsController.add(t)
+    @.add(t)
     t = YJ.Term.create(term: "Mitt")
     t.set('description', 'has a lot of money')
     YJ.termsController.add(t)
