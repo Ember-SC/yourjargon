@@ -9,11 +9,11 @@ describe "Submiting a term", ->
 
   it "with no definition will be added to the list of terms", ->
     @tc.set('currentTerm', @term)
-    @tc.updateTerm()
+    @tc.add(@term)
     expect(@tc.get("length")).toBe 1
 
   it "with definition will be added to the list of terms", ->
+    @term.set("definition", "a definition")
     @tc.set('currentTerm', @term)
-    @tc.set("definition", "a definition")
-    @tc.updateTerm()
+    @tc.add(@term)
     expect(@tc.get("length")).toBe 1
