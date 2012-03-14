@@ -72,9 +72,6 @@ YJ.termsController = Em.ArrayProxy.create(
     YJ.editTermView.append()
 
   updateTerm: () ->
-    console.log("termsController#updateTerm - term: '#{@currentTerm.get('term')}'; description: '#{@currentTerm.get('description')}'")
-#    YJ.termsController.add(@currentTerm)
-    console.log("update term controller - length: " + YJ.termsController.content.length)
     YJ.editTermView.remove()
     $("#indexTermView").show()
 
