@@ -22,9 +22,6 @@ YJ.termsController = Em.ArrayProxy.create(
   content: []
   currentTerm: null
   searchLetter: null
-  dummySomething = 47
-
-  # Start insert of code from examples.  This does the sorting
 
   # content: []
   add: (term) ->
@@ -59,8 +56,6 @@ YJ.termsController = Em.ArrayProxy.create(
 
   newTerm: ->
     @add YJ.Term.create(term: "A term", definition: "A description")
-
-  # End insert of code from examples
 
 
 
