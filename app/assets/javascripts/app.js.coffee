@@ -2,13 +2,16 @@ exports = this
 exports.YJ = Em.Application.create()
 
 YJ.Term = Em.Object.extend(
-    term: null
-    description: null
+  term: null
+  description: null
 
-    firstLetter: (->
-      return @get('term').charAt(0).toUpperCase()
-    ).property('term')
+  firstLetter: (->
+    return @get('term').charAt(0).toUpperCase()
+  ).property('term')
 
+  sortValue: (->
+    return @get("term")
+  ).property("term")
 )
 
 ####
@@ -20,8 +23,40 @@ YJ.termsController = Em.ArrayProxy.create(
   currentTerm: null
   searchLetter: null
 
+  # content: []
+  add: (term) ->
+    length = @get("length")
+#    idx = undefined
+    srtValue = term.get('sortValue')
+    console.log("termsController#add: sortValue='#{srtValue}'")
+    idx = @binarySearch(srtValue, 0, length)
+    console.log("termsController#add: sortValue='#{srtValue}'; idx='#{idx}'; length='#{@.get('content').length}'")
+    @insertAt idx, term
+    term.addObserver "sortValue", this, "termSortValueDidChange"
+
+  # todo: move this to a SortedArrayProxy class
+  binarySearch: (value, low, high) ->
+    mid = undefined
+    midValue = undefined
+    return low  if low is high
+    mid = low + Math.floor((high - low) / 2)
+    midValue = @objectAt(mid).get("sortValue")
+    return @binarySearch(value, mid + 1, high) if value > midValue
+    return @binarySearch(value, low, mid) if value < midValue
+    mid
+
+  remove: (term) ->
+    @removeObject term
+    term.removeObserver "sortValue", this, "termSortValueDidChange"
+
+  termSortValueDidChange: (term) ->
+    console.log("termSortValueDidChange: '#{term.term}'")
+    @remove term
+    @add term
+
   newTerm: ->
-    @editTerm(YJ.Term.create(term: "A term", definition: "A description"))
+    @add YJ.Term.create(term: "A term", definition: "A description")
+
 
 
   editTerm: (term) ->
@@ -32,9 +67,6 @@ YJ.termsController = Em.ArrayProxy.create(
     YJ.editTermView.append()
 
   updateTerm: () ->
-    console.log("termsController#updateTerm - term: '#{@currentTerm.get('term')}'; description: '#{@currentTerm.get('description')}'")
-    YJ.termsController.pushObject(@currentTerm)
-    console.log("update term controller - length: " + YJ.termsController.content.length)
     YJ.editTermView.remove()
     $("#indexTermView").show()
 
@@ -48,15 +80,15 @@ YJ.termsController = Em.ArrayProxy.create(
 
   # This is temporary so that we can see some generated data on the list page.  It will come out soon.
   load: ->
-    t1 = YJ.Term.create(term: "Mitt")
-    t1.set('description', 'has a lot of money')
-    t2 = YJ.Term.create(term: "Newt")
-    t2.set('description', 'plays fast and loose in debates')
-    t3 = YJ.Term.create(term: "Santorum")
-    t3.set('description', 'Dan Savage coined his last name')
-    @pushObject(t1)
-    @pushObject(t2)
-    @pushObject(t3)
+    t = YJ.Term.create(term: "Newt")
+    t.set('description', 'plays fast and loose in debates')
+    @.add(t)
+    t = YJ.Term.create(term: "Mitt")
+    t.set('description', 'has a lot of money')
+    YJ.termsController.add(t)
+    t = YJ.Term.create(term: "Santorum")
+    t.set('description', 'Dan Savage coined his last name')
+    YJ.termsController.add(t)
 
   # Another debugger function. Will come out
   addTestTerm: ->
