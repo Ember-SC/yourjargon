@@ -23,7 +23,6 @@ YJ.termsController = Em.ArrayProxy.create(
   currentTerm: null
   searchLetter: null
 
-  # content: []
   add: (term) ->
     length = @get("length")
 #    idx = undefined
@@ -34,7 +33,7 @@ YJ.termsController = Em.ArrayProxy.create(
     @insertAt idx, term
     term.addObserver "sortValue", this, "termSortValueDidChange"
 
-  # todo: move this to a SortedArrayProxy class
+  # todo: move this to a SortArray class
   binarySearch: (value, low, high) ->
     mid = undefined
     midValue = undefined
@@ -82,13 +81,13 @@ YJ.termsController = Em.ArrayProxy.create(
   load: ->
     t = YJ.Term.create(term: "Newt")
     t.set('description', 'plays fast and loose in debates')
-    YJ.termsController.add(t)
+    @add(t)
     t = YJ.Term.create(term: "Mitt")
     t.set('description', 'has a lot of money')
-    YJ.termsController.add(t)
+    @add(t)
     t = YJ.Term.create(term: "Santorum")
     t.set('description', 'Dan Savage coined his last name')
-    YJ.termsController.add(t)
+    @add(t)
 
   # Another debugger function. Will come out
   addTestTerm: ->
