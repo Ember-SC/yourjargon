@@ -1,0 +1,6 @@
+{{#view YJ.EditTermView id="editTermView"}}
+term: {{view Ember.TextField valueBinding="term.term"}}
+definition: {{view Ember.TextArea valueBinding="term.description"}}
+<button {{action "add"}}> Add </button>
+<button {{action "cancel"}}> Cancel </button>
+{{/view}}
