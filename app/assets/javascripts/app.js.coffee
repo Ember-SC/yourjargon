@@ -82,7 +82,7 @@ YJ.termsController = Em.ArrayProxy.create(
   load: ->
     t = YJ.Term.create(term: "Newt")
     t.set('description', 'plays fast and loose in debates')
-    @.add(t)
+    YJ.termsController.add(t)
     t = YJ.Term.create(term: "Mitt")
     t.set('description', 'has a lot of money')
     YJ.termsController.add(t)
