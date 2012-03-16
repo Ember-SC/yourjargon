@@ -23,7 +23,6 @@ YJ.termsController = Em.ArrayProxy.create(
   currentTerm: null
   searchLetter: null
 
-  # content: []
   add: (term) ->
     length = @get("length")
 #    idx = undefined
@@ -34,7 +33,12 @@ YJ.termsController = Em.ArrayProxy.create(
     @insertAt idx, term
     term.addObserver "sortValue", this, "termSortValueDidChange"
 
-  # todo: move this to a SortedArrayProxy class
+  addCurrent: ->
+    @add(@currentTerm)
+    YJ.newTermView.remove()
+    $("#indexTermView").show()
+
+  # todo: move this to a SortArray class
   binarySearch: (value, low, high) ->
     mid = undefined
     midValue = undefined
@@ -55,9 +59,10 @@ YJ.termsController = Em.ArrayProxy.create(
     @add term
 
   newTerm: ->
-    @add YJ.Term.create(term: "A term", definition: "A description")
-
-
+    @set('currentTerm', YJ.Term.create())
+    $("#indexTermView").hide()
+    YJ.newTermView = YJ.NewTermView.create()
+    YJ.newTermView.append()
 
   editTerm: (term) ->
     console.log("editTerm: '#{term.term}' => '#{term.description}'")
@@ -82,13 +87,13 @@ YJ.termsController = Em.ArrayProxy.create(
   load: ->
     t = YJ.Term.create(term: "Newt")
     t.set('description', 'plays fast and loose in debates')
-    @.add(t)
+    @add(t)
     t = YJ.Term.create(term: "Mitt")
     t.set('description', 'has a lot of money')
-    YJ.termsController.add(t)
+    @add(t)
     t = YJ.Term.create(term: "Santorum")
     t.set('description', 'Dan Savage coined his last name')
-    YJ.termsController.add(t)
+    @add(t)
 
   # Another debugger function. Will come out
   addTestTerm: ->
@@ -133,11 +138,25 @@ YJ.EditTermView = Em.View.extend(
     YJ.termsController.updateTerm()
 )
 
-YJ.NewButtonView = Em.View.extend(
+YJ.NewTermView = Em.View.extend(
+  termBinding: 'YJ.termsController.currentTerm'
+  templateName: 'templates/terms/new'
+  add: ->
+    YJ.termsController.addCurrent()
+)
 
-  new: ->
+YJ.NewTermButton = Em.Button.extend(
+  term: null
+  description: null
+  click: ->
     YJ.termsController.newTerm()
 )
+
+#YJ.NewButtonView = Em.View.extend(
+#
+#  new: ->
+#    YJ.termsController.newTerm()
+#)
 
 YJ.AlphabetView = Em.View.extend(
   templateName: 'templates/alphabet'
