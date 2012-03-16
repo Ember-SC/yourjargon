@@ -1,23 +1,16 @@
-<div class="container">
-  <div class="row fixed-row">
-    <div class="three columns alpha">
-        <h2 class="your-jargon-title">Your Jargon</h2>
-    </div>
-    <div class="one columns offset-by-fifteen omega fixed-row">
-    </div>
-  </div>
-  <div class="row fixed-row">
-    <div class="sixteen columns absolute-columns">
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">
       <h1 class="all-terms-title">All Terms</h1>
     </div>
   </div>
-  <div class="row search-top">
-    <div class="sixteen columns">
+  <div class="row-fluid search-top">
+    <div class="span4">
         <input type="search" id="regularInput" class="search-box">
     </div>
   </div>
-  <div class="row" id="bottom-scrollable">
-    <div class="fifteen columns alpha">
+  <div class="row-fluid" id="bottom-scrollable">
+    <div class="span3">
     <!--
       {{#collection contentBinding="YJ.termsController" tagName="ul" action="update"}}
         {{view Ember.Checkbox valueBinding="content.term"}}
@@ -25,7 +18,7 @@
     -->
       {{view YJ.ListTermsView action="update"}}
     </div>
-    <div class="one columns offset-by-fifteen omega">
+    <div class="span3">
         {{view YJ.AlphabetView}}
     </div>
   </div>
