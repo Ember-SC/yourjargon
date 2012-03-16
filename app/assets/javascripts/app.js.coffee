@@ -34,6 +34,11 @@ YJ.termsController = Em.ArrayProxy.create(
     @insertAt idx, term
     term.addObserver "sortValue", this, "termSortValueDidChange"
 
+  addCurrent: ->
+    @add(@currentTerm)
+    YJ.newTermView.remove()
+    $("#indexTermView").show()
+
   # todo: move this to a SortedArrayProxy class
   binarySearch: (value, low, high) ->
     mid = undefined
@@ -55,9 +60,10 @@ YJ.termsController = Em.ArrayProxy.create(
     @add term
 
   newTerm: ->
-    @add YJ.Term.create(term: "A term", definition: "A description")
-
-
+    @set('currentTerm', YJ.Term.create())
+    $("#indexTermView").hide()
+    YJ.newTermView = YJ.NewTermView.create()
+    YJ.newTermView.append()
 
   editTerm: (term) ->
     console.log("editTerm: '#{term.term}' => '#{term.description}'")
@@ -133,11 +139,25 @@ YJ.EditTermView = Em.View.extend(
     YJ.termsController.updateTerm()
 )
 
-YJ.NewButtonView = Em.View.extend(
+YJ.NewTermView = Em.View.extend(
+  termBinding: 'YJ.termsController.currentTerm'
+  templateName: 'templates/terms/new'
+  add: ->
+    YJ.termsController.addCurrent()
+)
 
-  new: ->
+YJ.NewTermButton = Em.Button.extend(
+  term: null
+  description: null
+  click: ->
     YJ.termsController.newTerm()
 )
+
+#YJ.NewButtonView = Em.View.extend(
+#
+#  new: ->
+#    YJ.termsController.newTerm()
+#)
 
 YJ.AlphabetView = Em.View.extend(
   templateName: 'templates/alphabet'
