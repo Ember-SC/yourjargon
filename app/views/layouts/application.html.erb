@@ -9,7 +9,22 @@
 </head>
 
 <body data-rendering="true">
+  <header>
+  <div class='navbar-fixed-top'>
+    <div class='navbar-inner'>
+      <div class='container-fluid'>
+        <a class="brand" href="#">
+           Your Jargon
+        </a>
 
+        <ul class="top-nav pull-right">
+          <li><input type="text" class="search-query" placeholder="Search Terms..."></li>
+          <li> Login | Sign up </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </header>
 <%= yield %>
 
 </body>
