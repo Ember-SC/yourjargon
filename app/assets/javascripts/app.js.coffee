@@ -185,6 +185,7 @@ YJ.AlphabetLinkView = Em.View.extend(
 YJ.stateManager = Em.StateManager.create(
   listTermsState: Ember.ViewState.create(
     view: YJ.ListTermsView.create()
+    isStart: true
   )
   newTermState: Ember.ViewState.create(
     view: YJ.NewTermView.create()
