@@ -22,7 +22,6 @@ describe "State manager", ->
 
   it "has the list terms state set as the start state", ->
     state = @stateManager.listTermsState
-    # Jasmine won't let me compare the currentState to the listViewState:
     expect(state.isStart).toBeTrue
 
   it "does not have the edit term state set as the start date", ->
