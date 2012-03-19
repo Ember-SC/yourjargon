@@ -1,6 +1,10 @@
 exports = this
 exports.YJ = Em.Application.create()
 
+####
+# MODELS
+####
+
 YJ.Term = Em.Object.extend(
   term: null
   description: null
@@ -169,10 +173,25 @@ YJ.AlphabetView = Em.View.extend(
 
 YJ.AlphabetLinkView = Em.View.extend(
 
-
   click: (event) ->
     event.preventDefault() # this keeps the browser from trying to refresh/reload the page
     YJ.termsController.set('searchLetter', @get('content').valueOf())
+)
+
+####
+# STATE MANAGER
+####
+
+YJ.stateManager = Em.StateManager.create(
+  listTermsState: Ember.ViewState.create(
+    view: YJ.ListTermsView.create()
+  )
+  newTermState: Ember.ViewState.create(
+    view: YJ.NewTermView.create()
+  )
+  editTermState: Ember.ViewState.create(
+    view: YJ.EditTermView.create()
+  )
 )
 
 # load test terms.
