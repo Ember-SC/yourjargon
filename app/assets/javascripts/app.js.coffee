@@ -1,6 +1,10 @@
 exports = this
 exports.YJ = Em.Application.create()
 
+####
+# MODELS
+####
+
 YJ.Term = Em.Object.extend(
   term: null
   description: null
@@ -35,8 +39,7 @@ YJ.termsController = Em.ArrayProxy.create(
 
   addCurrent: ->
     @add(@currentTerm)
-    YJ.newTermView.remove()
-    $("#indexTermView").show()
+    YJ.stateManager.goToState('mainState')
 
   # todo: move this to a SortArray class
   binarySearch: (value, low, high) ->
@@ -60,20 +63,15 @@ YJ.termsController = Em.ArrayProxy.create(
 
   newTerm: ->
     @set('currentTerm', YJ.Term.create())
-    $("#indexTermView").hide()
-    YJ.newTermView = YJ.NewTermView.create()
-    YJ.newTermView.append()
+    YJ.stateManager.goToState('newTermState')
 
   editTerm: (term) ->
     console.log("editTerm: '#{term.term}' => '#{term.description}'")
-    $("#indexTermView").hide()
     @set('currentTerm', term)
-    YJ.editTermView = YJ.EditTermView.create()
-    YJ.editTermView.append()
+    YJ.stateManager.goToState('editTermState')
 
   updateTerm: () ->
-    YJ.editTermView.remove()
-    $("#indexTermView").show()
+    YJ.stateManager.goToState('mainState')
 
   filtered: (->
     if @get("searchLetter") is null
@@ -110,9 +108,9 @@ YJ.alphabetController = Em.ArrayProxy.create(
 # VIEWS
 ####
 
-
-YJ.IndexTermView = Em.View.extend(
-  templateName: 'templates/terms/index'
+YJ.MainView = Em.View.extend(
+  templateName: 'templates/terms/index',
+  elementId: 'content'
 )
 
 YJ.ListTermsView = Em.View.extend(
@@ -169,12 +167,48 @@ YJ.AlphabetView = Em.View.extend(
 
 YJ.AlphabetLinkView = Em.View.extend(
 
-
   click: (event) ->
     event.preventDefault() # this keeps the browser from trying to refresh/reload the page
     YJ.termsController.set('searchLetter', @get('content').valueOf())
 )
 
-# load test terms.
+####
+# STATE MANAGER
+####
 
+YJ.stateManager = Em.StateManager.create(
+
+  rootElement: '#content'
+
+  mainState: Ember.ViewState.create(
+    view: YJ.MainView
+    isStart: true
+
+    exit: ->
+      console.log("exitting mainState")
+      @._super()
+  )
+  newTermState: Ember.ViewState.create(
+    view: YJ.NewTermView
+
+    exit: ->
+      console.log("exitting newTermState")
+      @._super()
+  )
+  editTermState: Ember.ViewState.create(
+    view: YJ.EditTermView
+
+    exit: ->
+      console.log("exitting editTermState")
+      @._super()
+  )
+  start: @.mainState
+
+)
+
+# load test terms.
 YJ.termsController.load()
+
+# Wait for everything to load
+Ember.$ ->
+  YJ.stateManager.goToState('mainState')
