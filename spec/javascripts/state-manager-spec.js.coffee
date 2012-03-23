@@ -5,8 +5,8 @@ describe "State manager", ->
   it "has a state manager", ->
     expect(@stateManager).toNotBe(null)
 
-  it "has a list terms state with a list terms view", ->
-    state = @stateManager.listTermsState
+  it "has a main state with a main view", ->
+    state = @stateManager.mainState
     expect(state).toNotBe(null)
     expect(state.get('view')).toNotBe(null)
 
@@ -20,10 +20,10 @@ describe "State manager", ->
     expect(state).toNotBe(null)
     expect(state.get('view')).toNotBe(null)
 
-  it "has the list terms state set as the start state", ->
-    state = @stateManager.listTermsState
+  it "has the main state set as the start state", ->
+    state = @stateManager.mainState
     expect(state.isStart).toBeTrue
 
-  it "does not have the edit term state set as the start date", ->
+  it "does not have the edit term state set as the start state", ->
     state = @stateManager.editTermState
     expect(state.isStart).toBeFalsy()

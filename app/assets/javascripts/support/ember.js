@@ -2318,8 +2318,6 @@ Ember.wrap = function(func, superFunc) {
 };
 
 /**
-  @function
-
   Returns true if the passed object is an array or Array-like.
 
   Ember Array Protocol:
@@ -2331,6 +2329,11 @@ Ember.wrap = function(func, superFunc) {
   Unlike Ember.typeOf this method returns true even if the passed object is
   not formally array but appears to be array-like (i.e. implements Ember.Array)
 
+      Ember.isArray(); // false
+      Ember.isArray([]); // true
+      Ember.isArray( Ember.ArrayProxy.create({ content: [] }) ); // true
+
+  @name Ember.isArray
   @param {Object} obj The object to test
   @returns {Boolean}
 */
@@ -2346,6 +2349,15 @@ Ember.isArray = function(obj) {
   Forces the passed object to be part of an array.  If the object is already
   an array or array-like, returns the object.  Otherwise adds the object to
   an array.  If obj is null or undefined, returns an empty array.
+
+      Ember.makeArray();          => []
+      Ember.makeArray(null);      => []
+      Ember.makeArray(undefined); => []
+      Ember.makeArray('lindsay'); => ['lindsay'] 
+      Ember.makeArray([1,2,42]);  => [1,2,42]
+
+      var controller = Ember.ArrayProxy.create({ content: [] });
+      Ember.makeArray(controller) === controller;   => true
 
   @param {Object} obj the object
   @returns {Array}
@@ -3311,6 +3323,20 @@ var Cp = ComputedProperty.prototype;
   mode the computed property will automatically cache the return value of
   your function until one of the dependent keys changes.
 
+      MyApp.president = Ember.Object.create({
+        fullName: function() {
+          return this.get('firstName') + ' ' + this.get('lastName');
+
+          // After calculating the value of this function, Ember.js will
+          // return that value without re-executing this function until
+          // one of the dependent properties change.
+        }.property('firstName', 'lastName').cacheable()
+      });
+
+  It is common to use `cacheable()` on nearly every computed property
+  you define. 
+
+  @name Ember.ComputedProperty.cacheable
   @param {Boolean} aFlag optional set to false to disable cacheing
   @returns {Ember.ComputedProperty} receiver
 */
@@ -3323,6 +3349,16 @@ Cp.cacheable = function(aFlag) {
   Sets the dependent keys on this computed property.  Pass any number of
   arguments containing key paths that this computed property depends on.
 
+      MyApp.president = Ember.Object.create({
+        fullName: Ember.computed(function() {
+          return this.get('firstName') + ' ' + this.get('lastName');
+
+          // Tell Ember.js that this computed property depends on firstName
+          // and lastName
+        }).property('firstName', 'lastName')
+      });
+
+  @name Ember.ComputedProperty.property
   @param {String} path... zero or more property paths
   @returns {Ember.ComputedProperty} receiver
 */
@@ -3348,6 +3384,10 @@ Cp.property = function() {
   computed property descriptor under the `_meta` key. Ember runtime
   exposes a public API for retrieving these values from classes,
   via the `metaForProperty()` function.
+
+  @name Ember.ComputedProperty.meta
+  @param {Hash} metadata
+  @returns {Ember.ComputedProperty} property descriptor instance
 */
 
 Cp.meta = function(meta) {
@@ -3471,6 +3511,25 @@ Ember.computed = function(func) {
   return cp;
 };
 
+/**
+  Returns the cached value for a property, if one exists.
+  This can be useful for peeking at the value of a computed
+  property that is generated lazily, without accidentally causing
+  it to be created.
+
+  @param {Object} obj the object whose property you want to check
+  @param {String} key the name of the property whose cached value you want
+                      to return
+
+*/
+Ember.cacheFor = function(obj, key) {
+  var cache = meta(obj, false).cache;
+
+  if (cache && cache[key]) {
+    return cache[key];
+  }
+};
+
 })({});
 
 (function(exports) {
@@ -3562,6 +3621,13 @@ Ember.ArrayUtils = {
   indexOf: function(obj) {
     var args = Array.prototype.slice.call(arguments, 1);
     return obj.indexOf ? obj.indexOf.apply(obj, args) : arrayIndexOf.apply(obj, args);
+  },
+
+  indexesOf: function(obj) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return args[0] === undefined ? [] : Ember.ArrayUtils.map(args[0], function(item) {
+      return Ember.ArrayUtils.indexOf(obj, item);
+    });
   },
 
   removeObject: function(array, item) {
@@ -4466,7 +4532,7 @@ Ember.destroy = function (obj) {
 var o_create = Ember.platform.create;
 var meta = Ember.meta;
 var guidFor = Ember.guidFor;
-var array_Slice = Array.prototype.slice;
+var a_slice = Array.prototype.slice;
 
 /**
   The event system uses a series of nested hashes to store listeners on an
@@ -4661,7 +4727,7 @@ function sendEvent(obj, eventName) {
 
   // first give object a chance to handle it
   if (obj !== Ember && 'function' === typeof obj.sendEvent) {
-    obj.sendEvent.apply(obj, array_Slice.call(arguments, 1));
+    obj.sendEvent.apply(obj, a_slice.call(arguments, 1));
   }
 
   var targetSet = targetSetFor(obj, eventName);
@@ -4677,6 +4743,10 @@ function deferEvent(obj, eventName) {
   });
 
   return function() {
+    if (obj !== Ember && 'function' === typeof obj.sendEvent) {
+      obj.sendEvent.apply(obj, a_slice.call(params, 1));
+    }
+
     for (var i=0, len=actions.length; i < len; ++i) {
       invokeAction(actions[i], params);
     }
@@ -6807,18 +6877,36 @@ var toString = Object.prototype.toString;
   It will return the same result across all browsers and includes a bit
   more detail.  Here is what will be returned:
 
-  | Return Value Constant | Meaning |
-  | 'string' | String primitive |
-  | 'number' | Number primitive |
-  | 'boolean' | Boolean primitive |
-  | 'null' | Null value |
-  | 'undefined' | Undefined value |
-  | 'function' | A function |
-  | 'array' | An instance of Array |
-  | 'class' | A Ember class (created using Ember.Object.extend()) |
-  | 'instance' | A Ember object instance |
-  | 'error' | An instance of the Error object |
-  | 'object' | A JavaScript object not inheriting from Ember.Object |
+      | Return Value  | Meaning                                              |
+      |---------------|------------------------------------------------------|
+      | 'string'      | String primitive                                     |
+      | 'number'      | Number primitive                                     |
+      | 'boolean'     | Boolean primitive                                    |
+      | 'null'        | Null value                                           |
+      | 'undefined'   | Undefined value                                      |
+      | 'function'    | A function                                           |
+      | 'array'       | An instance of Array                                 |
+      | 'class'       | A Ember class (created using Ember.Object.extend())  |
+      | 'instance'    | A Ember object instance                              |
+      | 'error'       | An instance of the Error object                      |
+      | 'object'      | A JavaScript object not inheriting from Ember.Object |
+
+  Examples:
+
+      Ember.typeOf();                      => 'undefined'
+      Ember.typeOf(null);                  => 'null'
+      Ember.typeOf(undefined);             => 'undefined'
+      Ember.typeOf('michael');             => 'string'
+      Ember.typeOf(101);                   => 'number'
+      Ember.typeOf(true);                  => 'boolean'
+      Ember.typeOf(Ember.makeArray);       => 'function'
+      Ember.typeOf([1,2,90]);              => 'array'
+      Ember.typeOf(Ember.Object.extend()); => 'class'
+      Ember.typeOf(Ember.Object.create()); => 'instance'
+      Ember.typeOf(new Error('teamocil')); => 'error'
+
+      // "normal" JavaScript object
+      Ember.typeOf({a: 'b'});              => 'object'
 
   @param item {Object} the item to check
   @returns {String} the type
@@ -6844,6 +6932,13 @@ Ember.typeOf = function(item) {
   from JSLint complaining about use of ==, which can be technically
   confusing.
 
+      Ember.none();             => true
+      Ember.none(null);         => true
+      Ember.none(undefined);    => true
+      Ember.none('');           => false
+      Ember.none([]);           => false
+      Ember.none(function(){}); => false
+
   @param {Object} obj Value to test
   @returns {Boolean}
 */
@@ -6854,16 +6949,23 @@ Ember.none = function(obj) {
 /**
   Verifies that a value is null or an empty string | array | function.
 
+  Constrains the rules on `Ember.none` by returning false for empty
+  string and empty arrays.
+
+      Ember.empty();               => true
+      Ember.empty(null);           => true
+      Ember.empty(undefined);      => true
+      Ember.empty('');             => true
+      Ember.empty([]);             => true
+      Ember.empty('tobias fünke'); => false
+      Ember.empty([0,1,2]);        => false
+
   @param {Object} obj Value to test
   @returns {Boolean}
 */
 Ember.empty = function(obj) {
   return obj === null || obj === undefined || (obj.length === 0 && typeof obj !== 'function');
 };
-
-/**
-  Ember.isArray defined in ember-metal/lib/utils
-**/
 
 /**
  This will compare two javascript values of possibly different types.
@@ -6875,6 +6977,10 @@ Ember.empty = function(obj) {
 
  The order is calculated based on Ember.ORDER_DEFINITION, if types are different.
  In case they have the same type an appropriate comparison for this type is made.
+
+    Ember.compare('hello', 'hello');  => 0
+    Ember.compare('abc', 'dfg');      => -1
+    Ember.compare(2, 1);              => 1
 
  @param {Object} v First value to compare
  @param {Object} w Second value to compare
@@ -7041,9 +7147,13 @@ Ember.inspect = function(obj) {
 
 /**
   Compares two objects, returning true if they are logically equal.  This is
-  a deeper comparison than a simple triple equal.  For arrays and enumerables
-  it will compare the internal objects.  For any other object that implements
-  `isEqual()` it will respect that method.
+  a deeper comparison than a simple triple equal. For sets it will compare the
+  internal objects.  For any other object that implements `isEqual()` it will 
+  respect that method.
+
+      Ember.isEqual('hello', 'hello');  => true
+      Ember.isEqual(1, 2);              => false
+      Ember.isEqual([4,2], [4,2]);      => false
 
   @param {Object} a first object to compare
   @param {Object} b second object to compare
@@ -7391,16 +7501,95 @@ var a_slice = Array.prototype.slice;
 
 if (Ember.EXTEND_PROTOTYPES) {
 
+  /**
+    The `property` extension of Javascript's Function prototype is available
+    when Ember.EXTEND_PROTOTYPES is true, which is the default. 
+
+    Computed properties allow you to treat a function like a property:
+
+        MyApp.president = Ember.Object.create({
+          firstName: "Barack",
+          lastName: "Obama",
+
+          fullName: function() {
+            return this.get('firstName') + ' ' + this.get('lastName');
+
+            // Call this flag to mark the function as a property
+          }.property()
+        });
+
+        MyApp.president.get('fullName');    => "Barack Obama"
+
+    Treating a function like a property is useful because they can work with
+    bindings, just like any other property.
+
+    Many computed properties have dependencies on other properties. For
+    example, in the above example, the `fullName` property depends on
+    `firstName` and `lastName` to determine its value. You can tell Ember.js
+    about these dependencies like this:
+
+        MyApp.president = Ember.Object.create({
+          firstName: "Barack",
+          lastName: "Obama",
+
+          fullName: function() {
+            return this.get('firstName') + ' ' + this.get('lastName');
+
+            // Tell Ember.js that this computed property depends on firstName
+            // and lastName
+          }.property('firstName', 'lastName')
+        });
+
+    Make sure you list these dependencies so Ember.js knows when to update
+    bindings that connect to a computed property.
+
+    Note: you will usually want to use `property(...)` with `cacheable()`.
+
+    @see Ember.ComputedProperty
+    @see Ember.computed
+  */
   Function.prototype.property = function() {
     var ret = Ember.computed(this);
     return ret.property.apply(ret, arguments);
   };
 
+  /**
+    The `observes` extension of Javascript's Function prototype is available
+    when Ember.EXTEND_PROTOTYPES is true, which is the default. 
+
+    You can observe property changes simply by adding the `observes`
+    call to the end of your method declarations in classes that you write.
+    For example:
+
+        Ember.Object.create({
+          valueObserver: function() {
+            // Executes whenever the "value" property changes
+          }.observes('value')
+        });
+    
+    @see Ember.Observable
+  */
   Function.prototype.observes = function() {
     this.__ember_observes__ = a_slice.call(arguments);
     return this;
   };
 
+  /**
+    The `observesBefore` extension of Javascript's Function prototype is
+    available when Ember.EXTEND_PROTOTYPES is true, which is the default. 
+
+    You can get notified when a property changes is about to happen by
+    by adding the `observesBefore` call to the end of your method
+    declarations in classes that you write. For example:
+
+        Ember.Object.create({
+          valueObserver: function() {
+            // Executes whenever the "value" property is about to change
+          }.observesBefore('value')
+        });
+    
+    @see Ember.Observable
+  */
   Function.prototype.observesBefore = function() {
     this.__ember_observesBefore__ = a_slice.call(arguments);
     return this;
@@ -8237,7 +8426,7 @@ Ember.Enumerable = Ember.Mixin.create( /** @lends Ember.Enumerable */ {
 // HELPERS
 // 
 
-var get = Ember.get, set = Ember.set, meta = Ember.meta;
+var get = Ember.get, set = Ember.set, meta = Ember.meta, map = Ember.ArrayUtils.map;
 
 /** @private */
 function none(obj) { return obj===null || obj===undefined; }
@@ -8308,6 +8497,17 @@ Ember.Array = Ember.Mixin.create(Ember.Enumerable, /** @scope Ember.Array.protot
   objectAt: function(idx) {
     if ((idx < 0) || (idx>=get(this, 'length'))) return undefined ;
     return get(this, idx);
+  },
+
+  /**
+    This returns the objects at the specified indexes, using objectAt.
+
+    @param {Array} indexes
+      An array of indexes of items to return.
+   */
+  objectsAt: function(indexes) {
+    var self = this;
+    return map(indexes, function(value,idx){ return self.objectAt(idx); });
   },
 
   /** @private (nodoc) - overrides Ember.Enumerable version */
@@ -8977,6 +9177,24 @@ Ember.MutableArray = Ember.Mixin.create(Ember.Array, Ember.MutableEnumerable,
   replace: Ember.required(),
 
   /**
+    Remove all elements from self. This is useful if you
+    want to reuse an existing array without having to recreate it.
+
+        var colors = ["red", "green", "blue"];
+        color.length();  => 3
+        colors.clear();  => []
+        colors.length(); => 0
+
+    @returns {Ember.Array} An empty Array. 
+  */
+  clear: function () {
+    var len = get(this, 'length');
+    if (len === 0) return this;
+    this.replace(0, len, EMPTY);
+    return this;
+  },
+
+  /**
     This will use the primitive replace() method to insert an object at the
     specified index.
 
@@ -9619,11 +9837,23 @@ Ember.Observable = Ember.Mixin.create(/** @scope Ember.Observable.prototype */ {
     return get(this, keyName);
   },
 
+  /**
+    Returns the cached value of a computed property, if it exists.
+    This allows you to inspect the value of a computed property
+    without accidentally invoking it if it is intended to be
+    generated lazily.
+
+    @param {String} keyName
+    @returns {Object} The cached value of the computed property, if any
+  */
+  cacheFor: function(keyName) {
+    return Ember.cacheFor(this, keyName);
+  },
+
   /** @private - intended for debugging purposes */
   observersForKey: function(keyName) {
     return Ember.observersFor(this, keyName);
   }
-
 });
 
 
@@ -10163,7 +10393,13 @@ Ember.Set = Ember.CoreObject.extend(Ember.MutableEnumerable, Ember.Copyable, Emb
   clear: function() {
     if (this.isFrozen) { throw new Error(Ember.FROZEN_ERROR); }
     var len = get(this, 'length');
+    var guid;
     this.enumerableContentWillChange(len, 0);
+    for (var i=0; i < len; i++){
+      guid = guidFor(this[i]);
+      delete this[guid];
+      delete this[i];
+    }
     set(this, 'length', 0);
     this.enumerableContentDidChange(len, 0);
     return this;
@@ -16295,7 +16531,7 @@ ActionHelper.registerAction = function(actionName, eventName, target, view, cont
       event.view = view;
       event.context = context;
 
-      if ('function' === typeof target.send) {
+      if (Ember.StateManager && Ember.StateManager.detectInstance(target)) {
         return target.send(actionName, event);
       } else {
         return target[actionName].call(target, event);
@@ -16661,7 +16897,7 @@ Ember.TabView = Ember.View.extend({
 /*jshint eqeqeq:false */
 
 var set = Ember.set, get = Ember.get, getPath = Ember.getPath;
-var indexOf = Ember.ArrayUtils.indexOf;
+var indexOf = Ember.ArrayUtils.indexOf, indexesOf = Ember.ArrayUtils.indexesOf;
 
 Ember.Select = Ember.View.extend({
   tagName: 'select',
@@ -16669,7 +16905,9 @@ Ember.Select = Ember.View.extend({
     '{{#if prompt}}<option>{{prompt}}</option>{{/if}}' +
     '{{#each content}}{{view Ember.SelectOption contentBinding="this"}}{{/each}}'
   ),
+  attributeBindings: ['multiple'],
 
+  multiple: false,
   content: null,
   selection: null,
   prompt: null,
@@ -16686,6 +16924,30 @@ Ember.Select = Ember.View.extend({
   },
 
   change: function() {
+    if (get(this, 'multiple')) {
+      this._changeMultiple();
+    } else {
+      this._changeSingle();
+    }
+  },
+
+  selectionDidChange: Ember.observer(function() {
+    var selection = get(this, 'selection'),
+        isArray = Ember.isArray(selection);
+    if (get(this, 'multiple')) {
+      if (!isArray) {
+        set(this, 'selection', Ember.A([selection]));
+        return;
+      }
+      this._selectionDidChangeMultiple();
+    } else {
+      ember_assert("Select multiple is false, but you have specified an Array selection.", !isArray);
+      this._selectionDidChangeSingle();
+    }
+  }, 'selection'),
+
+
+  _changeSingle: function() {
     var selectedIndex = this.$()[0].selectedIndex,
         content = get(this, 'content'),
         prompt = get(this, 'prompt');
@@ -16697,7 +16959,22 @@ Ember.Select = Ember.View.extend({
     set(this, 'selection', content.objectAt(selectedIndex));
   },
 
-  selectionDidChange: Ember.observer(function() {
+  _changeMultiple: function() {
+    var options = this.$('option:selected'),
+        prompt = get(this, 'prompt'),
+        offset = prompt ? 1 : 0,
+        content = get(this, 'content');
+
+    if (!content){ return; }
+    if (options) {
+      var selectedIndexes = options.map(function(){
+        return this.index - offset;
+      });
+      set(this, 'selection', content.objectsAt(selectedIndexes));
+    }
+  },
+
+  _selectionDidChangeSingle: function() {
     var el = this.$()[0],
         content = get(this, 'content'),
         selection = get(this, 'selection'),
@@ -16706,7 +16983,23 @@ Ember.Select = Ember.View.extend({
 
     if (prompt) { selectionIndex += 1; }
     if (el) { el.selectedIndex = selectionIndex; }
-  }, 'selection')
+  },
+
+  _selectionDidChangeMultiple: function() {
+    var content = get(this, 'content'),
+        selection = get(this, 'selection'),
+        selectedIndexes = indexesOf(content, selection),
+        prompt = get(this, 'prompt'),
+        offset = prompt ? 1 : 0,
+        options = this.$('option');
+
+    if (options) {
+      options.each(function() {
+        this.selected = indexOf(selectedIndexes, this.index + offset) > -1;
+      });
+    }
+  }
+
 });
 
 Ember.SelectOption = Ember.View.extend({
@@ -16722,8 +17015,15 @@ Ember.SelectOption = Ember.View.extend({
   },
 
   selected: Ember.computed(function() {
-    // Primitives get passed through bindings as objects... since `new Number(4) !== 4`, we use `==` below
-    return get(this, 'content') == getPath(this, 'parentView.selection');
+    var content = get(this, 'content'),
+        selection = getPath(this, 'parentView.selection');
+    if (getPath(this, 'parentView.multiple')) {
+      return selection && indexOf(selection, content) > -1;
+    } else {
+      // Primitives get passed through bindings as objects... since
+      // `new Number(4) !== 4`, we use `==` below
+      return content == selection;
+    }
   }).property('content', 'parentView.selection'),
 
   labelPathDidChange: Ember.observer(function() {
