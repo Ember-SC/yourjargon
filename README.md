@@ -36,12 +36,12 @@ To install:
 
     bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
 
-### Install Ruby 1.9.3-p0 and the Ruby Gems
+### Install Ruby 1.9.3-p125 and the Ruby Gems
 
 Using *rvm*:
 
-    rvm install ruby-1.9.3-p0
-    rvm use ruby-1.9.3-p0
+    rvm install ruby-1.9.3-p125
+    rvm use ruby-1.9.3-p125
     rvm gemset create yourjargon
     gem install bundler --no-ri --no-rdoc
     bundle install
