@@ -82,7 +82,7 @@ YJ.termsController = Em.ArrayProxy.create(
 
 
   # This is temporary so that we can see some generated data on the list page.  It will come out soon.
-  load: ->
+  loadTermsForTesting: ->
     t = YJ.Term.create(term: "Newt")
     t.set('description', 'plays fast and loose in debates')
     @add(t)
@@ -206,9 +206,9 @@ YJ.stateManager = Em.StateManager.create(
 
 )
 
-# load test terms.
-YJ.termsController.load()
+# This will come out before release:
+YJ.termsController.loadTermsForTesting()
 
-# Wait for everything to load
+# Wait for everything to load, then start
 Ember.$ ->
-  YJ.stateManager.goToState('mainState')
+YJ.stateManager.goToState('mainState')
