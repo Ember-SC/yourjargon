@@ -115,7 +115,7 @@ YJ.ListTermsView = Em.View.extend(
 )
 
 YJ.LinkView = Em.View.extend(
-  termBinding: "YJ.termsController.currentTerm"
+  term: null
 
   edit: (event) ->
     event.preventDefault() # this keeps the browser from trying to refresh/reload the page
