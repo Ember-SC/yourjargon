@@ -24,7 +24,7 @@
 //= require views/link_view
 //= require views/list_terms_view
 //= require views/main_view
-//= require views/new_term_button
+//= require views/new_term_button_view
 //= require views/new_term_view
 //= require states/states
 //= require launch.js

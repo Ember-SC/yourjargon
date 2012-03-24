@@ -1,4 +1,4 @@
-YJ.NewTermButton = Em.Button.extend(
+YJ.NewTermButtonView = Em.Button.extend(
     click: ->
       YJ.stateManager.send('newTerm')
 )
