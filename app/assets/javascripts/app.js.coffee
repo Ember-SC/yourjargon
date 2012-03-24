@@ -39,7 +39,6 @@ YJ.termsController = Em.ArrayProxy.create(
 
   addCurrent: ->
     @add(@currentTerm)
-    YJ.stateManager.goToState('mainState')
 
   # todo: move this to a SortArray class
   binarySearch: (value, low, high) ->
@@ -69,9 +68,6 @@ YJ.termsController = Em.ArrayProxy.create(
     console.log("editTerm: '#{term.term}' => '#{term.description}'")
     @set('currentTerm', term)
     YJ.stateManager.goToState('editTermState')
-
-  updateTerm: () ->
-    YJ.stateManager.goToState('mainState')
 
   filtered: (->
     if @get("searchLetter") is null
@@ -119,13 +115,11 @@ YJ.ListTermsView = Em.View.extend(
 )
 
 YJ.LinkView = Em.View.extend(
-  term: null
+  termBinding: "YJ.termsController.currentTerm"
 
   edit: (event) ->
     event.preventDefault() # this keeps the browser from trying to refresh/reload the page
-    term = this.get('term')
-    console.log(this.get('term'))
-    YJ.termsController.editTerm(term)
+    YJ.stateManager.send('editTerm')
 )
 
 YJ.EditTermView = Em.View.extend(
@@ -133,21 +127,25 @@ YJ.EditTermView = Em.View.extend(
   templateName: 'templates/terms/edit'
 
   update: ->
-    YJ.termsController.updateTerm()
+    YJ.stateManager.send('updateTerm')
+
+  cancel: ->
+    YJ.stateManager.send('cancelEditCurrentTerm')
+
+  delete: ->
+    YJ.stateManager.send('deleteCurrentTerm')
 )
 
 YJ.NewTermView = Em.View.extend(
   termBinding: 'YJ.termsController.currentTerm'
   templateName: 'templates/terms/new'
   add: ->
-    YJ.termsController.addCurrent()
+    YJ.stateManager.send('addCurrent')
 )
 
 YJ.NewTermButton = Em.Button.extend(
-  term: null
-  description: null
   click: ->
-    YJ.termsController.newTerm()
+    YJ.stateManager.send('newTerm')
 )
 
 #YJ.NewButtonView = Em.View.extend(
@@ -184,24 +182,38 @@ YJ.stateManager = Em.StateManager.create(
     view: YJ.MainView
     isStart: true
 
-    exit: ->
-      console.log("exitting mainState")
-      @._super()
+    newTerm: ->
+      YJ.termsController.set("currentTerm", YJ.Term.create())
+      YJ.stateManager.goToState('newTermState')
+
+    editTerm: ->
+      YJ.stateManager.goToState('editTermState')
   )
+
   newTermState: Ember.ViewState.create(
     view: YJ.NewTermView
 
-    exit: ->
-      console.log("exitting newTermState")
-      @._super()
+    addCurrent: ->
+      YJ.termsController.addCurrent()
+      YJ.stateManager.goToState('mainState')
+
   )
+
   editTermState: Ember.ViewState.create(
     view: YJ.EditTermView
 
-    exit: ->
-      console.log("exitting editTermState")
-      @._super()
+    updateTerm: ->
+      YJ.stateManager.goToState('mainState')
+
+    cancelEditCurrentTerm: ->
+      YJ.termsController.set('currentTerm', null)
+      YJ.stateManager.goToState('mainState')
+
+    deleteCurrentTerm: ->
+      YJ.termsController.deleteCurrentTerm()
+      YJ.stateManager.goToState('mainState')
   )
+
   start: @.mainState
 
 )
