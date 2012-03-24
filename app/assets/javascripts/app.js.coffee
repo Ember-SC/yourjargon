@@ -119,7 +119,7 @@ YJ.LinkView = Em.View.extend(
 
   edit: (event) ->
     event.preventDefault() # this keeps the browser from trying to refresh/reload the page
-    YJ.termsController.currentTerm = @term
+    YJ.termsController.set('currentTerm',  @term)
     YJ.stateManager.send('editTerm')
 )
 
