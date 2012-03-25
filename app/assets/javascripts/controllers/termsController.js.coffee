@@ -37,19 +37,6 @@ YJ.termsController = Em.ArrayProxy.create(
       filteredList = @get('content').filterProperty 'firstLetter', @get('searchLetter')
   ).property('searchLetter').cacheable()
 
-
-  # This is temporary so that we can see some generated data on the list page.  It will come out soon.
-  loadTermsForTesting: ->
-    t = YJ.Term.create(term: "Newt")
-    t.set('description', 'plays fast and loose in debates')
-    @add(t)
-    t = YJ.Term.create(term: "Mitt")
-    t.set('description', 'has a lot of money')
-    @add(t)
-    t = YJ.Term.create(term: "Santorum")
-    t.set('description', 'Dan Savage coined his last name')
-    @add(t)
-
   # Another debugger function. Will come out
   addTestTerm: ->
     t = YJ.Term.create(term: "Obama", description: "Good speaker")
