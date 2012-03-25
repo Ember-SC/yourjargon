@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ember-dev
+//= require support/ember
 //= require tabs
 //= require app.js
 //= require models/term.js
