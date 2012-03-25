@@ -19,8 +19,8 @@ YJ.stateManager = Em.StateManager.create(
   newTermState: Ember.ViewState.create(
     view: YJ.NewTermView
 
-    addCurrent: (manager) ->
-      YJ.termsController.addCurrent()
+    addTerm: (manager, term) ->
+      YJ.termsController.add(term)
       manager.goToState('mainState')
 
   )
