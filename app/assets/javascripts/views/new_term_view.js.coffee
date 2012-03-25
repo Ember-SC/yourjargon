@@ -3,4 +3,6 @@ YJ.NewTermView = Em.View.extend(
     templateName: 'templates/terms/new'
     add: ->
       YJ.stateManager.send('addTerm')
+    cancel: ->
+      YJ.stateManager.send('cancelAddTerm')
 )
