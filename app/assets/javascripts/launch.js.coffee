@@ -6,4 +6,5 @@ YJ.termsController.loadTermsForTesting()
 
 # Wait for everything to load, then start
 Ember.$ ->
+  YJ.stateManager = YJ.StateManager.create()
   YJ.stateManager.goToState('mainState')
