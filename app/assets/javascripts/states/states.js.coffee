@@ -12,7 +12,7 @@ YJ.stateManager = Em.StateManager.create(
       manager.goToState('newTermState')
 
     editTerm: (manager, term) ->
-      YJ.termsController.set('currentTerm', Ember.copy(term, false))
+      YJ.termsController.set("currentTerm", term)
       manager.goToState('editTermState')
   )
 
@@ -28,7 +28,7 @@ YJ.stateManager = Em.StateManager.create(
   editTermState: Ember.ViewState.create(
     view: YJ.EditTermView
 
-    updateTerm: (manager) ->
+    updateTerm: (manager, term) ->
       manager.goToState('mainState')
 
     cancelEditCurrentTerm: (manager) ->

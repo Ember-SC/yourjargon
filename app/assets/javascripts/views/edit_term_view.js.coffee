@@ -3,7 +3,7 @@ YJ.EditTermView = Em.View.extend(
     templateName: 'templates/terms/edit'
 
     update: ->
-      YJ.stateManager.send('updateTerm')
+      YJ.stateManager.send('updateTerm', @term)
 
     cancel: ->
       YJ.stateManager.send('cancelEditCurrentTerm')
