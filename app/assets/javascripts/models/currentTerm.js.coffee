@@ -12,4 +12,7 @@ YJ.currentTerm = Em.Object.create(
   updateTerm: ->
     @get('oldTerm').set('description', @get('newTerm').get('description'))
 
+  termToDelete: ->
+    @get('oldTerm')
+
 )

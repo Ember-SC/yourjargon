@@ -36,7 +36,7 @@ YJ.stateManager = Em.StateManager.create(
       manager.goToState('mainState')
 
     deleteCurrentTerm: (manager) ->
-      YJ.termsController.deleteCurrentTerm()
+      YJ.termsController.remove(YJ.currentTerm.termToDelete())
       manager.goToState('mainState')
   )
 
