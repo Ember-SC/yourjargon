@@ -13,9 +13,6 @@ YJ.termsController = Em.ArrayProxy.create(
       @insertAt idx, term
       term.addObserver "sortValue", this, "termSortValueDidChange"
 
-    addCurrent: ->
-      @add(@currentTerm)
-
     # todo: move this to a SortArray class
     binarySearch: (value, low, high) ->
       mid = undefined
