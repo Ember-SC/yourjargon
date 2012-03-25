@@ -1,46 +1,45 @@
 
 YJ.stateManager = Em.StateManager.create(
 
-    rootElement: '#content'
+  rootElement: '#content'
 
-    mainState: Ember.ViewState.create(
-        view: YJ.MainView
-        isStart: true
+  mainState: Ember.ViewState.create(
+    view: YJ.MainView
+    isStart: true
 
-        newTerm: ->
-          YJ.termsController.set("currentTerm", YJ.Term.create())
-          YJ.stateManager.goToState('newTermState')
+    newTerm: (manager) ->
+      YJ.termsController.set("currentTerm", YJ.Term.create())
+      manager.goToState('newTermState')
 
-        editTerm: (term) ->
-          YJ.termsController.set('currentTerm', Ember.copy(term))
-          YJ.stateManager.goToState('editTermState')
-    )
+    editTerm: (manager, term) ->
+      YJ.termsController.set('currentTerm', Ember.copy(term, false))
+      manager.goToState('editTermState')
+  )
 
-    newTermState: Ember.ViewState.create(
-        view: YJ.NewTermView
+  newTermState: Ember.ViewState.create(
+    view: YJ.NewTermView
 
-        addCurrent: ->
-          YJ.termsController.addCurrent()
-          YJ.stateManager.goToState('mainState')
+    addCurrent: (manager) ->
+      YJ.termsController.addCurrent()
+      manager.goToState('mainState')
 
-    )
+  )
 
-    editTermState: Ember.ViewState.create(
-        view: YJ.EditTermView
+  editTermState: Ember.ViewState.create(
+    view: YJ.EditTermView
 
-        updateTerm: ->
+    updateTerm: (manager) ->
+      manager.goToState('mainState')
 
-          YJ.stateManager.goToState('mainState')
+    cancelEditCurrentTerm: (manager) ->
+      YJ.termsController.set('currentTerm', null)
+      manager.goToState('mainState')
 
-        cancelEditCurrentTerm: ->
-          YJ.termsController.set('currentTerm', null)
-          YJ.stateManager.goToState('mainState')
+    deleteCurrentTerm: (manager) ->
+      YJ.termsController.deleteCurrentTerm()
+      manager.goToState('mainState')
+  )
 
-        deleteCurrentTerm: ->
-          YJ.termsController.deleteCurrentTerm()
-          YJ.stateManager.goToState('mainState')
-    )
-
-    start: @.mainState
+  start: @.mainState
 
 )
