@@ -8,19 +8,19 @@ YJ.stateManager = Em.StateManager.create(
     isStart: true
 
     newTerm: (manager) ->
-      YJ.termsController.set("currentTerm", YJ.Term.create())
+      YJ.currentTerm.createNewTerm()
       manager.goToState('newTermState')
 
     editTerm: (manager, term) ->
-      YJ.termsController.set("currentTerm", term)
+      YJ.currentTerm.editTerm(term)
       manager.goToState('editTermState')
   )
 
   newTermState: Ember.ViewState.create(
     view: YJ.NewTermView
 
-    addTerm: (manager, term) ->
-      YJ.termsController.add(term)
+    addTerm: (manager) ->
+      YJ.termsController.add(YJ.currentTerm.get('newTerm'))
       manager.goToState('mainState')
 
   )
@@ -28,11 +28,11 @@ YJ.stateManager = Em.StateManager.create(
   editTermState: Ember.ViewState.create(
     view: YJ.EditTermView
 
-    updateTerm: (manager, term) ->
+    updateTerm: (manager) ->
+      YJ.currentTerm.updateTerm()
       manager.goToState('mainState')
 
     cancelEditCurrentTerm: (manager) ->
-      YJ.termsController.set('currentTerm', null)
       manager.goToState('mainState')
 
     deleteCurrentTerm: (manager) ->

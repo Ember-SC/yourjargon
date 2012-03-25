@@ -16,6 +16,7 @@
 //= require tabs
 //= require app.js
 //= require models/term.js
+//= require models/currentTerm.js
 //= require controllers/termsController
 //= require controllers/alphabetController
 //= require views/alphabet_view
