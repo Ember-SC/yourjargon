@@ -7,9 +7,7 @@ YJ.termsController = Em.ArrayProxy.create(
       length = @get("length")
       #    idx = undefined
       srtValue = term.get('sortValue')
-      console.log("termsController#add: sortValue='#{srtValue}'")
       idx = @binarySearch(srtValue, 0, length)
-      console.log("termsController#add: sortValue='#{srtValue}'; idx='#{idx}'; length='#{@.get('content').length}'")
       @insertAt idx, term
       term.addObserver "sortValue", this, "termSortValueDidChange"
 
@@ -37,7 +35,6 @@ YJ.termsController = Em.ArrayProxy.create(
       @set('currentTerm', YJ.Term.create())
 
     editTerm: (term) ->
-      console.log("editTerm: '#{term.term}' => '#{term.description}'")
       @set('currentTerm', term)
 
     filtered: (->
