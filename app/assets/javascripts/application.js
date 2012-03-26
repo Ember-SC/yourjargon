@@ -12,7 +12,24 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ember-dev
+//= require support/ember
 //= require tabs
 //= require app.js
+//= require models/term.js
+//= require models/currentTerm.js
+//= require controllers/termsController
+//= require controllers/alphabetController
+//= require views/alphabet_view
+//= require views/alphabetic_link_view
+//= require views/edit_term_view
+//= require views/link_view
+//= require views/list_terms_view
+//= require views/main_view
+//= require views/new_term_button_view
+//= require views/new_term_view
+//= require states/stateManager.js
+//= require states/mainState.js
+//= require states/newTermState.js
+//= require states/editTermState.js
+//= require launch.js
 //= require templates/all.js

@@ -2,7 +2,7 @@ describe "Update an existing Term", ->
   beforeEach ->
     @ctl = YJ.termsController
     @ctl.set('content', [])
-    @ctl.load()
+    @ctl.loadTermsForTesting()
 
   it "Update term 'Mitt' to be 'Mitty'", ->
     expect(@ctl.get('content').length).toBe(3)
