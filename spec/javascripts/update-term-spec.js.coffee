@@ -1,7 +1,7 @@
 describe "Update an existing Term", ->
   beforeEach ->
     @ctl = YJ.termsController
-    @ctl.set('content', [])
+    @ctl.purge()
     YJ.LoadTermsForTesting.create().execute()
 
   it "Update term 'Mitt' to be 'Mitty'", ->
