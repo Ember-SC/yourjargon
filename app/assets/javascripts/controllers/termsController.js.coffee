@@ -10,6 +10,10 @@ YJ.termsController = Em.ArrayProxy.create(
     @insertAt idx, term
     term.addObserver "sortValue", this, "termSortValueDidChange"
 
+  purge: ->
+    @set('content', [])
+
+
   # todo: move this to a SortArray class
   binarySearch: (value, low, high) ->
     mid = undefined
@@ -36,10 +40,4 @@ YJ.termsController = Em.ArrayProxy.create(
     else
       filteredList = @get('content').filterProperty 'firstLetter', @get('searchLetter')
   ).property('searchLetter').cacheable()
-
-  # Another debugger function. Will come out
-  addTestTerm: ->
-    t = YJ.Term.create(term: "Obama", description: "Good speaker")
-    @pushObject(t)
-
 )
