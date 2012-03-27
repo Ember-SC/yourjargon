@@ -16,18 +16,28 @@ describe "State manager", ->
     expect(newTerm.get('term')).toBe(null)
     expect(newTerm.get('description')).toBe(null)
 
-  it "creates a new term into the sorted list", ->
-    @stateManager.goToState('newTermState')
-    newTerm = YJ.currentTerm.get('newTerm')
-    newTerm.set('term', 'Ron')
-    newTerm.set('description', 'Gold')
-    @stateManager.send('addTerm')
-    actualTerms = @tc.get('content')
-    expectedTerms = ['Mitt', 'Newt', 'Ron', 'Santorum']
-    for term, i in expectedTerms
-      expect(actualTerms[i].get('term')).toBe(term)
+  describe "for new term", ->
 
-  it "cancels editing a new term", ->
+    beforeEach ->
+      @stateManager.goToState('newTermState')
+      newTerm = YJ.currentTerm.get('newTerm')
+      newTerm.set('term', 'Ron')
+      newTerm.set('description', 'Gold')
+
+    it "creates a new term into the sorted list", ->
+      @stateManager.send('addTerm')
+      actualTerms = @tc.get('content')
+      expectedTerms = ['Mitt', 'Newt', 'Ron', 'Santorum']
+      for term, i in expectedTerms
+        expect(actualTerms[i].get('term')).toBe(term)
+
+    it "cancels editing a new term", ->
+      @stateManager.send('cancelAddTerm')
+      actualTerms = @tc.get('content')
+      expectedTerms = ['Mitt', 'Newt', 'Santorum']
+      for term, i in expectedTerms
+        expect(actualTerms[i].get('term')).toBe(term)
+
 
   it "edits an existing term, ->"
 
