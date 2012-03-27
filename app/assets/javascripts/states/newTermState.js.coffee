@@ -4,9 +4,9 @@ YJ.StateManager.reopen(
 
     addTerm: (manager) ->
       YJ.termsController.add(YJ.currentTerm.get('newTerm'))
-      manager.goToState('mainState')
+      manager.goToState('listTermsState')
 
     cancelAddTerm: (manager) ->
-      manager.goToState('mainState')
+      manager.goToState('listTermsState')
   )
 )
