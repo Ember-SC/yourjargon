@@ -27,6 +27,7 @@ describe "State manager", ->
     it "creates a new term into the sorted list", ->
       @stateManager.send('addTerm')
       actualTerms = @tc.get('content')
+      expect(actualTerms.length).toBe(4)
       expectedTerms = ['Mitt', 'Newt', 'Ron', 'Santorum']
       for term, i in expectedTerms
         expect(actualTerms[i].get('term')).toBe(term)
@@ -65,6 +66,7 @@ describe "State manager", ->
       @newTerm.set('description', "something else")
       @stateManager.send('updateTerm')
       actualTerms = @tc.get('content')
+      expect(actualTerms.length).toBe(3)
       expectedDescriptions = ['has a lot of money', 'something else', 'Dan Savage coined his last name']
       for description, i in expectedDescriptions
         expect(actualTerms[i].get('description')).toBe(description)
@@ -73,6 +75,7 @@ describe "State manager", ->
       @newTerm.set('description', "something else")
       @stateManager.send('cancelEditCurrentTerm')
       actualTerms = @tc.get('content')
+      expect(actualTerms.length).toBe(3)
       expectedDescriptions = ['has a lot of money', 'plays fast and loose in debates', 'Dan Savage coined his last name']
       for description, i in expectedDescriptions
         expect(actualTerms[i].get('description')).toBe(description)
@@ -81,6 +84,7 @@ describe "State manager", ->
       @newTerm.set('description', "something else")
       @stateManager.send('deleteCurrentTerm')
       actualTerms = @tc.get('content')
+      expect(actualTerms.length).toBe(2)
       expectedDescriptions = ['has a lot of money', 'Dan Savage coined his last name']
       for description, i in expectedDescriptions
         expect(actualTerms[i].get('description')).toBe(description)
@@ -88,5 +92,7 @@ describe "State manager", ->
   it "shows a list of terms filtered by the first letter in the term", ->
     @stateManager.goToState("listTermsState")
     YJ.termsController.set('searchLetter', 'N')
+    filtered = @tc.get('filtered')
+    expect(filtered.length).toBe(1)
     for term, i in ['Newt']
-      expect(@tc.get('filtered')[i].get('term')).toBe(term)
+      expect(filtered[i].get('term')).toBe(term)
