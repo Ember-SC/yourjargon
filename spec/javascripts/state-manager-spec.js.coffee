@@ -86,3 +86,7 @@ describe "State manager", ->
         expect(actualTerms[i].get('description')).toBe(description)
 
   it "shows a list of terms filtered by the first letter in the term", ->
+    @stateManager.goToState("listTermsState")
+    YJ.termsController.set('searchLetter', 'N')
+    for term, i in ['Newt']
+      expect(@tc.get('filtered')[i].get('term')).toBe(term)
