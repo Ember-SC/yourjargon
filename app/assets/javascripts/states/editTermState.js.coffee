@@ -4,13 +4,13 @@ YJ.StateManager.reopen(
 
     updateTerm: (manager) ->
       YJ.currentTerm.updateTerm()
-      manager.goToState('mainState')
+      manager.goToState('listTermsState')
 
     cancelEditCurrentTerm: (manager) ->
-      manager.goToState('mainState')
+      manager.goToState('listTermsState')
 
     deleteCurrentTerm: (manager) ->
       YJ.termsController.remove(YJ.currentTerm.termToDelete())
-      manager.goToState('mainState')
+      manager.goToState('listTermsState')
   )
 )

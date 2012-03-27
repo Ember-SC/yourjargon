@@ -1,5 +1,5 @@
 YJ.StateManager.reopen(
-  mainState: Ember.ViewState.create(
+  listTermsState: Ember.ViewState.create(
     view: YJ.MainView
     isStart: true
 

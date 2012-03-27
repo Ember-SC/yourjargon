@@ -28,7 +28,7 @@
 //= require views/new_term_button_view
 //= require views/new_term_view
 //= require states/stateManager.js
-//= require states/mainState.js
+//= require states/listTermsState.js
 //= require states/newTermState.js
 //= require states/editTermState.js
 //= require launch.js

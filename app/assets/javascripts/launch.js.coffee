@@ -22,4 +22,4 @@ YJ.LoadTermsForTesting.create().execute()
 # Wait for everything to load, then start
 Ember.$ ->
   YJ.stateManager = YJ.StateManager.create()
-  YJ.stateManager.goToState('mainState')
+  YJ.stateManager.goToState('listTermsState')
