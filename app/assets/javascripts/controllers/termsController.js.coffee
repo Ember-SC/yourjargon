@@ -38,6 +38,6 @@ YJ.termsController = Em.ArrayProxy.create(
     if @get("searchLetter") is null
       @get('content')
     else
-      filteredList = @get('content').filterProperty 'firstLetter', @get('searchLetter')
+      @get('content').filterProperty 'firstLetter', @get('searchLetter')
   ).property('searchLetter').cacheable()
 )
