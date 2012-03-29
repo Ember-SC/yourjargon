@@ -58,22 +58,6 @@ a javascript engine for running unit tests.  The 3rd command below copies its bi
     git checkout 1.3 qmake -spec macx-g++
     make cp bin/phantomjs /usr/local/bin
 
-### Node.js
-
-[This link will download the Mac OSX version of node.js](http://nodejs.org/dist/v0.6.11/node-v0.6.11.pkg) so that
-Cucumber can use
-its javascript engine
-and its ```npm```
-packaging capability
-
-### Install Cucumber.js
-
-    sudo npm install cucumber
-
-This will place ```cucumber.js``` and all of its ```npm``` packaging dependencies into
-
-    node_modules/cucumber
-
 ## Installation
 
 Now, with the prep work finished, we can install the application.
