@@ -82,7 +82,7 @@ This will cause *rvm* to ask you to confirm whether you want to use the `.rvmrc`
 
 In your project home directory:
 
-    guard
+    bundle exec guard
 
 Observe the test report. *NOTE: this is set up so that every time you save a javascript file,
 all the client tests are run again.*
