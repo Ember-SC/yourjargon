@@ -47,9 +47,9 @@ This last step will take a few minutes.  When done:
 ### phantomJS
 
 [phantomJS](http://code.google.com/p/phantomjs/) is a headless WebKit with JavaScript API.  We're going to use it as
-a javascript engine for running unit tests.  The 3rd command below copies its binary to a location in your path.
+a javascript engine for running unit tests.
 
-To install it, follow the instructions [here](http://code.google.com/p/phantomjs/wiki/Installation).
+To install it, follow the instructions [here](http://code.google.com/p/phantomjs/wiki/Installation).  Do the easy static installation from the zip file.
 
 ## Installation
 
