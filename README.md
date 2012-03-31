@@ -24,10 +24,6 @@ A number of open-source packages are required:
 Install [Xcode](http://developer.apple.com/technologies/mac/) and the necessary SDK for development (gcc,
 various tools, libraries, etc).
 
-### Qt Binary Package
-
-Install [Qt binary package](http://qt.nokia.com/downloads/qt-for-open-source-cpp-development-on-mac-os-x). *NOTE: Download and install the first `dmg` file: http://get.qt.nokia.com/qt/source/qt-mac-opensource-4.8.0.dmg*
-
 ### rvm
 
 Use [rvm](http://beginrescueend.com/) to keep your entire Ruby/Gem installation for this project separate from your others if you haven't already.
