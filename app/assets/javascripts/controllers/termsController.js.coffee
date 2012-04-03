@@ -1,9 +1,16 @@
+###
+  The controller that manages the list of terms in sorted order
+###
 YJ.termsController = Em.ArrayProxy.create(
+
+  # The sorted array of terms
   content: []
+
+  # The place to hold the letter used to filter by the first letter
   searchLetter: null
 
   add: (term) ->
-    length = @get("length")
+    length = @get('length')
     #    idx = undefined
     srtValue = term.get('sortValue')
     idx = @binarySearch(srtValue, 0, length)
