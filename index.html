@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Your Jargon : A private glossary for your organization's jargon" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Your Jargon</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/OC-Emberjs/yourjargon">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Your Jargon</h1>
+          <h2 id="project_tagline">A private glossary for your organization's jargon</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/OC-Emberjs/yourjargon/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/OC-Emberjs/yourjargon/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>yourjargon - A Private Maintainable Glossary</h1>
+
+<p>This web application shows the power of Rails and <a href="http://emberjs.com">EmberJS</a> to provide a powerful client side
+experience.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are used to drive out the functionality.</p>
+
+<h1>What Does this Web Application Do?</h1>
+
+<p><em>TODO</em></p>
+
+<h1>Installation</h1>
+
+<h2>Prerequisites</h2>
+
+<ul>
+<li>Mac OS X</li>
+<li>
+<strong>Snow Leopard</strong> or <strong>Lion</strong>
+</li>
+<li>64 bit</li>
+</ul><h2>Preparation</h2>
+
+<p>A number of open-source packages are required:</p>
+
+<h3>Xcode</h3>
+
+<p>Install <a href="http://developer.apple.com/technologies/mac/">Xcode</a> and the necessary SDK for development (gcc,
+various tools, libraries, etc).</p>
+
+<h3>rvm</h3>
+
+<p>Use <a href="http://beginrescueend.com/">rvm</a> to keep your entire Ruby/Gem installation for this project separate from your others if you haven't already.</p>
+
+<p>To install:</p>
+
+<pre><code>bash -s stable &lt; &lt;(curl -s <a href="https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer">https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer</a> )
+</code></pre>
+
+<h3>Install Ruby 1.9.3-p125 and the Ruby Gems</h3>
+
+<p>Using <em>rvm</em>:</p>
+
+<pre><code>rvm install ruby-1.9.3-p125
+rvm use ruby-1.9.3-p125
+rvm gemset create yourjargon
+gem install bundler --no-ri --no-rdoc
+bundle install
+</code></pre>
+
+<p>This last step will take a few minutes.  When done:</p>
+
+<h3>phantomJS</h3>
+
+<p><a href="http://code.google.com/p/phantomjs/">phantomJS</a> is a headless WebKit with JavaScript API.  We're going to use it as
+a javascript engine for running unit tests.</p>
+
+<p>To install it, follow the instructions <a href="http://code.google.com/p/phantomjs/wiki/Installation">here</a>.  Do the easy static installation from the zip file.</p>
+
+<h2>Installation</h2>
+
+<p>Now, with the prep work finished, we can install the application.</p>
+
+<h3>Cloning</h3>
+
+<pre><code>git clone git@github.com:oldfartdeveloper/yourjargon.git
+cd yourjargon
+</code></pre>
+
+<p>This will cause <em>rvm</em> to ask you to confirm whether you want to use the <code>.rvmrc</code> file.  Affirm positively as many times as you need to.</p>
+
+<pre><code>rake db:migrate
+</code></pre>
+
+<h3>Running Rails Tests</h3>
+
+<pre><code>rake
+</code></pre>
+
+<h3>Starting Rails</h3>
+
+<pre><code>rails s
+</code></pre>
+
+<h3>Running the Web Application</h3>
+
+<p><a href="http://localhost:3000/">Browse</a></p>
+
+<h3>Running the Browser Tests</h3>
+
+<h4>Method 1</h4>
+
+<p>In your project home directory:</p>
+
+<pre><code>bundle exec guard
+</code></pre>
+
+<p>Observe the test report. <em>NOTE: this is set up so that every time you save a javascript file,
+all the client tests are run again.</em></p>
+
+<h4>Method 2</h4>
+
+<p><a href="http://localhost:3000/jasmine">Browse</a></p>
+
+<p>This will show a <strong>Jasmine</strong> dashboard in which you can run tests and see results.</p>
+
+<h1>Miscellaneous</h1>
+
+<h2>Credits</h2>
+
+<ul>
+<li>To the <a href="http://www.arailsdemo.com/">arailsdemo</a> screencasts.  They are excellent.  Thank you!</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Your Jargon maintained by <a href="https://github.com/OC-Emberjs">OC-Emberjs</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
