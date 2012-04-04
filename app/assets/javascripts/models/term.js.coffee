@@ -1,6 +1,24 @@
+###
+  @class
+
+  The object holding the information about a term.
+  A term can be copied and be modified
+###
 YJ.Term = Em.Object.extend(Em.Copyable,
+
+    ###
+      The term acronym, word, or phrase to look up
+    ###
     term: null
+
+    ###
+      The definition for the term
+    ###
     description: null
+
+    ###
+      Indicates that Ember can make copies of this object
+    ###
     copyable: true
 
     # Normal usage: 'Ember.copy(aTerm, false)'
@@ -10,10 +28,16 @@ YJ.Term = Em.Object.extend(Em.Copyable,
           description: this.get('description')
       )
 
+    ###
+      When sorting, sort by the term
+    ###
     sortValue: (->
       return @get("term")
     ).property("term")
 
+    ###
+      Returns the first letter for use by the alphabet filter
+    ###
     firstLetter: (->
       return @get('term').charAt(0).toUpperCase()
     ).property('term')

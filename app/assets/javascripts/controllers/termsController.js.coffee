@@ -1,5 +1,7 @@
 ###
-  The controller that manages the list of terms in sorted order
+  The controller that manages the list of terms in sorted order.  It also
+  provides the filtered output when the user clicks one of the alphabet
+  letters on the right side of the screen.
 ###
 YJ.termsController = Em.ArrayProxy.create(
 
@@ -9,6 +11,7 @@ YJ.termsController = Em.ArrayProxy.create(
   # The place to hold the letter used to filter by the first letter
   searchLetter: null
 
+  # Add a term in sorted order.
   add: (term) ->
     length = @get('length')
     #    idx = undefined
@@ -17,11 +20,15 @@ YJ.termsController = Em.ArrayProxy.create(
     @insertAt idx, term
     term.addObserver "sortValue", this, "termSortValueDidChange"
 
+  ###
+    Purge all terms
+  ###
   purge: ->
     @set('content', [])
 
-
-  # todo: move this to a SortArray class
+  ###
+    @private
+  ###
   binarySearch: (value, low, high) ->
     mid = undefined
     midValue = undefined
@@ -32,15 +39,25 @@ YJ.termsController = Em.ArrayProxy.create(
     return @binarySearch(value, low, mid) if value < midValue
     mid
 
+  ###
+    Remove a term
+    @param {Em.Object} term
+  ###
   remove: (term) ->
     @removeObject term
     term.removeObserver("sortValue", this, "termSortValueDidChange")
 
+  ###
+    @private
+  ###
   termSortValueDidChange: (term) ->
     console.log("termSortValueDidChange: '#{term.term}'")
     @remove term
     @add term
 
+  ###
+    Returns the contests filtered by the first letter
+  ###
   filtered: (->
     if @get("searchLetter") is null
       @get('content')

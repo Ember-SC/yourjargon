@@ -19,7 +19,7 @@ YJ.LoadTermsForTesting = Em.Object.extend(
 )
 YJ.LoadTermsForTesting.create().execute()
 
-# Wait for everything to load, then star
+# Wait for everything to load, then start by listing all the terms
 YJ.ready = ->
   YJ.stateManager = YJ.StateManager.create()
   YJ.stateManager.goToState('listTermsState')

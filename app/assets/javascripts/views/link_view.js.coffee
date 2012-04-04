@@ -1,3 +1,8 @@
+###
+  @class
+
+  The view for the term that the user clicked in the list of terms
+###
 YJ.LinkView = Em.View.extend(
     term: null
 
