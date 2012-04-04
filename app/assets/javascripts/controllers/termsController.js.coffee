@@ -56,7 +56,7 @@ YJ.termsController = Em.ArrayProxy.create(
     @add term
 
   ###
-    Returns the contests filtered by the first letter
+    Returns the contents filtered by the first letter
   ###
   filtered: (->
     if @get("searchLetter") is null
