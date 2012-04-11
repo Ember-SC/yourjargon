@@ -11,7 +11,7 @@ YJ.currentTerm = Em.Object.create(
     Initially create a new term for editing
   ###
   createNewTerm: ->
-    @set('newTerm', YJ.Term.create())
+    @set('newTerm', YJ.store.createRecord(YJ.Term,{}))
 
   ###
     Hold a term for editing.

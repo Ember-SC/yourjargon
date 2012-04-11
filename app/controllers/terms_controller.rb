@@ -6,7 +6,7 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @terms }
+      format.json { render json: {:terms => @terms} }
     end
   end
 
@@ -17,7 +17,7 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @term }
+      format.json { render json: {:term => @term} }
     end
   end
 
@@ -28,7 +28,7 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @term }
+      format.json { render json: {:term => @term} }
     end
   end
 

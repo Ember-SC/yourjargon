@@ -7,17 +7,18 @@
 YJ.LoadTermsForTesting = Em.Object.extend(
 
   execute: ->
-    t = YJ.Term.create(term: "Newt")
+    t = YJ.store.createRecord(YJ.Term, {term: "Newt"})
     t.set('description', 'plays fast and loose in debates')
     YJ.termsController.add(t)
-    t = YJ.Term.create(term: "Mitt")
+    t = YJ.store.createRecord(YJ.Term, {term: "Mitty Man"})
     t.set('description', 'has a lot of money')
     YJ.termsController.add(t)
-    t = YJ.Term.create(term: "Santorum")
+    t = YJ.store.createRecord(YJ.Term, {term: "Santorum"})
     t.set('description', 'Dan Savage coined his last name')
     YJ.termsController.add(t)
 )
-YJ.LoadTermsForTesting.create().execute()
+
+#YJ.LoadTermsForTesting.create().execute()
 
 # Wait for everything to load, then start by listing all the terms
 YJ.ready = ->

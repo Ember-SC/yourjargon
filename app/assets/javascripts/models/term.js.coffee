@@ -22,11 +22,11 @@ YJ.Term = DS.Model.extend(Em.Copyable,
     copyable: true
 
     # Normal usage: 'Ember.copy(aTerm, false)'
-    copy: ->
-      YJ.Term.create(
-          term: this.get('term')
-          description: this.get('description')
-      )
+#    copy: ->
+#      YJ.Term.create(
+#          term: this.get('term')
+#          description: this.get('description')
+#      )
 
     ###
       When sorting, sort by the term
