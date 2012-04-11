@@ -4,17 +4,17 @@
   The object holding the information about a term.
   A term can be copied and be modified
 ###
-YJ.Term = Em.Object.extend(Em.Copyable,
+YJ.Term = DS.Model.extend(Em.Copyable,
 
     ###
       The term acronym, word, or phrase to look up
     ###
-    term: null
+    term: DS.attr('string')
 
     ###
       The definition for the term
     ###
-    description: null
+    description: DS.attr('string')
 
     ###
       Indicates that Ember can make copies of this object

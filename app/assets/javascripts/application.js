@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require support/ember
+//= require support/ember-data
 //= require tabs
 //= require app.js
 //= require models/term.js
