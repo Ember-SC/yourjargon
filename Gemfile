@@ -23,6 +23,7 @@ end
 gem 'skeleton-rails'
 gem 'jquery-rails'
 gem 'ember-rails'
+gem "active_model_serializers", :git => "git://github.com/josevalim/active_model_serializers.git"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,13 +1,10 @@
 class TermsController < ApplicationController
-  # GET /terms
-  # GET /terms.json
+  respond_to :json
+
   def index
     @terms = Term.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: {:terms => @terms} }
-    end
+    render json: @terms
   end
 
   # GET /terms/1
@@ -17,7 +14,7 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: {:term => @term} }
+      format.json { render json: @term }
     end
   end
 
@@ -28,7 +25,7 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: {:term => @term} }
+      format.json { render json: @term }
     end
   end
 
