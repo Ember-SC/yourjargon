@@ -40,7 +40,7 @@ gem 'ember-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development, :test do
-  gem 'rspec'
+  gem 'rspec-rails'
   gem 'jasmine'
   gem 'jasminerice'
   gem 'guard-jasmine'
