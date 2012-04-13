@@ -5,6 +5,12 @@
   A term can be copied and be modified
 ###
 YJ.Term = DS.Model.extend(Em.Copyable,
+    ###
+      Define the urls for the resource
+    ###
+    collectUrl: '/terms'
+    resourceUrl: '/terms/%@'
+    resourceName: 'term'
 
     ###
       The term acronym, word, or phrase to look up
