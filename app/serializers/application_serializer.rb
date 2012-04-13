@@ -1,3 +1,3 @@
-class ApplicationSerializer < ActiveModel::Serializers
+class ApplicationSerializer < ActiveModel::Serializer
 
 end

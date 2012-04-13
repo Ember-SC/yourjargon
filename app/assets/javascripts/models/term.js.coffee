@@ -16,9 +16,6 @@ YJ.Term = DS.Model.extend(Em.Copyable,
     ###
     description: DS.attr('string')
 
-    created_at: DS.attr('date')
-    updated_at: DS.attr('date')
-
     ###
       Indicates that Ember can make copies of this object
     ###
