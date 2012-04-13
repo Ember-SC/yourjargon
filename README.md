@@ -58,6 +58,7 @@ Now, with the prep work finished, we can install the application.
     cd yourjargon
     gem install bundler --no-ri --no-rdoc
     bundle install
+    git checkout develop
 
 This will cause *rvm* to ask you to confirm whether you want to use the `.rvmrc` file.  Affirm positively as many times as you need to.
 
