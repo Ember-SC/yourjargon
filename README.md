@@ -38,11 +38,6 @@ Using *rvm*:
 
     rvm install ruby-1.9.3-p125
     rvm use ruby-1.9.3-p125
-    rvm gemset create yourjargon
-    gem install bundler --no-ri --no-rdoc
-    bundle install
-
-This last step will take a few minutes.  When done:
 
 ### phantomJS
 
@@ -55,12 +50,17 @@ To install it, follow the instructions [here](http://code.google.com/p/phantomjs
 
 Now, with the prep work finished, we can install the application.
 
-### Cloning
+### Cloning and Your Jargon Setup
 
-    git clone git@github.com:oldfartdeveloper/yourjargon.git
+    git clone git@github.com:OC-Emberjs/yourjargon.git
     cd yourjargon
 
 This will cause *rvm* to ask you to confirm whether you want to use the `.rvmrc` file.  Affirm positively as many times as you need to.
+
+    gem install bundler --no-ri --no-rdoc
+    bundle install
+
+This last step will take a few minutes.  When done:
 
     rake db:migrate
 
