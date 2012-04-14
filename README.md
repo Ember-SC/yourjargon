@@ -5,7 +5,16 @@ experience.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are us
 
 # What Does this Web Application Do?
 
-*TODO*
+Our user group is creating an EmberJS/Rails-based web application that, when complete, provide a private dictionary for an organization to store their own "jargon" into.  In addition, it shows off the features of EmberJS for a small application that developers learning EmberJS can easily digest:
+
+ * Bindings
+ * Observers
+ * Calculated Properties
+ * Ember-Data
+ * RESTful Rails Adapter
+ * Rails 3.2 application
+ * Complete Jasmine test suite
+ * (future) Use of Twitter Bootstrap
 
 # Installation
 
