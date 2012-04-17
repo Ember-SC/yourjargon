@@ -18,7 +18,8 @@ YJ.LoadTermsForTesting = Em.Object.extend(
     YJ.termsController.add(t)
 )
 
-YJ.LoadTermsForTesting.create().execute()
+# While we have persistence running, don't generate test users:
+#YJ.LoadTermsForTesting.create().execute()
 
 # Wait for everything to load, then start by listing all the terms
 YJ.ready = ->
