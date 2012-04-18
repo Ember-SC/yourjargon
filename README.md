@@ -5,7 +5,16 @@ experience.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are us
 
 # What Does this Web Application Do?
 
-*TODO*
+Our user group is creating an EmberJS/Rails-based web application that, when complete, provide a private dictionary for an organization to store their own "jargon" into.  In addition, it shows off the features of EmberJS for a small application that developers learning EmberJS can easily digest:
+
+ * Bindings
+ * Observers
+ * Calculated Properties
+ * Ember-Data
+ * RESTful Rails Adapter
+ * Rails 3.2 application
+ * Complete Jasmine test suite
+ * (future) Use of Twitter Bootstrap
 
 # Installation
 
@@ -39,8 +48,6 @@ Using *rvm*:
     rvm install ruby-1.9.3-p125
     rvm use ruby-1.9.3-p125
 
-This last step will take a few minutes.  When done:
-
 ### phantomJS
 
 [phantomJS](http://code.google.com/p/phantomjs/) is a headless WebKit with JavaScript API.  We're going to use it as
@@ -56,11 +63,13 @@ Now, with the prep work finished, we can install the application.
 
     git clone git@github.com:OC-Emberjs/yourjargon.git
     cd yourjargon
-    gem install bundler --no-ri --no-rdoc
-    bundle install
-    git checkout develop
 
 This will cause *rvm* to ask you to confirm whether you want to use the `.rvmrc` file.  Affirm positively as many times as you need to.
+
+    gem install bundler --no-ri --no-rdoc
+    bundle install
+
+This last step will take a few minutes.  When done:
 
     rake db:migrate
 
