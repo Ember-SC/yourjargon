@@ -17,7 +17,7 @@ experience.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are us
 
 ## Preparation
 
-A number of open-source packages are required:
+A variety of open-source packages are required:
 
 ### Xcode
 
