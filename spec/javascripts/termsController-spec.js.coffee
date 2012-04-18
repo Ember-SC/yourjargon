@@ -7,7 +7,7 @@ describe "Terms controller", ->
   it "can load its contents with test data", ->
     tc = YJ.termsController
     tc.purge()
-    t = YJ.Term.create(term: "Obama", description: "Good speaker")
+    t = YJ.store.createRecord(YJ.Term, term: "Obama", description: "Good speaker")
     tc.add(t)
     terms = tc.get('content')
     expect(terms.length).toBe(1)

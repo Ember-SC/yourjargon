@@ -2,9 +2,13 @@ class TermsController < ApplicationController
   respond_to :json
 
   def index
-    @terms = Term.all
+    if ids = params[:ids]
+      @terms = Term.where(:id => ids)
+    else
+      @terms = Term.all
+    end
 
-    render json: @terms
+    respond_with @terms
   end
 
   # GET /terms/1
@@ -77,4 +81,5 @@ class TermsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
