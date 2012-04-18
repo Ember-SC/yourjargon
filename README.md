@@ -26,7 +26,7 @@ Our user group is creating an EmberJS/Rails-based web application that, when com
 
 ## Preparation
 
-A number of open-source packages are required:
+A variety of open-source packages are required:
 
 ### Xcode
 
