@@ -63,3 +63,6 @@ $search-bottom-top: $search-top-height + $search-middle-height;
   top: $search-bottom-top;
   position: fixed;
 }
+
+button.disabled,
+button[disabled]{background-color:#f5f5f5; cursor:not-allowed;}
