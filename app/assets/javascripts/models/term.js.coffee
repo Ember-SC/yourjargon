@@ -35,6 +35,14 @@ YJ.Term = DS.Model.extend(Em.Copyable,
       )
 
     ###
+      Returns truthy if the term has content else returns falsy
+    ###
+    hasContent: (->
+      myTerm = @get("term")
+      return myTerm != null and myTerm.length > 0
+    ).property("term")
+
+    ###
       When sorting, sort by the term
     ###
     sortValue: (->

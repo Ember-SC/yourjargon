@@ -25,4 +25,11 @@ YJ.NewTermView = Em.View.extend(
     # will be discarded.
     cancel: ->
       YJ.stateManager.send('cancelAddTerm')
+
+    newTerm: Em.TextField.extend(
+      didInsertElement: ->
+        @focus()
+
+      valueBinding: "YJ.currentTerm.newTerm.term"
+    )
 )
