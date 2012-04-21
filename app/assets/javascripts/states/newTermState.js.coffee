@@ -13,6 +13,7 @@ YJ.StateManager.reopen(
     ###
     addTerm: (manager) ->
       YJ.termsController.add(YJ.currentTerm.get('newTerm'))
+      YJ.store.commit()
       manager.goToState('listTermsState')
 
     ###

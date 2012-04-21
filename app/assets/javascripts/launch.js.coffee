@@ -18,14 +18,13 @@ YJ.LoadTermsForTesting = Em.Object.extend(
     YJ.termsController.add(t)
 )
 
+YJ.set('tempTerms', YJ.store.findQuery(YJ.Term, 'terms'))
+
+
 # While we have persistence running, don't generate test users:
 #YJ.LoadTermsForTesting.create().execute()
 
 # Wait for everything to load, then start by listing all the terms
 YJ.ready = ->
-  terms = YJ.store.findAll(YJ.Term)
-  for term in terms
-    do (term) ->
-      YJ.termsController.add(term)
   YJ.stateManager = YJ.StateManager.create()
   YJ.stateManager.goToState('listTermsState')
