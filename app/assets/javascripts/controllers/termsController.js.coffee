@@ -17,4 +17,10 @@ YJ.termsController = Em.SortedArrayProxy.create(
     else
       @get('content').filterProperty 'firstLetter', @get('searchLetter')
   ).property('searchLetter').cacheable()
+
+  loadTerms: (->
+    YJ.tempTerms.forEach (term) ->
+      console.log(term.get('term'))
+      YJ.termsController.add(term)
+  ).observes('YJ.tempTerms.isLoaded')
 )
