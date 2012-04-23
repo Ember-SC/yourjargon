@@ -11,6 +11,7 @@ YJ.StateManager.reopen(
     ###
     updateTerm: (manager) ->
       YJ.currentTerm.updateTerm()
+      YJ.store.commit()
       manager.goToState('listTermsState')
 
     ###
@@ -24,6 +25,7 @@ YJ.StateManager.reopen(
     ###
     deleteCurrentTerm: (manager) ->
       YJ.termsController.remove(YJ.currentTerm.termToDelete())
+      YJ.store.commit()
       manager.goToState('listTermsState')
   )
 )
