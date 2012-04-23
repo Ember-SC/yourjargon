@@ -6,9 +6,10 @@
 # information.
 # TODO: shouldn't require separate tempTerms array
 # from termsController array.  Merge into termsController.
-YJ.set('tempTerms', YJ.store.findQuery(YJ.Term, 'terms'))
 
 # Wait for everything to load, then start by listing all the terms
 YJ.ready = ->
+  YJ.set('termsController', YJ.TermsController.create())
+  YJ.get('termsController').initialLoad()
   YJ.stateManager = YJ.StateManager.create()
   YJ.stateManager.goToState('listTermsState')
