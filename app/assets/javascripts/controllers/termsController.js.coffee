@@ -18,6 +18,10 @@ YJ.termsController = Em.SortedArrayProxy.create(
       @get('content').filterProperty 'firstLetter', @get('searchLetter')
   ).property('searchLetter').cacheable()
 
+  # This is a callback that is invoked when YJ.tempTerms
+  # has been completely filled by ember-data.
+  # See http://stackoverflow.com/questions/10031283/ember-data-callback-when-findall-finished-loading-all-records
+  # for further explanation.
   loadTerms: (->
     YJ.tempTerms.forEach (term) ->
       console.log(term.get('term'))
