@@ -1,5 +1,6 @@
 {{#view YJ.LoginView id="loginView"}}
-email: {{view Ember.TextField valueBinding="email"}} <br />
-password: {{view Ember.TextField valueBinding="password"}} <br />
-<button {{action "submit"}}> Submit </button>
+<h2> Log in </h2> <br />
+email: {{view Ember.TextField valueBinding="login" placeHolder="Email..."}} <br />
+password: {{view Ember.TextField valueBinding="password" type="password" placeHolder="Password..."}} <br />
+<button {{action "cancel"}}> Cancel </button>  <button {{action "submit"}}> Submit </button> or <a href="#" {{action "signup"}}> Sign up </a>
 {{/view}}

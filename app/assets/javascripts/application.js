@@ -32,10 +32,12 @@
 //= require views/new_term_button_view
 //= require views/new_term_view
 //= require views/login_view
+//= require views/signup_view
 //= require states/stateManager.js
 //= require states/listTermsState.js
 //= require states/newTermState.js
 //= require states/editTermState.js
 //= require states/loginState.js
+//= require states/signupState.js
 //= require launch.js
 //= require templates/all.js
