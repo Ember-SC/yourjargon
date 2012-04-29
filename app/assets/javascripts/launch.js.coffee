@@ -27,4 +27,4 @@ YJ.set('tempTerms', YJ.store.findQuery(YJ.Term, 'terms'))
 # Wait for everything to load, then start by listing all the terms
 YJ.ready = ->
   YJ.stateManager = YJ.StateManager.create()
-  YJ.stateManager.goToState('listTermsState')
+  YJ.stateManager.goToState('loggedOutState')

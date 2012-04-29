@@ -1,4 +1,5 @@
-YJ.currentUser = Em.Object.create(
-  name: "Guest",
+YJ.CurrentUser = Em.Object.extend(
+  name: null
   email: null
+  password: null
 )

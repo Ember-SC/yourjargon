@@ -1,17 +1,12 @@
 YJ.LoginView = Em.View.extend(
   templateName: 'templates/user/login'
 
-  login: ""
-  password: ""
-
-
   submit: ->
-    console.log(this.login)
-    YJ.userController.login(@login, @password)
+    YJ.stateManager.send('authenticate')
 
-  signup: ->
-    YJ.stateManager.goToState('signupState')
+  register: ->
+    YJ.stateManager.send('register')
 
   cancel: ->
-    YJ.stateManager.goToState('listTermsState')
+    YJ.stateManager.send('cancel')
 )
