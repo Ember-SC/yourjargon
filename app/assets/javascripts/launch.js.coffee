@@ -11,4 +11,4 @@
 YJ.ready = ->
   YJ.termsController.initialLoad()
   YJ.stateManager = YJ.StateManager.create()
-  YJ.stateManager.goToState('listTermsState')
+  YJ.stateManager.goToState('loggedOutState')

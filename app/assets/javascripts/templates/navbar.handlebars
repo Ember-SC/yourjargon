@@ -1,0 +1,9 @@
+<div id="navbar">
+<a href="#" class="brand"> YourJargon </a> ----
+
+{{#if YJ.userController.currentUser}}
+  current user: {{YJ.userController.currentUser.email}} <a href="#" {{action "logout"}}>logout</a>
+{{else}}
+  <a href="#" {{action "login"}}>login</a>
+{{/if}}
+</div>
