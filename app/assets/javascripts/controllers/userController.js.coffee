@@ -3,7 +3,13 @@ YJ.userController = Em.Object.create(
 
   authenticate: ->
     #make a call to the server to find user with email/password
-    # if success set name, email from response and create session and return true
+    # if success set currentUser from response and create session and return true
+    # if failure return false
+    true
+
+  register: ->
+    #make a create call to the server for a user
+    # if success set currentUser from response and create session and return true
     # if failure return false
     true
 
@@ -12,6 +18,7 @@ YJ.userController = Em.Object.create(
     # clear session and currentUser
     # if successful return true
     # if failure return false
+    @set('currentUser', null)
     true
 
 )
