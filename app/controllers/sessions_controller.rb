@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
       @user = User.authenticate(params[:email], params[:password])
 
       if @user
-      create_user_session(@user)
+        create_user_session(@user)
+        render :json => @user
       else
         respond_with "invalid email or password"
       end

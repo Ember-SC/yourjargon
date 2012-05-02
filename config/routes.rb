@@ -4,6 +4,8 @@ Yourjargon::Application.routes.draw do
   resources :home
 
   match 'users/create' => 'users#create'
+  match 'sessions/create' => 'sessions#create'
+  match 'sessions/destroy' => 'sessions#destroy'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
