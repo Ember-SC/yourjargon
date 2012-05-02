@@ -9,6 +9,7 @@
 
 # Wait for everything to load, then start by listing all the terms
 YJ.ready = ->
-  YJ.termsController.initialLoad()
+  YJ.set('termsController', YJ.TermsController.create())
+  YJ.get('termsController').initialLoad()
   YJ.stateManager = YJ.StateManager.create()
   YJ.stateManager.goToState('listTermsState')

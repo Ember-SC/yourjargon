@@ -3,7 +3,7 @@
   provides the filtered output when the user clicks one of the alphabet
   letters on the right side of the screen.
 ###
-YJ.termsController = Em.SortedArrayProxy.create(
+YJ.TermsController = Em.SortedArrayProxy.extend(
 
   # The place to hold the letter used to filter by the first letter
   searchLetter: null
