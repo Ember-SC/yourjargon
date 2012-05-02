@@ -32,5 +32,6 @@
 //= require states/listTermsState.js
 //= require states/newTermState.js
 //= require states/editTermState.js
+//= require load_test_terms.js
 //= require launch.js
 //= require templates/all.js
