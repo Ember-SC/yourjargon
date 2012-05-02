@@ -1,12 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.0'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
-
+gem 'rails', '3.2.3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,6 +18,12 @@ gem 'skeleton-rails'
 gem 'jquery-rails'
 gem 'ember-rails'
 gem "active_model_serializers", :git => "git://github.com/josevalim/active_model_serializers.git"
+gem 'foreman'
+gem 'thin'
+
+group :production do
+  gem 'pg'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -41,6 +41,7 @@ gem "active_model_serializers", :git => "git://github.com/josevalim/active_model
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'jasmine'
   gem 'jasminerice'
