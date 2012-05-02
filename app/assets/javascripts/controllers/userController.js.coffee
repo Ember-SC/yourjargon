@@ -11,6 +11,7 @@ YJ.userController = Em.Object.create(
     #make a create call to the server for a user
     # if success set currentUser from response and create session and return true
     # if failure return false
+    @currentUser.create()
     true
 
 
