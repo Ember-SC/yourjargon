@@ -24,8 +24,8 @@ YJ.StateManager.reopen(
       The event is to delete the term
     ###
     deleteCurrentTerm: (manager) ->
-      YJ.termsController.remove(YJ.currentTerm.termToDelete())
       YJ.currentTerm.deleteRecord()
+      YJ.termsController.remove(YJ.currentTerm.termToDelete())
       YJ.store.commit()
       manager.goToState('listTermsState')
   )

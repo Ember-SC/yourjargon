@@ -45,7 +45,9 @@ YJ.currentTerm = Em.Object.create(
   deleteRecord: ->
     # Note that both have to be deleted, because it's likely a commit
     # will soon occur and add the newTerm
+    console.log("oldTerm: #{@get('oldTerm')}")
     @get('oldTerm').deleteRecord()
+    console.log("newTerm: #{@get('newTerm')}")
     @get('newTerm').deleteRecord()
 
 )

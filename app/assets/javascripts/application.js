@@ -18,8 +18,8 @@
 //= require app.js
 //= require models/term.js
 //= require models/currentTerm.js
-//= require controllers/termsController
-//= require controllers/alphabetController
+//= require controllers/termsController.js
+//= require controllers/alphabetController.js
 //= require views/alphabet_view
 //= require views/alphabetic_link_view
 //= require views/edit_term_view
