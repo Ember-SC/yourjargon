@@ -11198,13 +11198,16 @@
       },
 
       /**
-       * Clears the contents.
+   * Clears the contents in place so you can reuse the content if desired.
        */
       purge: function() {
         // Implementation note: this is called 'purge' instead of 'clear'
         // since MutableArray will remove values in a non-sorted order
         // which will crash.
-        this.set('content', Ember.A([]));
+    for (var offset = this.get('length') - 1 ; offset >= 0 ; offset--) {
+      var lastItem = this.get('content')[offset];
+      this.remove(lastItem);
+    }
       },
 
       /**
