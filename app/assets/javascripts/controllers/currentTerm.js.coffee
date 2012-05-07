@@ -34,9 +34,18 @@ YJ.currentTerm = Em.Object.create(
     @get('oldTerm').set('description', @get('newTerm').get('description'))
 
   ###
-    When a term is deleted from the edit, it needs to retrieve the term to delete.
+    return the term to be deleted
   ###
   termToDelete: ->
     @get('oldTerm')
+
+  ###
+    When a term is deleted from the edit.
+  ###
+  deleteRecord: ->
+    # Note that both have to be deleted, because it's likely a commit
+    # will soon occur and add the newTerm
+    @get('oldTerm').deleteRecord()
+    @get('newTerm').deleteRecord()
 
 )
