@@ -1,6 +1,12 @@
 Yourjargon::Application.routes.draw do
   resources :terms
 
+  resources :home
+
+  match 'users/create' => 'users#create'
+  match 'sessions/create' => 'sessions#create'
+  match 'sessions/destroy' => 'sessions#destroy'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -8,7 +14,7 @@ Yourjargon::Application.routes.draw do
     mount Jasminerice::Engine => "/jasmine"
   end
 
-  resources :home
+
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
