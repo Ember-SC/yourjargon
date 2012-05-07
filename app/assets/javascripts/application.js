@@ -1,4 +1,4 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+// This is a manifest file that'll be compiled into application, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -17,21 +17,29 @@
 //= require tabs
 //= require app
 //= require models/term
-//= require models/currentTerm
+//= require models/currentUser
 //= require controllers/termsController
 //= require controllers/alphabetController
+//= require controllers/userController
+//= require controllers/currentTerm
 //= require views/alphabet_view
 //= require views/alphabetic_link_view
 //= require views/edit_term_view
 //= require views/link_view
 //= require views/list_terms_view
 //= require views/main_view
+//= require views/navbar_view
 //= require views/new_term_button_view
 //= require views/new_term_view
+//= require views/login_view
+//= require views/register_view
 //= require states/stateManager
 //= require states/listTermsState
 //= require states/newTermState
 //= require states/editTermState
 //= require load_test_terms
+//= require states/loginState
+//= require states/registerState
+//= require states/loggedOutState
 //= require launch
 //= require templates/all
