@@ -5,10 +5,6 @@
 ###
 YJ.NewTermView = Em.View.extend(
 
-  # Changes in the new term edit window are instantly bound
-  # to the 'newTerm' attribute in the currentTerm model.
-  termBinding: 'YJ.currentTerm.newTerm'
-
   hasContentBinding: 'YJ.currentTerm.newTerm.hasContent'
 
   isDisabled: (->
@@ -26,10 +22,9 @@ YJ.NewTermView = Em.View.extend(
   cancel: ->
     YJ.stateManager.send('cancelAddTerm')
 
-  newTerm: Em.TextField.extend(
-    didInsertElement: ->
-      @focus()
-
-    valueBinding: "YJ.currentTerm.newTerm.term"
-  )
+  didInsertElement: ->
+    console.log("didIntertElement")
+    #    @focus()
+    @_super()
+    @$('input:first').focus()
 )

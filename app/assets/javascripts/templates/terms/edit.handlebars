@@ -1,6 +1,6 @@
 {{#view YJ.EditTermView id="editTermView"}}
-  term: {{term.term}}<br>
-  definition: {{view Ember.TextArea valueBinding="term.description"}}
+  term: {{YJ.currentTerm.newTerm.term}}<br>
+  definition: {{view Ember.TextArea valueBinding="YJ.currentTerm.newTerm.description"}}
   <button {{action "update"}}> Submit </button>
   <button {{action "cancel"}}> Cancel </button>
   <button {{action "delete"}}> Delete </button>
