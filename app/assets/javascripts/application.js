@@ -32,6 +32,7 @@
 //= require views/new_term_view
 //= require views/login_view
 //= require views/register_view
+//= require views/text_view
 //= require states/stateManager
 //= require states/listTermsState
 //= require states/newTermState
