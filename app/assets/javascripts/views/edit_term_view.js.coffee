@@ -5,7 +5,6 @@
 ###
 YJ.EditTermView = Em.View.extend(
 
-    termBinding: 'YJ.currentTerm.newTerm'
     templateName: 'templates/terms/edit'
 
     update: ->
