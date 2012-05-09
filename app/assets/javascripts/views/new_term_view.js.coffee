@@ -21,9 +21,10 @@ YJ.NewTermView = Em.View.extend(
   # will be discarded.
   cancel: ->
     YJ.stateManager.send('cancelAddTerm')
-#
-#  newTerm: Em.TextField.extend(
-#    didInsertElement: ->
-#      @focus()
-#  )
+
+  didInsertElement: ->
+    console.log("didIntertElement")
+    #    @focus()
+    @_super()
+    @$('input:first').focus()
 )

@@ -1,5 +1,5 @@
 {{#view YJ.NewTermView id="newTermView"}}
-term: {{view YJ.TextView valueBinding="YJ.currentTerm.newTerm.term"}}
+term: {{view Ember.TextField valueBinding="YJ.currentTerm.newTerm.term"}}
 definition: {{view Ember.TextArea valueBinding="YJ.currentTerm.newTerm.description"}}
 <p>
 <button {{bindAttr class="disabled"}} {{bindAttr disabled="isDisabled"}} {{action "add"}}> Submit </button>
