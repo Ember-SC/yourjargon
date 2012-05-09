@@ -5,10 +5,6 @@
 ###
 YJ.NewTermView = Em.View.extend(
 
-  # Changes in the new term edit window are instantly bound
-  # to the 'newTerm' attribute in the currentTerm model.
-  termBinding: 'YJ.currentTerm.newTerm'
-
   hasContentBinding: 'YJ.currentTerm.newTerm.hasContent'
 
   isDisabled: (->
@@ -29,7 +25,5 @@ YJ.NewTermView = Em.View.extend(
   newTerm: Em.TextField.extend(
     didInsertElement: ->
       @focus()
-
-    valueBinding: "YJ.currentTerm.newTerm.term"
   )
 )

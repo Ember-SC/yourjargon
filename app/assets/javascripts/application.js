@@ -29,7 +29,6 @@
 //= require views/list_terms_view
 //= require views/main_view
 //= require views/navbar_view
-//= require views/new_term_button_view
 //= require views/new_term_view
 //= require views/login_view
 //= require views/register_view
