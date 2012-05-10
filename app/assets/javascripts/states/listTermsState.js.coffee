@@ -19,5 +19,12 @@ YJ.StateManager.reopen(
     editTerm: (manager, term) ->
       YJ.currentTerm.editTerm(term)
       manager.goToState('editTermState')
+
+    ###
+      The event signifies that the user selected logout
+    ###
+    logout: (manager) ->
+      YJ.userController.logout()
+      manager.goToState('loggedOutState')
   )
 )
