@@ -1,6 +1,6 @@
-{{#view YJ.LoginView id="loginView"}}
+<div id="loginView">
 <h2> Log in </h2> <br />
 email: {{view Ember.TextField valueBinding="YJ.userController.currentUser.email" placeHolder="Email..."}} <br />
 password: {{view Ember.TextField valueBinding="YJ.userController.currentUser.password" type="password" placeHolder="Password..."}} <br />
 <button {{action "cancel"}}> Cancel </button>  <button {{action "submit"}}> Submit </button> or <a href="#" {{action "register"}}> Sign up </a>
-{{/view}}
+</div>
