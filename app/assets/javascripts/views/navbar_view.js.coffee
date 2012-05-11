@@ -5,4 +5,8 @@ YJ.NavbarView = Em.View.extend(
 
   logout: ->
     YJ.stateManager.send('logout')
+
+  # User wants to create a new term
+  new: ->
+    YJ.stateManager.send('newTerm')
 )

@@ -9,7 +9,4 @@ YJ.MainView = Em.View.extend(
     # The HTML ID of the page element to 'hang off of'.
     elementId: 'content'
 
-    # User wants to create a new term
-    new: ->
-      YJ.stateManager.send('newTerm')
 )

@@ -1,6 +1,24 @@
 // Define the top part of the terms list page:
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+
+
 $search-top-height: 32px;
 $new-button-top-offset: 3px;
+
+.left-align {
+
+}
+
+.right-align {
+
+}
+
+.alphabet-list {
+  text-align: right;
+  margin-right: 100px;
+}
 
 .fixed-row {
   position: fixed;
