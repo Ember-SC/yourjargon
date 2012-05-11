@@ -1,9 +1,7 @@
-<ul class="position-alphabet-list">
+<ul class="alphabet-list">
   <a href="#" {{action "all"}}> Show All </a>
   <!-- 'action all' above is scary; tie it down better -->
   {{#each YJ.alphabetController}}
-    {{#view YJ.AlphabetLinkView contentBinding="this"}}
-    <a href="#" {{content}} </a>
-    {{/view}}
+    <li><span class="badge"><a href="#" {{action "choose"}}> {{this}} </a></span></li>
   {{/each}}
 </ul>

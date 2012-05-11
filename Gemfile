@@ -14,13 +14,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'skeleton-rails'
 gem 'jquery-rails'
 gem 'ember-rails'
 gem "active_model_serializers", :git => "git://github.com/josevalim/active_model_serializers.git"
 gem 'foreman'
 gem 'thin'
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'bootstrap-sass', '~> 2.0.2'
 
 group :production do
   gem 'pg'

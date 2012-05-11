@@ -12,9 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require support/ember
 //= require support/ember-data
-//= require tabs
 //= require app
 //= require models/term
 //= require models/currentUser

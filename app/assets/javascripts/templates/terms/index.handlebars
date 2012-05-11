@@ -1,28 +1,11 @@
-<div class="container">
-  <div class="row">
-    {{view YJ.NavbarView}}
-  </div>
-  <div class="row">
-    <div class="sixteen columns">
-      <h1>All Terms</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="sixteen columns">
-        <input type="search" id="regularInput" class="search-box">
-    </div>
-  </div>
-  <div class="row" id="bottom-scrollable">
-    <div class="fifteen columns alpha">
+{{view YJ.NavbarView}}
+<div class="container-fluid">
+  <div class="row-fluid" id="bottom-scrollable">
+    <div class="left-align">
       {{view YJ.ListTermsView action="update"}}
     </div>
-    <div class="one columns offset-by-fifteen omega">
+    <div class="right-align">
         {{view YJ.AlphabetView}}
     </div>
-  </div>
-  <div>
-  <button {{action "new"}} class="new-button-position">
-    New
-  </button>
   </div>
 </div>

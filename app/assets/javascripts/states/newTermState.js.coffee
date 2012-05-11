@@ -12,7 +12,7 @@ YJ.StateManager.reopen(
       new term contents are to be added to the collection of terms
     ###
     addTerm: (manager) ->
-      YJ.termsController.add(YJ.currentTerm.get('newTerm'))
+      YJ.get('termsController').add(YJ.currentTerm.get('newTerm'))
       YJ.store.commit()
       manager.goToState('listTermsState')
 
