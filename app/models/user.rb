@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
    validates :email, :presence => true, :uniqueness => true
 
+   after_create :api_authenticable
 
    def password=(pass)
      return if pass.blank?
@@ -16,5 +17,11 @@ class User < ActiveRecord::Base
    def self.authenticate(email, password)
      user = find_by_email(email)
      user && BCrypt::Password.new(user.password_digest) == password ? user : nil
+   end
+
+   private
+
+   def api_authenticable
+     update_attribute(:api_key, Digest::SHA1.hexdigest([Time.now, rand].join))
    end
 end
