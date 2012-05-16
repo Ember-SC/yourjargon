@@ -2,8 +2,6 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
-
-
 $search-top-height: 32px;
 $new-button-top-offset: 3px;
 
@@ -25,66 +23,16 @@ $new-button-top-offset: 3px;
   list-style: none;
 }
 
-.fixed-row {
-  position: fixed;
-  top: 0px !important;
-}
-
-.absolute-columns {
-  position: absolute;
-  top: 0px;
-}
-
-.your-jargon-title {
-  width: 100%;
-  line-height: $search-top-height;
-  font-style: italic;
-}
-
-.all-terms-title {
-  text-align: center;
-  line-height: $search-top-height;
-}
-
-.new-button-position {
-  position: absolute;
-  right: 0px;
-  top: $new-button-top-offset;
-}
-
 // Define the middle part of the terms list page:
 $search-middle-height: 30px;
 $search-bottom-top: $search-top-height + $search-middle-height;
-
-.search-top {
-  position: fixed;
-  top: $search-top-height;
-}
-
-.search-box {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  height: $search-middle-height;
-}
 
 // Define the scrollable bottom part of the terms list page:
 // NOTE: Seem to have to attach this via the ID rather
 // than class.
 #bottom-scrollable {
-  top: $search-bottom-top;
-  position: fixed;
   overflow-y: scroll;
   height: 100%;
-}
-
-.terms-list-position {
-  position: absolute; left: 0px; margin-left: 0px;
-}
-
-.position-alphabet-list {
-  top: $search-bottom-top;
-  position: fixed;
 }
 
 button.disabled,
