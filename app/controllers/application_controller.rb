@@ -13,17 +13,17 @@ class ApplicationController < ActionController::Base
   def current_user
      return @current_user if @current_user
 
-     if session[:user_id]
-       @current_user = User.find_by_id(session[:user_id])
+     if session[:api_key]
+       @current_user = User.find_by_api_key(session[:api_key])
      end
   end
 
   def create_user_session(user)
-    session[:user_id] = user.id
+    session[:api_key] = user.api_key
   end
 
   def destroy_user_session
-    session[:user_id] = nil
+    session[:api_key] = nil
   end
 
 end

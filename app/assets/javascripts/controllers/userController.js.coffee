@@ -1,5 +1,7 @@
 YJ.userController = Em.Object.create(
   currentUser: null
+  api_key: null
+
 
   authenticate: ->
     #make a call to the server to find user with email/password
@@ -12,7 +14,9 @@ YJ.userController = Em.Object.create(
       data: {email: @currentUser.get('email'), password: @currentUser.get('password')}
       dataType: 'json'
       success: (data) ->
+        console.log(data)
         self.currentUser.update(data.user)
+        self.set('api_key', data.api_key)
         true
 
       failure:
@@ -30,6 +34,7 @@ YJ.userController = Em.Object.create(
       dataType: 'json'
       success: (data) ->
         self.currentUser.update(data.user)
+        #TODO.  Redirect the user to sign in and create a session
         true
 
       failure: ->
