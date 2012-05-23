@@ -1,6 +1,13 @@
+<div class="navbar">
+<div class="navbar-inner">
+	<div class="container-fluid">
+		<a href="#" class="brand"> YourJargon </a>
+	</div>
+</div>
+</div>
 <div id="editTermView" class='well'>
-  term: {{YJ.currentTerm.newTerm.term}}<br>
-  definition: {{view Ember.TextArea valueBinding="YJ.currentTerm.newTerm.description"}}
+  <h3>Term: {{YJ.currentTerm.newTerm.term}}</h3><br>
+  <h4>Definition: {{view Ember.TextArea valueBinding="YJ.currentTerm.newTerm.description"}}</h4>
   <div class='btn-group'>
   <button {{action "update"}} class='btn btn-primary'> Submit </button>
   <button {{action "cancel"}} class='btn'> Cancel </button>

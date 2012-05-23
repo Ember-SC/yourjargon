@@ -1,6 +1,12 @@
-<div id="loginView">
-<h2> Log in </h2> <br />
-email: {{view Ember.TextField valueBinding="YJ.userController.currentUser.email" placeHolder="Email..."}} <br />
-password: {{view Ember.TextField valueBinding="YJ.userController.currentUser.password" type="password" placeHolder="Password..."}} <br />
+<div class="navbar" id="loginView">
+    <div class="navbar-inner">
+        <div class="container">
+			<h2> Log in </h2> <br />
+		</div>
+	</div>
+</div>
+<div class="well">
+<h4>Email: {{view Ember.TextField valueBinding="YJ.userController.currentUser.email" placeholder="User email"}}</h4> <br />
+<h4>Password: {{view Ember.TextField valueBinding="YJ.userController.currentUser.password" type="password" placeholder="User password"}}</h4> <br />
 <button {{action "cancel"}}> Cancel </button>  <button {{action "submit"}}> Submit </button> or <a href="#" {{action "register"}}> Sign up </a>
 </div>

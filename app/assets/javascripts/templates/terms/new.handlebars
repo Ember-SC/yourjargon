@@ -1,8 +1,16 @@
-<div id="newTermView">
-term: {{view Ember.TextField valueBinding="YJ.currentTerm.newTerm.term"}}
-definition: {{view Ember.TextArea valueBinding="YJ.currentTerm.newTerm.description"}}
-<p>
-<button {{bindAttr class="disabled"}} {{bindAttr disabled="isDisabled"}} {{action "add"}}> Submit </button>
-<button {{action "cancel"}}> Cancel </button>
-</p>
+<div class="navbar">
+<div class="navbar-inner">
+	<div class="container-fluid">
+		<a href="#" class="brand"> YourJargon </a>
+	</div>
+</div>
+</div>
+<div id="newTermView" class="well">
+	<h3>Term: {{view Ember.TextField valueBinding="YJ.currentTerm.newTerm.term"}}</h3>
+	<br>
+	<h3>Definition: {{view Ember.TextArea valueBinding="YJ.currentTerm.newTerm.description"}}</h3>
+	<div class="btn-group">
+		<button {{bindAttr class="disabled"}} {{bindAttr disabled="isDisabled"}} {{action "add"}} > Submit </button>
+		<button {{action "cancel"}}> Cancel </button>
+	</div>
 </div>
