@@ -274,9 +274,14 @@ DS.ManyArray = DS.RecordArray.extend({
     var pendingParent = parentRecord && !get(parentRecord, 'id');
     var stateManager = get(this, 'stateManager');
 
+    // Map the array of record objects into an array of  client ids.
     added = added.map(function(record) {
-      ember_assert("You can only add records of " + (get(this, 'type') && get(this, 'type').toString()) + " to this association.", !get(this, 'type') || (get(this, 'type') === record.constructor));
+      Ember.assert("You can only add records of " + (get(this, 'type') && get(this, 'type').toString()) + " to this association.", !get(this, 'type') || (get(this, 'type') === record.constructor));
 
+      // If the record to which this many array belongs does not yet
+      // have an id, notify the newly-added record that it must wait
+      // for the parent to receive an id before the child can be
+      // saved.
       if (pendingParent) {
         record.send('waitingOn', parentRecord);
       }
@@ -295,6 +300,14 @@ DS.ManyArray = DS.RecordArray.extend({
       // TODO: null out inverse FK
       record = this.objectAt(i);
       this.assignInverse(record, parentRecord, true);
+
+      // If we put the child record into a pending state because
+      // we were waiting on the parent record to get an id, we
+      // can tell the child it no longer needs to wait.
+      if (pendingParent) {
+        record.send('doneWaitingOn', parentRecord);
+      }
+
       stateManager.send('recordWasAdded', record);
     }
 
@@ -471,12 +484,12 @@ DS.Transaction = Ember.Object.extend({
   */
   add: function(record) {
     // we could probably make this work if someone has a valid use case. Do you?
-    ember_assert("Once a record has changed, you cannot move it into a different transaction", !get(record, 'isDirty'));
+    Ember.assert("Once a record has changed, you cannot move it into a different transaction", !get(record, 'isDirty'));
 
     var recordTransaction = get(record, 'transaction'),
         defaultTransaction = getPath(this, 'store.defaultTransaction');
 
-    ember_assert("Models cannot belong to more than one transaction at a time.", recordTransaction === defaultTransaction);
+    Ember.assert("Models cannot belong to more than one transaction at a time.", recordTransaction === defaultTransaction);
 
     this.adoptRecord(record);
   },
@@ -1303,11 +1316,11 @@ DS.Store = Ember.Object.extend({
 
     primaryKey = type.proto().primaryKey;
 
-    // TODO: Make ember_assert more flexible and convert this into an ember_assert
+    // TODO: Make Ember.assert more flexible
     if (hash) {
-      ember_assert("The server must provide a primary key: " + primaryKey, get(hash, primaryKey));
+      Ember.assert("The server must provide a primary key: " + primaryKey, get(hash, primaryKey));
     } else {
-      ember_assert("The server did not return data, and you did not create a primary key (" + primaryKey + ") on the client", get(get(record, 'data'), primaryKey));
+      Ember.assert("The server did not return data, and you did not create a primary key (" + primaryKey + ") on the client", get(get(record, 'data'), primaryKey));
     }
 
     clientId = get(record, 'clientId');
@@ -1480,7 +1493,7 @@ DS.Store = Ember.Object.extend({
     if (hash === undefined) {
       hash = id;
       var primaryKey = type.proto().primaryKey;
-      ember_assert("A data hash was loaded for a record of type " + type.toString() + " but no primary key '" + primaryKey + "' was provided.", primaryKey in hash);
+      Ember.assert("A data hash was loaded for a record of type " + type.toString() + " but no primary key '" + primaryKey + "' was provided.", primaryKey in hash);
       id = hash[primaryKey];
     }
 
@@ -2451,11 +2464,53 @@ DS.StateManager = Ember.StateManager.extend({
 (function() {
 var get = Ember.get, set = Ember.set;
 
-// This object is a regular JS object for performance. It is only
-// used internally for bookkeeping purposes.
+//  When a record is changed on the client, it is considered "dirty"--there are
+//  pending changes that need to be saved to a persistence layer, such as a
+//  server.
+//
+//  If the record is rolled back, it re-enters a clean state, any changes are
+//  discarded, and its attributes are reset back to the last known good copy
+//  of the data that came from the server.
+//
+//  If the record is committed, the changes are sent to the server to be saved,
+//  and once the server confirms that they are valid, the record's "canonical"
+//  data becomes the original canonical data plus the changes merged in.
+//
+//  A DataProxy is an object that encapsulates this change tracking. It
+//  contains three buckets:
+//
+//  * `savedData` - the last-known copy of the data from the server
+//  * `unsavedData` - a hash that contains any changes that have not yet
+//     been committed
+//  * `associations` - this is similar to `savedData`, but holds the client
+//    ids of associated records
+//
+//  When setting a property on the object, the value is placed into the
+//  `unsavedData` bucket:
+//
+//      proxy.set('key', 'value');
+//
+//      // unsavedData:
+//      {
+//        key: "value"
+//      }
+//
+//  When retrieving a property from the object, it first looks to see
+//  if that value exists in the `unsavedData` bucket, and returns it if so.
+//  Otherwise, it returns the value from the `savedData` bucket.
+//
+//  When the adapter notifies a record that it has been saved, it merges the
+//  `unsavedData` bucket into the `savedData` bucket. If the record's
+//  transaction is rolled back, the `unsavedData` hash is simply discarded.
+//
+//  This object is a regular JS object for performance. It is only
+//  used internally for bookkeeping purposes.
+
 var DataProxy = DS._DataProxy = function(record) {
   this.record = record;
+
   this.unsavedData = {};
+
   this.associations = {};
 };
 
@@ -2802,7 +2857,7 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
     var data = get(this, 'data');
 
     if (data && key in data) {
-      ember_assert("You attempted to access the " + key + " property on a record without defining an attribute.", false);
+      Ember.assert("You attempted to access the " + key + " property on a record without defining an attribute.", false);
     }
   },
 
@@ -2810,7 +2865,7 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
     var data = get(this, 'data');
 
     if (data && key in data) {
-      ember_assert("You attempted to set the " + key + " property on a record without defining an attribute.", false);
+      Ember.assert("You attempted to set the " + key + " property on a record without defining an attribute.", false);
     } else {
       return this._super(key, value);
     }
@@ -2930,7 +2985,7 @@ DS.Model.reopenClass({
 
 DS.attr = function(type, options) {
   var transform = DS.attr.transforms[type];
-  ember_assert("Could not find model attribute of type " + type, !!transform);
+  Ember.assert("Could not find model attribute of type " + type, !!transform);
 
   var transformFrom = transform.from;
   var transformTo = transform.to;
@@ -3119,7 +3174,7 @@ var hasAssociation = function(type, options, one) {
 };
 
 DS.belongsTo = function(type, options) {
-  ember_assert("The type passed to DS.belongsTo must be defined", !!type);
+  Ember.assert("The type passed to DS.belongsTo must be defined", !!type);
   return hasAssociation(type, options);
 };
 
@@ -3165,7 +3220,7 @@ var hasAssociation = function(type, options) {
 };
 
 DS.hasMany = function(type, options) {
-  ember_assert("The type passed to DS.hasMany must be defined", !!type);
+  Ember.assert("The type passed to DS.hasMany must be defined", !!type);
   return hasAssociation(type, options);
 };
 
@@ -3370,11 +3425,26 @@ DS.Adapter = Ember.Object.extend({
 
 
 (function() {
+var set = Ember.set;
+
+Ember.onLoad('application', function(app) {
+  app.registerInjection(function(app, stateManager, property) {
+    if (property === 'Store') {
+      set(stateManager, 'store', app[property].create());
+    }
+  });
+});
+
+})();
+
+
+
+(function() {
 DS.fixtureAdapter = DS.Adapter.create({
   find: function(store, type, id) {
     var fixtures = type.FIXTURES;
 
-    ember_assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
+    Ember.assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
     if (fixtures.hasLoaded) { return; }
 
     setTimeout(function() {
@@ -3390,7 +3460,7 @@ DS.fixtureAdapter = DS.Adapter.create({
   findAll: function(store, type) {
     var fixtures = type.FIXTURES;
 
-    ember_assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
+    Ember.assert("Unable to find fixtures for model type "+type.toString(), !!fixtures);
 
     var ids = fixtures.map(function(item, index, self){ return item.id; });
     store.loadMany(type, ids, fixtures);
@@ -3610,10 +3680,10 @@ DS.RESTAdapter = DS.Adapter.extend({
 
       if (!sideloadedType) {
         mappings = get(this, 'mappings');
-        ember_assert("Your server returned a hash with the key " + prop + " but you have no mappings", !!mappings);
+        Ember.assert("Your server returned a hash with the key " + prop + " but you have no mappings", !!mappings);
 
         sideloadedType = get(mappings, prop);
-        ember_assert("Your server returned a hash with the key " + prop + " but you have no mapping for it", !!sideloadedType);
+        Ember.assert("Your server returned a hash with the key " + prop + " but you have no mapping for it", !!sideloadedType);
       }
 
       this.loadValue(store, sideloadedType, json[prop]);
@@ -3631,9 +3701,9 @@ DS.RESTAdapter = DS.Adapter.extend({
   buildURL: function(record, suffix) {
     var url = [""];
 
-    ember_assert("Namespace URL (" + this.namespace + ") must not start with slash", !this.namespace || this.namespace.toString().charAt(0) !== "/");
-    ember_assert("Record URL (" + record + ") must not start with slash", !record || record.toString().charAt(0) !== "/");
-    ember_assert("URL suffix (" + suffix + ") must not start with slash", !suffix || suffix.toString().charAt(0) !== "/");
+    Ember.assert("Namespace URL (" + this.namespace + ") must not start with slash", !this.namespace || this.namespace.toString().charAt(0) !== "/");
+    Ember.assert("Record URL (" + record + ") must not start with slash", !record || record.toString().charAt(0) !== "/");
+    Ember.assert("URL suffix (" + suffix + ") must not start with slash", !suffix || suffix.toString().charAt(0) !== "/");
 
     if (this.namespace !== undefined) {
       url.push(this.namespace);
