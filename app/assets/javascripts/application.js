@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require support/handlebars-1.0.0.beta.6
 //= require support/ember
 //= require support/ember-data
 //= require app
