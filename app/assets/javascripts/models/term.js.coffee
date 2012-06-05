@@ -8,7 +8,7 @@ YJ.Term = DS.Model.extend(Em.Copyable,
     ###
       The term acronym, word, or phrase to look up
     ###
-    term: DS.attr('string')
+    name: DS.attr('string')
 
     ###
       The definition for the term
@@ -23,7 +23,7 @@ YJ.Term = DS.Model.extend(Em.Copyable,
     # Normal usage: 'Ember.copy(aTerm, false)'
     copy: ->
       YJ.store.createRecord(YJ.Term,
-          {term: this.get('term')
+          {term: this.get('name')
           description: this.get('description')}
       )
 
@@ -31,21 +31,21 @@ YJ.Term = DS.Model.extend(Em.Copyable,
       Returns truthy if the term has content else returns falsy
     ###
     hasContent: (->
-      myTerm = @get("term")
+      myTerm = @get("name")
       return myTerm != null and myTerm.length > 0
-    ).property("term")
+    ).property("name")
 
     ###
       When sorting, sort by the term
     ###
-    sortValue: (->
-      return @get("term")
-    ).property("term")
+    orderBy: (->
+      return @get("name")
+    ).property("name")
 
     ###
       Returns the first letter for use by the alphabet filter
     ###
     firstLetter: (->
-      return @get('term').charAt(0).toUpperCase()
-    ).property('term')
+      return @get('name').charAt(0).toUpperCase()
+    ).property('name')
 )

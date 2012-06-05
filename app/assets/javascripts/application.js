@@ -23,8 +23,8 @@
 //= require controllers/alphabetController
 //= require controllers/userController
 //= require controllers/currentTerm
+//= require mixins/sortable
 //= require views/alphabet_view
-//= require views/alphabetic_link_view
 //= require views/edit_term_view
 //= require views/link_view
 //= require views/list_terms_view

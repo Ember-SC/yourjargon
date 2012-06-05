@@ -1073,7 +1073,7 @@ DS.Store = Ember.Object.extend({
 
       // create a new instance of the model type in the
       // 'isLoading' state
-      record = this.materializeRecord(type, clientId);
+      record = this.materializeRecord(type, clientId, id);
 
       // let the adapter set the data, possibly async
       var adapter = get(this, '_adapter');
@@ -1361,21 +1361,28 @@ DS.Store = Ember.Object.extend({
         clientIds = typeMap.clientIds,
         clientId, hash, proxy;
 
-    var recordCache = get(this, 'recordCache'), record;
+    var recordCache = get(this, 'recordCache'),
+        foundRecord,
+        record;
 
     for (var i=0, l=clientIds.length; i<l; i++) {
       clientId = clientIds[i];
+      foundRecord = false;
 
       hash = dataCache[clientId];
       if (typeof hash === 'object') {
         if (record = recordCache[clientId]) {
-          proxy = get(record, 'data');
+          if (!get(record, 'isDeleted')) {
+            proxy = get(record, 'data');
+            foundRecord = true;
+          }
         } else {
           DATA_PROXY.savedData = hash;
           proxy = DATA_PROXY;
+          foundRecord = true;
         }
 
-        this.updateRecordArray(array, filter, type, clientId, proxy);
+        if (foundRecord) { this.updateRecordArray(array, filter, type, clientId, proxy); }
       }
     }
   },
@@ -1578,12 +1585,13 @@ DS.Store = Ember.Object.extend({
   // . RECORD MATERIALIZATION .
   // ..........................
 
-  materializeRecord: function(type, clientId) {
+  materializeRecord: function(type, clientId, id) {
     var record;
 
     get(this, 'recordCache')[clientId] = record = type._create({
       store: this,
-      clientId: clientId
+      clientId: clientId,
+      _id: id
     });
 
     get(this, 'defaultTransaction').adoptRecord(record);
@@ -2642,7 +2650,8 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
       return value;
     }
 
-    return data && get(data, primaryKey);
+    var id = get(data, primaryKey);
+    return id ? id : this._id;
   }).property('primaryKey', 'data'),
 
   // The following methods are callbacks invoked by `toJSON`. You
@@ -3595,8 +3604,8 @@ DS.RESTAdapter = DS.Adapter.extend({
 
     this.ajax(this.buildURL(root, id), "GET", {
       success: function(json) {
-        store.load(type, json[root]);
         this.sideload(store, type, json, root);
+        store.load(type, json[root]);
       }
     });
   },
@@ -3607,8 +3616,8 @@ DS.RESTAdapter = DS.Adapter.extend({
     this.ajax(this.buildURL(root), "GET", {
       data: { ids: ids },
       success: function(json) {
-        store.loadMany(type, json[plural]);
         this.sideload(store, type, json, plural);
+        store.loadMany(type, json[plural]);
       }
     });
   },
@@ -3618,8 +3627,8 @@ DS.RESTAdapter = DS.Adapter.extend({
 
     this.ajax(this.buildURL(root), "GET", {
       success: function(json) {
-        store.loadMany(type, json[plural]);
         this.sideload(store, type, json, plural);
+        store.loadMany(type, json[plural]);
       }
     });
   },
@@ -3630,8 +3639,8 @@ DS.RESTAdapter = DS.Adapter.extend({
     this.ajax(this.buildURL(root), "GET", {
       data: query,
       success: function(json) {
-        recordArray.load(json[plural]);
         this.sideload(store, type, json, plural);
+        recordArray.load(json[plural]);
       }
     });
   },
