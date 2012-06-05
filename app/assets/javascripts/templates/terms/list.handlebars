@@ -1,7 +1,8 @@
 <ul class="terms-list">
-  {{#each terms}}
+    This is my terms list
+  {{#each view.terms}}
     {{#view YJ.LinkView termBinding="this"}}
-    <li><a href=""> {{term.term}} </a> </li>
+    <li><a href=""> {{name}} </a> </li>
     {{/view}}
   {{/each}}
 </ul>

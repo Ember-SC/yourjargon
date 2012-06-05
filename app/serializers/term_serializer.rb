@@ -1,4 +1,4 @@
 class TermSerializer < ApplicationSerializer
-  attributes :id, :term, :description
+   attributes :id, :name, :description
 
 end

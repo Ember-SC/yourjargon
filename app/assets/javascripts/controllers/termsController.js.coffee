@@ -3,8 +3,8 @@
   provides the filtered output when the user clicks one of the alphabet
   letters on the right side of the screen.
 ###
-YJ.TermsController = Em.SortedArrayProxy.extend(
-
+YJ.TermsController = Em.ArrayProxy.extend(Ember.Sortable,
+  {
   # The place to hold the letter used to filter by the first letter
   searchLetter: null
 
@@ -29,7 +29,8 @@ YJ.TermsController = Em.SortedArrayProxy.extend(
   # for further explanation.
   loadTerms: (->
     @get('tempTerms').forEach (term) ->
-      console.log(term.get('term'))
+      console.log(term.get('name'))
       YJ.termsController.add(term)
   ).observes('tempTerms.isLoaded')
+  }
 )
