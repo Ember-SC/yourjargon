@@ -9,7 +9,7 @@
 
 # Wait for everything to load, then start by listing all the terms
 YJ.ready = ->
-  YJ.set('termsController', YJ.TermsController.create())
+  YJ.set('termsController', YJ.TermsController.create(Ember.Sortable, {content: []}))
   YJ.get('termsController').initialLoad()
   YJ.stateManager = YJ.StateManager.create()
   YJ.stateManager.goToState('loggedOutState')

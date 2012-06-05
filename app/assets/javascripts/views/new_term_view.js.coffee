@@ -11,7 +11,7 @@ YJ.NewTermView = Em.View.extend(
     return !@get('hasContent') ? true : false
   ).property('hasContent')
 
-  templateName: 'templates/terms/new'
+  templateName: 'terms/new'
 
   # Event indicates user wants to keep the new term and add it
   add: ->

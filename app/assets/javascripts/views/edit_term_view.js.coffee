@@ -5,7 +5,7 @@
 ###
 YJ.EditTermView = Em.View.extend(
 
-    templateName: 'templates/terms/edit'
+    templateName: 'terms/edit'
 
     update: ->
       YJ.stateManager.send('updateTerm')
