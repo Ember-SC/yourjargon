@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+   respond_to :json
 
    def create
       @user = User.authenticate(params[:email], params[:password])
