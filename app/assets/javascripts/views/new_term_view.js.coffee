@@ -5,11 +5,11 @@
 ###
 YJ.NewTermView = Em.View.extend(
 
-  hasContentBinding: 'YJ.currentTerm.newTerm.hasContent'
-
-  isDisabled: (->
-    return !@get('hasContent') ? true : false
-  ).property('hasContent')
+#  hasContentBinding: 'YJ.currentTerm.newTerm.hasContent'
+#
+#  isDisabled: (->
+#    return !@get('hasContent') ? true : false
+#  ).property('hasContent')
 
   templateName: 'terms/new'
 

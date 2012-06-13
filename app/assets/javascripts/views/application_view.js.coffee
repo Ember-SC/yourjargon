@@ -1,3 +1,4 @@
-YJ.applicationView = Ember.View.extend(
+YJ.ApplicationView = Ember.View.extend(
+  templateName: 'application'
 
 )

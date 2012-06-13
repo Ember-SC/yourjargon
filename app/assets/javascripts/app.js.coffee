@@ -7,7 +7,7 @@ exports.YJ = Em.Application.create(
   ready: ->
     YJ.set('termsController', YJ.TermsController.create(Ember.Sortable, {content: []}))
     YJ.get('termsController').initialLoad()
-    YJ.initialize
+    YJ.initialize()
 )
 
 YJ.store = DS.Store.create(

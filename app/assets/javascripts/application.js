@@ -26,6 +26,7 @@
 //= require controllers/currentTerm
 //= require controllers/applicationController
 //= require controllers/navbarController
+//= require controllers/main_controller
 //= require mixins/sortable
 //= require views/alphabet_view
 //= require views/edit_term_view

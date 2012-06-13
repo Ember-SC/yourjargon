@@ -2,37 +2,51 @@ YJ.Router = Ember.Router.extend(
   enableLogging: true
   location: 'hash'
   #states defined under /states folder
+
   root: Ember.State.extend(
+    # EVENTS
+
+
     index: Ember.State.extend(
       route: '/'
 
+      connectOutlets: (router) ->
+        console.log("connecting outlets")
+        appController = router.get('applicationController')
+        console.log(appController)
+        appController.connectOutlet(YJ.MainView)
+
+      newTerm: Ember.State.transitionTo('new')
     )
 
-    terms: Ember.State.extend(
-      index: Ember.State.extend(
-        route: '/terms'
-      )
+    new: Ember.State.extend(
+      route: '/new'
 
-      edit: Ember.State.extend(
-        route: '/terms/:term_id/edit'
-      )
-
-      new: Ember.State.extend(
-        route: '/terms/new'
-      )
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet(YJ.NewTermView)
     )
 
-    login: Ember.State.extend(
-      route: '/'
+    index: Ember.State.extend(
+      route: '/terms'
+
+      connectOutlets: (router) ->
+        router.get('applicationController').connectOutlet(YJ.ListTermsView)
     )
 
-    loggedOut: Ember.State.extend(
-      route: '/login'
+    edit: Ember.State.extend(
+      route: '/terms/:term_id/edit'
     )
 
-    register: Ember.State.extend(
-      route: ''
-    )
+#    login: Ember.State.extend(
+#      route: '/'
+#    )
+#
+#    loggedOut: Ember.State.extend(
+#      #EVENTS
+#      login: Ember.State.transitionTo('login')
+#
+#      route: '/login'
+#    )
 
   )
 )
