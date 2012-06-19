@@ -1,9 +1,9 @@
 <div id="newTermView" class="well">
-	<h3>Term: {{view Ember.TextField valueBinding="YJ.currentTerm.newTerm.name"}}</h3>
+	<h3>Term: {{view Ember.TextField valueBinding="content.name"}}</h3>
 	<br>
-	<h3>Definition: {{view Ember.TextArea valueBinding="YJ.currentTerm.newTerm.description"}}</h3>
+	<h3>Definition: {{view Ember.TextArea valueBinding="content.description"}}</h3>
 	<div class="btn-group">
-		<button {{bindAttr class="disabled"}} {{bindAttr disabled="isDisabled"}} {{action "add"}} > Submit </button>
-		<button {{action "cancel"}}> Cancel </button>
+		<button {{bindAttr class="disabled"}} {{bindAttr disabled="isDisabled"}} {{action addTerm target="controller"}} > Submit </button>
+		<button {{action cancel target="controller"}}> Cancel </button>
 	</div>
 </div>

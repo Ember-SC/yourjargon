@@ -1,9 +1,9 @@
 <div id="editTermView" class='well'>
-  <h3>Term: {{YJ.currentTerm.oldTerm.name}}</h3><br>
-  <h4>Definition: {{view Ember.TextArea valueBinding="YJ.currentTerm.newTerm.description"}}</h4>
+  <h3>Term: {{content.name}}</h3><br>
+  <h4>Definition: {{view Ember.TextArea valueBinding="content.description"}}</h4>
   <div class='btn-group'>
-  <button {{action "update"}} class='btn btn-primary'> Submit </button>
-  <button {{action "cancel"}} class='btn'> Cancel </button>
-  <button {{action "delete"}} class='btn btn-danger'> Delete </button>
+  <button {{action save target="controller"}} class='btn btn-primary'> Submit </button>
+  <button {{action cancel target="controller"}} class='btn'> Cancel </button>
+  <button {{action delete target="controller"}} class='btn btn-danger'> Delete </button>
   </div>
 </div>

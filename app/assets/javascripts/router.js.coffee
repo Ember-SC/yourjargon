@@ -1,52 +1,75 @@
 YJ.Router = Ember.Router.extend(
   enableLogging: true
   location: 'hash'
-  #states defined under /states folder
 
   root: Ember.State.extend(
     # EVENTS
+    newTerm: Ember.State.transitionTo('terms.new')
+    editTerm: Ember.State.transitionTo('edit')
+    viewTerms: Ember.State.transitionTo('terms.index')
+    cancel: Ember.State.transitionTo('cancel')
+    goHome: Ember.State.transitionTo('home')
 
-
-    index: Ember.State.extend(
+    home: Ember.State.extend(
       route: '/'
+      redirectsTo: 'terms.index'
 
-      connectOutlets: (router) ->
-        console.log("connecting outlets")
-        appController = router.get('applicationController')
-        console.log(appController)
-        appController.connectOutlet(YJ.MainView)
+      #      connectOutlets: (router) ->
+      #        appController = router.get('applicationController')
+      #        appController.connectOutlet(YJ.MainView)
 
-      newTerm: Ember.State.transitionTo('new')
+
     )
 
-    new: Ember.State.extend(
-      route: '/new'
-
-      connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet(YJ.NewTermView)
-    )
-
-    index: Ember.State.extend(
+    terms: Ember.State.extend(
       route: '/terms'
 
-      connectOutlets: (router) ->
-        router.get('applicationController').connectOutlet(YJ.ListTermsView)
+      new: Ember.State.extend(
+        #EVENTS
+
+        route: '/new'
+
+        connectOutlets: (router) ->
+          router.get('applicationController').connectOutlet(YJ.NewTermView, YJ.Term.createRecord())
+      )
+
+      index: Ember.State.extend(
+        route: '/'
+
+        connectOutlets: (router) ->
+          router.get('applicationController').connectOutlet(YJ.TermsView, YJ.Term.find())
+      )
+
+      edit: Ember.State.extend(
+        route: ':term_id/edit'
+
+        connectOutlets: (router, term) ->
+          router.get('applicationController').connectOutlet(YJ.EditTermView, term)
+      )
+
+      #      show: Ember.State.extend(
+      #        route: ':term_id'
+      #
+      #        connectOutlets: (router, term) ->
+      #          router.get('applicationController').connectOutlet(YJ.Term)
+      #      )
     )
 
-    edit: Ember.State.extend(
-      route: '/terms/:term_id/edit'
-    )
 
-#    login: Ember.State.extend(
-#      route: '/'
-#    )
-#
-#    loggedOut: Ember.State.extend(
-#      #EVENTS
-#      login: Ember.State.transitionTo('login')
-#
-#      route: '/login'
-#    )
+
+    #    loggedIn: Ember.State.extend(
+    #      #EVENTS
+    #      logout: Ember.State.transitionTo('loggedOut')
+
+    #      route: '/'
+    #    )
+    #
+    #    loggedOut: Ember.State.extend(
+    #      #EVENTS
+    #      login: Ember.State.transitionTo('loggedIn')
+    #
+    #      route: '/login'
+    #    )
 
   )
 )
