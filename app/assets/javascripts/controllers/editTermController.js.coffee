@@ -1,20 +1,17 @@
 YJ.EditTermController = Ember.Controller.extend(
-  save: (event) ->
-    console.log("saving")
-    term = event.context.content
-    term.get('transaction').commit()
-    YJ.stateManager.send('viewTerms')
+  content: null
 
-  cancel: (event) ->
-    console.log('canceling change')
-    term = event.context.content
-    term.get('transaction').rollback()
-    YJ.stateManager.send('viewTerms')
+  term: ->
+    @get('content')
 
-  delete: (event) ->
-    term = event.context.content
-    term.destroy()
-    YJ.stateManager.send('viewTerms')
+  save: ->
+    @term().get('transaction').commit()
+
+  cancel: ->
+    @term().get('transaction').rollback()
+
+  delete: ->
+    @term().destroy()
 
 
 )

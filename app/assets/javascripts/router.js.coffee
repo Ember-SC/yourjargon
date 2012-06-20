@@ -26,6 +26,15 @@ YJ.Router = Ember.Router.extend(
 
       new: Ember.State.extend(
         #EVENTS
+        addTerm: ((router) ->
+          router.get('newTermController').addTerm()
+          router.send('goHome')
+        )
+        cancel: ((router) ->
+          router.get('newTermController').cancel()
+          router.send('goHome')
+        )
+
 
         route: '/new'
 
@@ -42,9 +51,22 @@ YJ.Router = Ember.Router.extend(
 
       edit: Ember.State.extend(
         route: ':term_id/edit'
+        #EVENTS
+        save: ((router) ->
+          router.get('editTermController').save()
+          router.transitionTo('home')
+        )
+        delete: ((router) ->
+          router.get('editTermController').delete()
+          router.transitionTo('home')
+        )
+        cancel: ((router) ->
+          router.get('editTermController').cancel()
+          router.transitionTo('home')
+        )
 
-        connectOutlets: (router, term) ->
-          router.get('applicationController').connectOutlet(YJ.EditTermView, term)
+        connectOutlets: (router, context) ->
+          router.get('applicationController').connectOutlet(YJ.EditTermView, context)
       )
 
       #      show: Ember.State.extend(
