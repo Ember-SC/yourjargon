@@ -18,4 +18,5 @@
 //= require support/ember-data
 //= require app
 //= require app_config
+//= require router
 //= require load_test_terms
