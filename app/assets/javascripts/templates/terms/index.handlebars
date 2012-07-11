@@ -2,13 +2,13 @@
   <div class="row-fluid" id="bottom-scrollable">
     <div class="span6">
       <ul class="terms-list">
-        {{#each term in controller}}
+        {{#each term in controller.filtered}}
         <li><a {{action editTerm context="term"}}> {{term.name}} </a> </li>
         {{/each}}
       </ul>
     </div>
     <div class="span6">
-      {{view YJ.AlphabetView}}
+      {{view YJ.AlphabetView controllerBinding="YJ.router.alphabetController"}}
     </div>
   </div>
 </div>

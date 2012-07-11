@@ -1,7 +1,7 @@
 <ul class="alphabet-list">
-  <a href="#" {{action "all"}}> Show All </a>
+  <a {{action allTerms}}> Show All </a>
   <!-- 'action all' above is scary; tie it down better -->
-  {{#each YJ.alphabetController}}
-    <li><span class="badge"><a href="#" {{action "choose"}}> {{this}} </a></span></li>
+  {{#each letter in controller}}
+    <li><span class="badge"><a {{action filterTerms context="letter"}}> {{letter}} </a></span></li>
   {{/each}}
 </ul>
