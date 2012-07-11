@@ -1,4 +1,4 @@
-YJ.CurrentUser = Em.Object.extend(
+YJ.User = Em.Object.extend(
   id: null
   name: null
   email: null

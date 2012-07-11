@@ -8,6 +8,6 @@
 // Time: 11:36 PM
 //
 //= require_tree ./support
-//= require application
+//= require application_test
 //= require_tree ./
 
