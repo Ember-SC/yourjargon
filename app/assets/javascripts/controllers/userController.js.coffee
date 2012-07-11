@@ -1,4 +1,4 @@
-YJ.userController = Em.Object.create(
+YJ.UserController = Em.ObjectController.extend(
   currentUser: null
   api_key: null
 

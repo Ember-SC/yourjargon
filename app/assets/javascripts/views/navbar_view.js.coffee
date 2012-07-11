@@ -1,5 +1,5 @@
 YJ.NavbarView = Em.View.extend(
-  templateName: 'templates/navbar'
+  templateName: 'navbar'
   login: ->
     YJ.stateManager.send('login')
 
