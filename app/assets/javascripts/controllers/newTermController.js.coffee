@@ -1,10 +1,12 @@
 YJ.NewTermController = Ember.Controller.extend(
-  addTerm: ->
-    YJ.store.commit()
-    YJ.stateManager.send('viewTerms')
+  content: null
 
-  cancel: (event) ->
-    term = event.context.content
-    term.destroy()
-    YJ.stateManager.send('viewTerms')
+  term: ->
+    @get('content')
+
+  addTerm: ->
+    @term().get('transaction').commit()
+
+  cancel: ->
+    @term().destroy()
 )
