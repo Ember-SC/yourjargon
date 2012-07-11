@@ -1,23 +1,6 @@
 YJ.TermsRoute = Ember.Route.extend(
   route: '/terms'
 
-  new: Ember.Route.extend(
-    #EVENTS
-    addTerm: ((router) ->
-      router.get('newTermController').addTerm()
-      router.send('goHome')
-    )
-    cancel: ((router) ->
-      router.get('newTermController').cancel()
-      router.send('goHome')
-    )
-
-    route: '/new'
-
-    connectOutlets: (router) ->
-      router.get('applicationController').connectOutlet('newTerm', YJ.Term.createRecord())
-  )
-
   index: Ember.Route.extend(
     route: '/'
     #EVENTS
@@ -32,6 +15,22 @@ YJ.TermsRoute = Ember.Route.extend(
 
     connectOutlets: (router) ->
       router.get('applicationController').connectOutlet('terms', YJ.Term.find())
+  )
+
+  new: Ember.Route.extend(
+    route: '/new'
+    #EVENTS
+    addTerm: ((router) ->
+      router.get('newTermController').addTerm()
+      router.send('goHome')
+    )
+    cancel: ((router) ->
+      router.get('newTermController').cancel()
+      router.send('goHome')
+    )
+
+    connectOutlets: (router) ->
+      router.get('applicationController').connectOutlet('newTerm', YJ.Term.createRecord())
   )
 
   edit: Ember.Route.extend(
@@ -54,11 +53,4 @@ YJ.TermsRoute = Ember.Route.extend(
     connectOutlets: (router, term) ->
       router.get('applicationController').connectOutlet('editTerm', term)
   )
-
-  #      show: Ember.Route.extend(
-  #        route: ':term_id'
-  #
-  #        connectOutlets: (router, term) ->
-  #          router.get('applicationController').connectOutlet(YJ.Term)
-  #      )
 )

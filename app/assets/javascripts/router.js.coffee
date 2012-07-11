@@ -12,29 +12,12 @@ YJ.Router = Ember.Router.extend(
 
     home: Ember.Route.extend(
       route: '/'
-      redirectsTo: 'terms.index'
 
-      #      connectOutlets: (router) ->
-      #        appController = router.get('applicationController')
-      #        appController.connectOutlet(YJ.MainView)
+      connectOutlets: (router) ->
+        appController = router.get('applicationController')
+        appController.connectOutlet('home')
+    )
 
     terms: YJ.TermsRoute
-
-
-
-    #    loggedIn: Ember.Route.extend(
-    #      #EVENTS
-    #      logout: Ember.Route.transitionTo('loggedOut')
-
-    #      route: '/'
-    #    )
-    #
-    #    loggedOut: Ember.Route.extend(
-    #      #EVENTS
-    #      login: Ember.Route.transitionTo('loggedIn')
-    #
-    #      route: '/login'
-    #    )
-
   )
 )
