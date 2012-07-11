@@ -2,15 +2,15 @@ YJ.Router = Ember.Router.extend(
   enableLogging: true
   location: 'hash'
 
-  root: Ember.State.extend(
+  root: Ember.Route.extend(
     # EVENTS
-    newTerm: Ember.State.transitionTo('terms.new')
-    editTerm: Ember.State.transitionTo('edit')
-    viewTerms: Ember.State.transitionTo('terms.index')
-    cancel: Ember.State.transitionTo('cancel')
-    goHome: Ember.State.transitionTo('home')
+    newTerm: Ember.Route.transitionTo('terms.new')
+    editTerm: Ember.Route.transitionTo('edit')
+    viewTerms: Ember.Route.transitionTo('terms.index')
+    cancel: Ember.Route.transitionTo('cancel')
+    goHome: Ember.Route.transitionTo('home')
 
-    home: Ember.State.extend(
+    home: Ember.Route.extend(
       route: '/'
       redirectsTo: 'terms.index'
 
@@ -21,33 +21,33 @@ YJ.Router = Ember.Router.extend(
 
     )
 
-    terms: Ember.State.extend(
+    terms: Ember.Route.extend(
       route: '/terms'
 
-      new: Ember.State.extend(
+      new: Ember.Route.extend(
         #EVENTS
 
         route: '/new'
 
         connectOutlets: (router) ->
-          router.get('applicationController').connectOutlet(YJ.NewTermView, YJ.Term.createRecord())
+          router.get('applicationController').connectOutlet('newTerm', YJ.Term.createRecord())
       )
 
-      index: Ember.State.extend(
+      index: Ember.Route.extend(
         route: '/'
 
         connectOutlets: (router) ->
-          router.get('applicationController').connectOutlet(YJ.TermsView, YJ.Term.find())
+          router.get('applicationController').connectOutlet('terms', YJ.Term.find())
       )
 
-      edit: Ember.State.extend(
+      edit: Ember.Route.extend(
         route: ':term_id/edit'
 
         connectOutlets: (router, term) ->
-          router.get('applicationController').connectOutlet(YJ.EditTermView, term)
+          router.get('applicationController').connectOutlet('editTerm', term)
       )
 
-      #      show: Ember.State.extend(
+      #      show: Ember.Route.extend(
       #        route: ':term_id'
       #
       #        connectOutlets: (router, term) ->
@@ -57,16 +57,16 @@ YJ.Router = Ember.Router.extend(
 
 
 
-    #    loggedIn: Ember.State.extend(
+    #    loggedIn: Ember.Route.extend(
     #      #EVENTS
-    #      logout: Ember.State.transitionTo('loggedOut')
+    #      logout: Ember.Route.transitionTo('loggedOut')
 
     #      route: '/'
     #    )
     #
-    #    loggedOut: Ember.State.extend(
+    #    loggedOut: Ember.Route.extend(
     #      #EVENTS
-    #      login: Ember.State.transitionTo('loggedIn')
+    #      login: Ember.Route.transitionTo('loggedIn')
     #
     #      route: '/login'
     #    )

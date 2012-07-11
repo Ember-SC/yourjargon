@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require support/handlebars-1.0.0.beta.6
-//= require support/ember-latest
+//= require support/ember
 //= require support/ember-data
 //= require app
 //= require router
@@ -28,7 +28,6 @@
 //= require controllers/userController
 //= require controllers/applicationController
 //= require controllers/navbarController
-//= require mixins/sortable
 //= require views/alphabet_view
 //= require views/edit_term_view
 //= require views/terms_view
