@@ -7,15 +7,16 @@ YJ.TermsController = Em.ArrayController.extend(
   # The place to hold the letter used to filter by the first letter
   searchLetter: null
   content: []
+  sortProperties: ['name']
 
   ###
     Returns the contents filtered by the first letter
   ###
   filtered: (->
     if @get("searchLetter") is null
-      @get('content')
+      @get('arrangedContent')
     else
-      @get('content').filterProperty 'firstLetter', @get('searchLetter')
+      @get('arrangedContent').filterProperty 'firstLetter', @get('searchLetter')
   ).property('searchLetter').cacheable()
 
 )
