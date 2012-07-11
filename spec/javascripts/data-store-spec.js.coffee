@@ -1,7 +1,7 @@
 describe "Data Store", ->
   Ember.run ->
     YJ.set('termsController', YJ.TermsController.create())
-    YJ.get('termsController').initialLoad()
+    #YJ.get('termsController').initialLoad()
     terms = YJ.get('termsController').get('content')
     length = terms.get('length')
     for term, i in terms

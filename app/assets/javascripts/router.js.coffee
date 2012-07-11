@@ -44,6 +44,15 @@ YJ.Router = Ember.Router.extend(
 
       index: Ember.Route.extend(
         route: '/'
+        #EVENTS
+        allTerms: ((router, event) ->
+          # The user clicked the 'all' link in the alphabet list
+          YJ.router.get('termsController').set('searchLetter', null)
+        )
+        filterTerms: ((router, event) ->
+          console.log(event.context)
+          YJ.router.get('termsController').set('searchLetter', event.context)
+        )
 
         connectOutlets: (router) ->
           router.get('applicationController').connectOutlet('terms', YJ.Term.find())

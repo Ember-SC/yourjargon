@@ -1,21 +1,21 @@
-<div id="navbar" class="navbar">
-    <div class="navbar-inner">
-        <div class="container-fluid">
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a {{action goHome}} class="brand"> YourJargon </a>
 
-            <a href="#" class="brand"> YourJargon </a> ----
+      {{#if YJ.userController.currentUser}}
+      current user: {{YJ.userController.currentUser.email}} <a href="#" {{action "logout"}}>logout</a>
+      {{else}}
+      <a href="#" {{action "login"}}>login</a>
+      {{/if}}
 
-            {{#if YJ.userController.currentUser}}
-            current user: {{YJ.userController.currentUser.email}} <a href="#" {{action "logout"}}>logout</a>
-            {{else}}
-            <a href="#" {{action "login"}}>login</a>
-            {{/if}}
+      <form class="navbar-search">
+        <input type="text" class="search-query" placeholder="Search">
+        <span class="title pull-center">All Terms</span>
+      </form>
 
-            <form class="navbar-search">
-                <input type="text" class="search-query" placeholder="Search">
-                <span class="title pull-center">All Terms</span>
-            </form>
-
-            <button {{action newTerm}} class="pull-right"> New </button>
-        </div>
+      <button
+      {{action newTerm}} class="pull-right"> New </button>
     </div>
+  </div>
 </div>

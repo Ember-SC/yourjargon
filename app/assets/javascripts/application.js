@@ -19,7 +19,7 @@
 //= require app
 //= require router
 //= require models/term
-//= require models/currentUser
+//= require models/user
 //= require controllers/termsController
 //= require controllers/termController
 //= require controllers/newTermController
