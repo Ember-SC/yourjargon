@@ -14,7 +14,6 @@ YJ.TermsRoute = Ember.Route.extend(
       YJ.router.get('termsController').set('searchLetter', null)
     )
     filterTerms: ((router, event) ->
-      console.log(event.context)
       YJ.router.get('termsController').set('searchLetter', event.context)
     )
 
