@@ -1,5 +1,10 @@
 YJ.TermsRoute = Ember.Route.extend(
   route: '/terms'
+  #EVENTS
+  #defined at global level
+  #newTerm: Ember.Route.transitionTo('terms.new')
+  #viewTerms: Ember.Route.transitionTo('terms.index')
+  editTerm: Ember.Route.transitionTo('edit')
 
   index: Ember.Route.extend(
     route: '/'
@@ -9,7 +14,6 @@ YJ.TermsRoute = Ember.Route.extend(
       YJ.router.get('termsController').set('searchLetter', null)
     )
     filterTerms: ((router, event) ->
-      console.log(event.context)
       YJ.router.get('termsController').set('searchLetter', event.context)
     )
 
@@ -22,11 +26,11 @@ YJ.TermsRoute = Ember.Route.extend(
     #EVENTS
     addTerm: ((router) ->
       router.get('newTermController').addTerm()
-      router.send('goHome')
+      router.send('viewTerms')
     )
     cancel: ((router) ->
       router.get('newTermController').cancel()
-      router.send('goHome')
+      router.send('viewTerms')
     )
 
     connectOutlets: (router) ->
@@ -39,15 +43,15 @@ YJ.TermsRoute = Ember.Route.extend(
     #EVENTS
     save: ((router) ->
       router.get('editTermController').save()
-      router.transitionTo('home')
+      router.transitionTo('index')
     )
     delete: ((router) ->
       router.get('editTermController').delete()
-      router.transitionTo('home')
+      router.transitionTo('index')
     )
     cancel: ((router) ->
       router.get('editTermController').cancel()
-      router.transitionTo('home')
+      router.transitionTo('index')
     )
 
     connectOutlets: (router, term) ->

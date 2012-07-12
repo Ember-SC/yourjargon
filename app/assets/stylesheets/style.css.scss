@@ -2,9 +2,6 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
-$search-top-height: 32px;
-$new-button-top-offset: 3px;
-
 .left-align {
 
 }
@@ -23,16 +20,12 @@ $new-button-top-offset: 3px;
   list-style: none;
 }
 
-// Define the middle part of the terms list page:
-$search-middle-height: 30px;
-$search-bottom-top: $search-top-height + $search-middle-height;
 
-// Define the scrollable bottom part of the terms list page:
-// NOTE: Seem to have to attach this via the ID rather
-// than class.
-#bottom-scrollable {
-  overflow-y: scroll;
-  height: 100%;
+.footer {
+  list-style: none;
+  li {
+    display: inline;
+  }
 }
 
 button.disabled,
