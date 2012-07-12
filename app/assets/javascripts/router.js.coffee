@@ -5,10 +5,16 @@ YJ.Router = Ember.Router.extend(
   root: Ember.Route.extend(
     # EVENTS
     newTerm: Ember.Route.transitionTo('terms.new')
-    editTerm: Ember.Route.transitionTo('edit')
     viewTerms: Ember.Route.transitionTo('terms.index')
-    cancel: Ember.Route.transitionTo('cancel')
     goHome: Ember.Route.transitionTo('home')
+    toLogin: Ember.Route.transitionTo('users.authentication')
+    toRegister: Ember.Route.transitionTo('users.registration')
+    toEdit: Ember.Route.transitionTo('users.edit')
+    cancel: Ember.Route.transitionTo('home')
+    logout: ((router, event) ->
+      router.get('userController').logout()
+      router.send('goHome')
+    )
 
     home: Ember.Route.extend(
       route: '/'
@@ -17,6 +23,8 @@ YJ.Router = Ember.Router.extend(
         appController = router.get('applicationController')
         appController.connectOutlet('home')
     )
+
+    users: YJ.UsersRoute
 
     terms: YJ.TermsRoute
   )
