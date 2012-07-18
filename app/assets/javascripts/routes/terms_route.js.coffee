@@ -3,7 +3,6 @@ YJ.TermsRoute = Ember.Route.extend(
   #EVENTS
   #defined at global level
   #newTerm: Ember.Route.transitionTo('terms.new')
-  viewTerms: Ember.Route.transitionTo('terms.index')
   editTerm: Ember.Route.transitionTo('edit')
 
 
@@ -26,11 +25,11 @@ YJ.TermsRoute = Ember.Route.extend(
     route: '/search'
     #EVENTS
     filterTerms: ((router, event) ->
-      YJ.router.get('searchController').set('searchLetter', event.context)
+      router.get('searchController').set('searchLetter', event.context)
     )
     allTerms: ((router, event) ->
         # The user clicked the 'all' link in the alphabet list
-    YJ.router.get('searchController').set('searchLetter', null)
+      router.get('searchController').set('searchLetter', null)
     )
 
     connectOutlets: (router, context) ->
@@ -39,7 +38,7 @@ YJ.TermsRoute = Ember.Route.extend(
       router.get('applicationController').connectOutlet(
               viewClass: YJ.TermsView
               controller: YJ.router.searchController
-              context: YJ.Term.find(name: searchTerm)
+              context: YJ.Term.find(search: searchTerm)
       )
   )
 

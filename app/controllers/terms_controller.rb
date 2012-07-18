@@ -4,8 +4,8 @@ class TermsController < ApplicationController
   def index
     if ids = params[:ids]
       @terms = Term.where(:id => ids)
-    elsif params[:name]
-      @terms = Term.where("name like ?", "%#{params[:name]}%")
+    elsif params[:search]
+      @terms = Term.where("name like ?", "%#{params[:search]}%")
     else
       @terms = Term.all
     end

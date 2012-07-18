@@ -15,7 +15,7 @@ YJ.Router = Ember.Router.extend(
       router.get('userController').logout()
       router.send('goHome')
     )
-    search: Ember.Route.transitionTo('terms.search')
+    toSearch: Ember.Route.transitionTo('terms.search')
 
     home: Ember.Route.extend(
       route: '/'
