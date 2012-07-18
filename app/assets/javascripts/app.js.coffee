@@ -14,3 +14,5 @@ YJ.store = DS.Store.create(
   adapter: DS.RESTAdapter.create(bulkCommit: false)
 )
 
+YJ.searchTerm = Em.Object.create(term: null)
+

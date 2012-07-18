@@ -1,10 +1,4 @@
-###
-  The controller that manages the list of terms in sorted order.  It also
-  provides the filtered output when the user clicks one of the alphabet
-  letters on the right side of the screen.
-###
-YJ.TermsController = Em.ArrayController.extend(
-  # The place to hold the letter used to filter by the first letter
+YJ.SearchController = Em.ArrayController.extend(
   searchLetter: null
   searchTerm: null
   content: []
@@ -19,5 +13,4 @@ YJ.TermsController = Em.ArrayController.extend(
     else
       @get('arrangedContent').filterProperty 'firstLetter', @get('searchLetter')
   ).property('searchLetter').cacheable()
-
 )
