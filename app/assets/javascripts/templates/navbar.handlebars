@@ -4,11 +4,12 @@
       <a {{action goHome}} class="brand"> YourJargon </a>
 
       <form class="navbar-search pull-left">
-        <input type="text" class="search-query" placeholder="Search">
+         {{view Ember.TextField valueBinding="YJ.searchTerm.term"}}
       </form>
 
       <ul class="nav pull-left">
-        <li> <button {{action newTerm}} class="btn pull-right"> New Term </button></li>
+        <li> <button {{action toSearch }} class="btn"> Search </button></li>
+        <li> <button {{action newTerm}} class="btn"> New Term </button></li>
       </ul>
       <ul class="nav pull-right">
         {{#if YJ.currentUser.id}}
