@@ -3,5 +3,4 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+Term.create(YAML.load_file(Rails.root.join('db/sample', 'terms.yml')))
