@@ -6,7 +6,7 @@ exports = this
 exports.YJ = Em.Application.create(
   ready: ->
     YJ.initialize()
-    YJ.currentUser = YJ.User.create()
+    YJ.currentUser = YJ.User.createRecord()
 )
 
 YJ.store = DS.Store.create(
