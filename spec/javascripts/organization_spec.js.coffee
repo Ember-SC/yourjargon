@@ -9,19 +9,32 @@
 describe "Organization", ->
 
   beforeEach ->
-    @org = YJ.Organization.createRecord()
+    publicOrg = YJ.get('publicOrganization')
+    owner = publicOrg.createUser({
+      name: 'Owner User',
+      email: 'owner.user@example.com'
+    })
+    @org = YJ.createOrganization(owner)
 
   afterEach ->
     @org = null
 
+  it "is defined", ->
+    expect(@org).toBeDefined()
+
   it "has a name", ->
+    @org.set('name', "An organization name")
+    expect(@org.get('name')).toBe('An organization name')
 
   it "has an owner", ->
+    expect(@org.get('owner').get('name').toBe('Owner User'))
 
   it "has terms", ->
 
-  it "can retrieve a list of its members", ->
+  it "add"
 
-  it "can delete a member from a list of its members", ->
+  it "retrieves a list of its members", ->
 
-  it "owner can create a member", ->
+  it "deletes a member from a list of its members", ->
+
+  it "creates a member", ->

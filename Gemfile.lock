@@ -185,7 +185,7 @@ DEPENDENCIES
   ember-rails
   foreman
   guard-jasmine
-  jasmine
+  jasmine (~> 1.2.0)
   jasminerice
   jquery-rails
   pg
