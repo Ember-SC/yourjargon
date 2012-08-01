@@ -8,13 +8,28 @@
 
 YJ.Organization = DS.Model.extend(
   name: DS.attr("string")
-  owner: DS.belongsTo("YJ.Membership")
-  members: DS.hasMany("YJ.Membership")
+  ownership: DS.belongsTo("YJ.Membership")
+  memberships: DS.hasMany("YJ.Membership")
 
   addMembership: (user) ->
 
 
   setOwner: (owner) ->
-    @owner.set('owner', addMembership(owner))
+    owner.join(@, true)
+    membership = @.enroll(owner)
+    @set('ownership', membership)
+
+  getOwner: ->
+
+  enroll: (user) ->
+    membership = YJ.Membership.createRecord(user: user, organization: @)
+    @memberships.pushObject(membership)
+    membership
+
+  drop: (user) ->
+    membership = @memberships
+    @memberships.removeObject()
+
+
 
 )

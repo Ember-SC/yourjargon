@@ -9,12 +9,11 @@
 describe "Organization", ->
 
   beforeEach ->
-    publicOrg = YJ.get('publicOrganization')
-    owner = publicOrg.createUser({
+    owner = YJ.User.createRecord(
       name: 'Owner User',
       email: 'owner.user@example.com'
-    })
-    @org = YJ.createOrganization(owner)
+    )
+    @org = YJ.router.get('organizationController').add("Test Organization", owner)
 
   afterEach ->
     @org = null
@@ -27,14 +26,18 @@ describe "Organization", ->
     expect(@org.get('name')).toBe('An organization name')
 
   it "has an owner", ->
-    expect(@org.get('owner').get('name').toBe('Owner User'))
+    expect(@org.getOwner.get('name').toBe('Owner User'))
 
   it "has terms", ->
-
-  it "add"
+    @org.publish(Term.createRecord(name:"Term", description: "Description"))
+    expect(@org.get('terms').get('length')).toBe('1')
 
   it "retrieves a list of its members", ->
+    newMember = YJ.User.createRecord(name: "description")
+    newMember.join(@org)
+    expect(@org.members).toContain(newMember)
 
-  it "deletes a member from a list of its members", ->
+  it "raise exception when name for creating an organization already exists", ->
+    @org = YJ.router.get('organizationController').add("Test Organization", owner)
 
-  it "creates a member", ->
+
