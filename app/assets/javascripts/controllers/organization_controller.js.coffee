@@ -1,7 +1,10 @@
 YJ.OrganizationController = Ember.ArrayController.extend(
-  content: null
+  content: []
 
   add: (name, owner) ->
     organization = YJ.Organization.createRecord(name: name)
-    organization.ownedBy(owner)
+    organization.setOwner(owner)
+    @get('content').pushObject(organization)
+    organization
+
 )

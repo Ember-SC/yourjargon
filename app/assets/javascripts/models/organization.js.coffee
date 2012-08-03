@@ -10,26 +10,35 @@ YJ.Organization = DS.Model.extend(
   name: DS.attr("string")
   ownership: DS.belongsTo("YJ.Membership")
   memberships: DS.hasMany("YJ.Membership")
+  terms: DS.hasMany("YJ.Term")
 
-  addMembership: (user) ->
-
+  ownedBy: ->
+    @get('ownership').get('user')
 
   setOwner: (owner) ->
-    owner.join(@, true)
-    membership = @.enroll(owner)
+    membership = @get('ownership')
+    membership.clearOwner() if membership != null
+    # do we need to commit() here?
+    membership = @enroll(owner)
+    membership.setOwner()
     @set('ownership', membership)
 
-  getOwner: ->
-
   enroll: (user) ->
-    membership = YJ.Membership.createRecord(user: user, organization: @)
-    @memberships.pushObject(membership)
+    memberships = @get('memberships')
+    membership = memberships.findProperty('user', user)
+    unless membership?
+      membership = YJ.Membership.createRecord(user: user, organization: @)
+      memberships.pushObject(membership)
     membership
 
   drop: (user) ->
-    membership = @memberships
-    @memberships.removeObject()
+    memberships = @get('memberships')
+    membership = memberships.findProperty('user', user)
+    memberships.removeObject(membership)
 
+  publish: (term) ->
+    terms = @get('terms')
+    terms.pushObject(term)
 
 
 )

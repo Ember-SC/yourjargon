@@ -5,4 +5,7 @@ YJ.User = DS.Model.extend(
   apiKey: DS.attr("string") # FIXME remove me
 
   memberships: DS.hasMany("YJ.Membership")
+
+  join: (organization) ->
+    organization.enroll(@)
 )
