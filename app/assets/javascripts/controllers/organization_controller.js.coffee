@@ -1,4 +1,4 @@
-YJ.OrganizationController = Ember.ArrayController.extend(
+YJ.OrganizationsController = Ember.ArrayController.extend(
   content: []
 
   add: (name, owner) ->

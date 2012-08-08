@@ -13,12 +13,12 @@ describe "Organization", ->
       name: 'Owner User',
       email: 'owner.user@example.com'
     )
-    YJ.router.get('organizationController').add("Test Organization", owner)
-    @org = YJ.router.get('organizationController').get('firstObject')
+    YJ.router.get('organizationsController').add("Test Organization", owner)
+    @org = YJ.router.organizationsController.get('firstObject')
 
   afterEach ->
     @org = null
-    YJ.router.get('organizationController').set('content', [])
+    YJ.router.organizationsController.set('content', [])
 
 
   it "is defined", ->
@@ -46,6 +46,6 @@ describe "Organization", ->
     expect(@org.get('memberships').get('length')).toBe(2)
 
 #  it "raise exception when name for creating an organization already exists", ->
-#    @org = YJ.router.get('organizationController').add("Test Organization", owner)
+#    @org = YJ.router.get('organizationsController').add("Test Organization", owner)
 
 

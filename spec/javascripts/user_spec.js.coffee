@@ -5,8 +5,8 @@ describe "User", ->
       name: 'Owner User',
       email: 'owner.user@example.com'
     )
-    YJ.router.get('organizationController').add("Test Organization", owner)
-    @org = YJ.router.get('organizationController').get('firstObject')
+    YJ.router.get('organizationsController').add("Test Organization", owner)
+    @org = YJ.router.get('organizationsController').get('firstObject')
 
   afterEach ->
     @org = null

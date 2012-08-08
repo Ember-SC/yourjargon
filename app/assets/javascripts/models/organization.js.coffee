@@ -11,6 +11,7 @@ YJ.Organization = DS.Model.extend(
   ownership: DS.belongsTo("YJ.Membership")
   memberships: DS.hasMany("YJ.Membership")
   terms: DS.hasMany("YJ.Term")
+  isPublic: DS.attr("boolean", defaultValue: false)
 
   ownedBy: ->
     @get('ownership').get('user')
@@ -39,6 +40,9 @@ YJ.Organization = DS.Model.extend(
   publish: (term) ->
     terms = @get('terms')
     terms.pushObject(term)
+
+  setPublic: ->
+    @set('isPublic', true)
 
 
 )

@@ -6,7 +6,7 @@ exports = this
 exports.YJ = Em.Application.create(
 
   createPublicOrganization: (owner) ->
-    publicOrg = YJ.Organization.create()
+    publicOrg = YJ.Organization.createRecord()
     publicOrg.setOwner(YJ.currentUser)
     publicOrg.setPublic()
     # YJ.store.commit()

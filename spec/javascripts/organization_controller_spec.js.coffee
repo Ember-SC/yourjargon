@@ -1,9 +1,9 @@
-describe 'OrganizationController spec', ->
+describe 'OrganizationsController spec', ->
   beforeEach ->
-    @org_controller = YJ.router.get('organizationController')
+    @org_controller = YJ.router.get('organizationsController')
   afterEach ->
     @org_controller = null
-    YJ.router.get('organizationController').set('content', [])
+    YJ.router.get('organizationsController').set('content', [])
 
   it 'can add an organization', ->
     owner = YJ.User.createRecord(name: 'Test Owner')
