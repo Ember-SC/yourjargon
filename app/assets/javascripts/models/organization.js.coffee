@@ -45,4 +45,5 @@ YJ.Organization = DS.Model.extend(
     @set('isPublic', true)
 
 
+
 )

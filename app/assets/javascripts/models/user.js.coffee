@@ -5,6 +5,11 @@ YJ.User = DS.Model.extend(
 
   memberships: DS.hasMany("YJ.Membership")
 
+  organizations: (->
+    @get('memberships').map(item, index, self) ->
+      item.get('organization')
+  ).property
+
   join: (organization) ->
     organization.enroll(@)
 )
