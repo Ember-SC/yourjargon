@@ -4,20 +4,16 @@
 exports = this
 
 exports.YJ = Em.Application.create(
+  god: null
 
-  createPublicOrganization: (owner) ->
-    publicOrg = YJ.Organization.createRecord()
-    publicOrg.setOwner(YJ.currentUser)
-    publicOrg.setPublic()
-    # YJ.store.commit()
-    publicOrg
+  createGod: ->
+    YJ.set('god', YJ.User.createRecord("god", "yourjargon@gmail.com"))
 
   ready: ->
     YJ.initialize()
+    YJ.createGod()
     YJ.currentUser = YJ.User.createRecord()
-
-    # FIXME: How do I keep a public organization around while testing?
-    YJ.publicOrganization = YJ.createPublicOrganization())
+)
 
 YJ.store = DS.Store.create(
   revision: 4,

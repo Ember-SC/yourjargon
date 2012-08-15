@@ -7,6 +7,7 @@ YJ.PublicOrganizationController = Em.ObjectController.extend(
      user
 
    createPublicOrganization: ->
-     org = YJ.Organization.createRecord(name: "Public Organization")  #FIXME assign god as owner
+     org = YJ.Organization.createRecord(name: "Public Organization")
+     org.set('owner', YJ.get('god'))
      @set('content', org)
 )

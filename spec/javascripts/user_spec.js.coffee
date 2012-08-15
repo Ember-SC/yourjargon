@@ -1,13 +1,11 @@
 describe "User", ->
 
   beforeEach ->
-
     @publicOrganizationController = YJ.router.get('publicOrganizationController')
     @publicOrganizationController.createPublicOrganization()
     owner = @publicOrganizationController.enroll('owner User', 'owner.user@example.com')
     orgsController = YJ.router.get('organizationsController')
-    orgsController.add("Test Organization", owner)
-    @org = orgsController.get('firstObject')
+    @org = orgsController.create("Test Organization", owner)
 
   afterEach ->
     @org = null
@@ -19,10 +17,11 @@ describe "User", ->
     expect(uc.get('content')).toBeDefined()
 
   it "member joins an organization", ->
-    newMember = YJ.User.createRecord(name: "description")
-    newMember.join(@org)
+    testUser = @publicOrganizationController.enroll('test user', 'test@example.com')
+    testUser.join(@org)
+    console.log(@org.get('memberships'))
     expect(@org.memberships.get('length')).toBe(1)
-#
+
 #  it "member leaves an organization", ->
 #    newMember = YJ.User.createRecord(name: "description")
 #    newMember.join(@org)
