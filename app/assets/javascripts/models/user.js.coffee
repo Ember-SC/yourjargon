@@ -10,6 +10,11 @@ YJ.User = DS.Model.extend(
       item.get('organization')
   ).property
 
+  createOrganization: (name) ->
+    org = YJ.Organization.createRecord(name: name)
+    org.setOwner(@)
+    org
+
   join: (organization) ->
     organization.enroll(@)
 )

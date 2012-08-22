@@ -1,5 +1,5 @@
-// Version: v0.9.8.1-734-ga2caaa3
-// Last commit: a2caaa3 (2012-08-14 10:04:46 -0700)
+// Version: v0.9.8.1-744-g7e61fe3
+// Last commit: 7e61fe3 (2012-08-21 12:10:37 -0700)
 
 
 (function() {
@@ -142,8 +142,8 @@ window.ember_deprecateFunc  = Ember.deprecateFunc("ember_deprecateFunc is deprec
 
 })();
 
-// Version: v0.9.8.1-734-ga2caaa3
-// Last commit: a2caaa3 (2012-08-14 10:04:46 -0700)
+// Version: v0.9.8.1-744-g7e61fe3
+// Last commit: 7e61fe3 (2012-08-21 12:10:37 -0700)
 
 
 (function() {
@@ -8272,17 +8272,23 @@ Ember.Evented = Ember.Mixin.create(
 // Ember.Object.  We only define this separately so that Ember.Set can depend on it
 
 
-
-var classToString = Ember.Mixin.prototype.toString;
-var set = Ember.set, get = Ember.get;
-var o_create = Ember.create,
+var set = Ember.set, get = Ember.get,
+    o_create = Ember.create,
     o_defineProperty = Ember.platform.defineProperty,
     a_slice = Array.prototype.slice,
+    GUID_KEY = Ember.GUID_KEY,
+    guidFor = Ember.guidFor,
+    generateGuid = Ember.generateGuid,
     meta = Ember.meta,
     rewatch = Ember.rewatch,
     finishChains = Ember.finishChains,
-    finishPartial = Ember.Mixin.finishPartial,
-    reopen = Ember.Mixin.prototype.reopen;
+    destroy = Ember.destroy,
+    schedule = Ember.run.schedule,
+    Mixin = Ember.Mixin,
+    applyMixin = Mixin._apply,
+    finishPartial = Mixin.finishPartial,
+    reopen = Mixin.prototype.reopen,
+    classToString = Mixin.prototype.toString;
 
 var undefinedDescriptor = {
   configurable: true,
@@ -8304,14 +8310,14 @@ function makeCtor() {
     if (!wasApplied) {
       Class.proto(); // prepare prototype...
     }
-    var m = Ember.meta(this);
+    o_defineProperty(this, GUID_KEY, undefinedDescriptor);
+    o_defineProperty(this, '_super', undefinedDescriptor);
+    var m = meta(this);
     m.proto = this;
     if (initMixins) {
       this.reopen.apply(this, initMixins);
       initMixins = null;
     }
-    o_defineProperty(this, Ember.GUID_KEY, undefinedDescriptor);
-    o_defineProperty(this, '_super', undefinedDescriptor);
     finishPartial(this, m);
     delete m.proto;
     finishChains(this);
@@ -8321,7 +8327,7 @@ function makeCtor() {
   Class.toString = classToString;
   Class.willReopen = function() {
     if (wasApplied) {
-      Class.PrototypeMixin = Ember.Mixin.create(Class.PrototypeMixin);
+      Class.PrototypeMixin = Mixin.create(Class.PrototypeMixin);
     }
 
     wasApplied = false;
@@ -8347,11 +8353,11 @@ function makeCtor() {
 
 var CoreObject = makeCtor();
 
-CoreObject.PrototypeMixin = Ember.Mixin.create(
+CoreObject.PrototypeMixin = Mixin.create(
 /** @scope Ember.CoreObject.prototype */ {
 
   reopen: function() {
-    Ember.Mixin._apply(this, arguments, true);
+    applyMixin(this, arguments, true);
     return this;
   },
 
@@ -8386,7 +8392,7 @@ CoreObject.PrototypeMixin = Ember.Mixin.create(
     if (this.willDestroy) { this.willDestroy(); }
 
     set(this, 'isDestroyed', true);
-    Ember.run.schedule('destroy', this, this._scheduledDestroy);
+    schedule('destroy', this, this._scheduledDestroy);
     return this;
   },
 
@@ -8397,7 +8403,7 @@ CoreObject.PrototypeMixin = Ember.Mixin.create(
     @private
   */
   _scheduledDestroy: function() {
-    Ember.destroy(this);
+    destroy(this);
     if (this.didDestroy) { this.didDestroy(); }
   },
 
@@ -8408,7 +8414,7 @@ CoreObject.PrototypeMixin = Ember.Mixin.create(
   },
 
   toString: function() {
-    return '<'+this.constructor.toString()+':'+Ember.guidFor(this)+'>';
+    return '<'+this.constructor.toString()+':'+guidFor(this)+'>';
   }
 });
 
@@ -8418,7 +8424,7 @@ if (Ember.config.overridePrototypeMixin) {
 
 CoreObject.__super__ = null;
 
-var ClassMixin = Ember.Mixin.create(
+var ClassMixin = Mixin.create(
 /** @scope Ember.ClassMixin.prototype */ {
 
   ClassMixin: Ember.required(),
@@ -8431,8 +8437,8 @@ var ClassMixin = Ember.Mixin.create(
 
   extend: function() {
     var Class = makeCtor(), proto;
-    Class.ClassMixin = Ember.Mixin.create(this.ClassMixin);
-    Class.PrototypeMixin = Ember.Mixin.create(this.PrototypeMixin);
+    Class.ClassMixin = Mixin.create(this.ClassMixin);
+    Class.PrototypeMixin = Mixin.create(this.PrototypeMixin);
 
     Class.ClassMixin.ownerConstructor = Class;
     Class.PrototypeMixin.ownerConstructor = Class;
@@ -8444,7 +8450,7 @@ var ClassMixin = Ember.Mixin.create(
 
     proto = Class.prototype = o_create(this.prototype);
     proto.constructor = Class;
-    Ember.generateGuid(proto, 'ember');
+    generateGuid(proto, 'ember');
     meta(proto).proto = proto; // this will disable observers on prototype
 
     Class.ClassMixin.apply(Class);
@@ -8465,7 +8471,7 @@ var ClassMixin = Ember.Mixin.create(
 
   reopenClass: function() {
     reopen.apply(this.ClassMixin, arguments);
-    Ember.Mixin._apply(this, arguments, false);
+    applyMixin(this, arguments, false);
     return this;
   },
 
@@ -9196,6 +9202,10 @@ Ember.ArrayProxy = Ember.Object.extend(Ember.MutableArray,
     entire array content will change.
   */
   _contentWillChange: Ember.beforeObserver(function() {
+    this._teardownContent();
+  }, 'content'),
+
+  _teardownContent: function() {
     var content = get(this, 'content');
 
     if (content) {
@@ -9204,8 +9214,7 @@ Ember.ArrayProxy = Ember.Object.extend(Ember.MutableArray,
         didChange: 'contentArrayDidChange'
       });
     }
-  }, 'content'),
-
+  },
 
   contentArrayWillChange: Ember.K,
   contentArrayDidChange: Ember.K,
@@ -9215,10 +9224,15 @@ Ember.ArrayProxy = Ember.Object.extend(Ember.MutableArray,
     entire array content has changed.
   */
   _contentDidChange: Ember.observer(function() {
-    var content = get(this, 'content'),
-        len     = content ? get(content, 'length') : 0;
+    var content = get(this, 'content');
 
     Ember.assert("Can't set ArrayProxy's content to itself", content !== this);
+
+    this._setupContent();
+  }, 'content'),
+
+  _setupContent: function() {
+    var content = get(this, 'content');
 
     if (content) {
       content.addArrayObserver(this, {
@@ -9226,20 +9240,16 @@ Ember.ArrayProxy = Ember.Object.extend(Ember.MutableArray,
         didChange: 'contentArrayDidChange'
       });
     }
-  }, 'content'),
+  },
 
   _arrangedContentWillChange: Ember.beforeObserver(function() {
     var arrangedContent = get(this, 'arrangedContent'),
         len = arrangedContent ? get(arrangedContent, 'length') : 0;
 
     this.arrangedContentArrayWillChange(this, 0, len, undefined);
+    this.arrangedContentWillChange(this);
 
-    if (arrangedContent) {
-      arrangedContent.removeArrayObserver(this, {
-        willChange: 'arrangedContentArrayWillChange',
-        didChange: 'arrangedContentArrayDidChange'
-      });
-    }
+    this._teardownArrangedContent(arrangedContent);
   }, 'arrangedContent'),
 
   _arrangedContentDidChange: Ember.observer(function() {
@@ -9248,15 +9258,36 @@ Ember.ArrayProxy = Ember.Object.extend(Ember.MutableArray,
 
     Ember.assert("Can't set ArrayProxy's content to itself", arrangedContent !== this);
 
+    this._setupArrangedContent();
+
+    this.arrangedContentDidChange(this);
+    this.arrangedContentArrayDidChange(this, 0, undefined, len);
+  }, 'arrangedContent'),
+
+  _setupArrangedContent: function() {
+    var arrangedContent = get(this, 'arrangedContent');
+
     if (arrangedContent) {
       arrangedContent.addArrayObserver(this, {
         willChange: 'arrangedContentArrayWillChange',
         didChange: 'arrangedContentArrayDidChange'
       });
     }
+  },
 
-    this.arrangedContentArrayDidChange(this, 0, undefined, len);
-  }, 'arrangedContent'),
+  _teardownArrangedContent: function() {
+    var arrangedContent = get(this, 'arrangedContent');
+
+    if (arrangedContent) {
+      arrangedContent.removeArrayObserver(this, {
+        willChange: 'arrangedContentArrayWillChange',
+        didChange: 'arrangedContentArrayDidChange'
+      });
+    }
+  },
+
+  arrangedContentWillChange: Ember.K,
+  arrangedContentDidChange: Ember.K,
 
   /** @private (nodoc) */
   objectAt: function(idx) {
@@ -9289,15 +9320,15 @@ Ember.ArrayProxy = Ember.Object.extend(Ember.MutableArray,
   /** @private (nodoc) */
   init: function() {
     this._super();
-    this._contentWillChange();
-    this._contentDidChange();
-    this._arrangedContentWillChange();
-    this._arrangedContentDidChange();
+    this._setupContent();
+    this._setupArrangedContent();
+  },
+
+  willDestroy: function() {
+    this._teardownArrangedContent();
+    this._teardownContent();
   }
-
 });
-
-
 
 
 })();
@@ -10300,6 +10331,8 @@ Ember.Application = Ember.Namespace.extend(
 
   /** @private */
   init: function() {
+    if (!this.$) { this.$ = Ember.$; }
+
     var eventDispatcher,
         rootElement = get(this, 'rootElement');
     this._super();
@@ -10310,14 +10343,32 @@ Ember.Application = Ember.Namespace.extend(
 
     set(this, 'eventDispatcher', eventDispatcher);
 
-    // jQuery 1.7 doesn't call the ready callback if already ready
-    if (Ember.$.isReady) {
+    // Start off the number of deferrals at 1. This will be
+    // decremented by the Application's own `initialize` method.
+    this._readinessDeferrals = 1;
+
+    this.waitForDOMContentLoaded();
+  },
+
+  waitForDOMContentLoaded: function() {
+    this.deferReadiness();
+
+    var self = this;
+    this.$().ready(function() {
+      self.advanceReadiness();
+    });
+  },
+
+  deferReadiness: function() {
+    Ember.assert("You cannot defer readiness since the `ready()` hook has already been called.", this._readinessDeferrals > 0);
+    this._readinessDeferrals++;
+  },
+
+  advanceReadiness: function() {
+    this._readinessDeferrals--;
+
+    if (this._readinessDeferrals === 0) {
       Ember.run.once(this, this.didBecomeReady);
-    } else {
-      var self = this;
-      Ember.$(document).ready(function() {
-        Ember.run.once(self, self.didBecomeReady);
-      });
     }
   },
 
@@ -10363,27 +10414,36 @@ Ember.Application = Ember.Namespace.extend(
       set(router, 'namespace', this);
     }
 
-    Ember.runLoadHooks('application', this);
-
     injections.forEach(function(injection) {
       properties.forEach(function(property) {
         injection[1](namespace, router, property);
       });
     });
 
-    if (router && router instanceof Ember.Router) {
-      this.startRouting(router);
-    }
+    Ember.runLoadHooks('application', this);
+
+    // At this point, any injections or load hooks that would have wanted
+    // to defer readiness have fired.
+    this.advanceReadiness();
+
+    return this;
   },
 
   /** @private */
   didBecomeReady: function() {
     var eventDispatcher = get(this, 'eventDispatcher'),
-        customEvents    = get(this, 'customEvents');
+        customEvents    = get(this, 'customEvents'),
+        router;
 
     eventDispatcher.setup(customEvents);
 
     this.ready();
+
+    router = get(this, 'router');
+
+    if (router && router instanceof Ember.Router) {
+      this.startRouting(router);
+    }
   },
 
   /**
@@ -10470,6 +10530,9 @@ Ember.Application.registerInjection({
     });
   }
 });
+
+Ember.runLoadHooks('Ember.Application', Ember.Application);
+
 
 })();
 
@@ -11287,8 +11350,10 @@ Ember.ControllerMixin.reopen(/** @scope Ember.ControllerMixin.prototype */ {
       Ember.assert("The name you supplied " + name + " did not resolve to a controller " + name + 'Controller', (!!controller && !!context) || !context);
     }
 
-    if (controller && context) { controller.set('content', context); }
-    view = viewClass.create();
+    if (controller && context) { set(controller, 'content', context); }
+
+    view = this.createOutletView(outletName, viewClass);
+
     if (controller) { set(view, 'controller', controller); }
     set(this, outletName, view);
 
@@ -11315,9 +11380,28 @@ Ember.ControllerMixin.reopen(/** @scope Ember.ControllerMixin.prototype */ {
       controllerName = controllerNames[i] + 'Controller';
       set(this, controllerName, get(controllers, controllerName));
     }
+  },
+
+  /**
+    `disconnectOutlet` removes previously attached view from given outlet.
+
+    @param  {String} outletName the outlet name. (optional)
+   */
+  disconnectOutlet: function(outletName) {
+    outletName = outletName || 'view';
+
+    set(this, outletName, null);
+  },
+
+  /**
+    `createOutletView` is a hook you may want to override if you need to do
+    something special with the view created for the outlet. For example
+    you may want to implement views sharing across outlets.
+  */
+  createOutletView: function(outletName, viewClass) {
+    return viewClass.create();
   }
 });
-
 
 })();
 
@@ -11933,7 +12017,7 @@ Ember.View = Ember.Object.extend(Ember.Evented,
     } else {
       return get(this, '_context');
     }
-  }).cacheable(),
+  }).volatile(),
 
   /**
     @private
@@ -12182,7 +12266,7 @@ Ember.View = Ember.Object.extend(Ember.Evented,
     var template = get(this, 'layout') || get(this, 'template');
 
     if (template) {
-      var context = get(this, '_context');
+      var context = get(this, 'context');
       var keywords = this.cloneKeywords();
 
       var data = {
@@ -16699,7 +16783,7 @@ var merge = function(original, hash) {
   ### Deserializing A URL's Dynamic Segments
   When an application is first loaded or the URL is changed manually (e.g. through the browser's
   back button) the `deserialize` method of the URL's matching Ember.Route will be called with
-  the application's router as its first argument and a hash of the URLs dynamic segments and values
+  the application's router as its first argument and a hash of the URL's dynamic segments and values
   as its second argument.
 
   The following route structure when loaded with the URL "#/fixed/thefirstvalue/anotherFixed/thesecondvalue":
@@ -16735,8 +16819,8 @@ var merge = function(original, hash) {
   ### Serializing An Object For URLs with Dynamic Segments
   When transitioning into a Route whose `route` property contains dynamic segments the Route's
   `serialize` method is called with the Route's router as the first argument and the Route's
-  context as the second argument.  The return value of `serialize` will be use to populate the
-  dynamic segments and should be a object with keys that match the names of the dynamic sections.
+  context as the second argument.  The return value of `serialize` will be used to populate the
+  dynamic segments and should be an object with keys that match the names of the dynamic sections.
 
   Given the following route structure:
 
@@ -16825,7 +16909,7 @@ var merge = function(original, hash) {
 
   ## Injection of Controller Singletons
   During application initialization Ember will detect properties of the application ending in 'Controller',
-  create singleton instances of each class, and assign them as a properties on the router.  The property name
+  create singleton instances of each class, and assign them as properties on the router.  The property name
   will be the UpperCamel name converted to lowerCamel format. These controller classes should be subclasses
   of Ember.ObjectController, Ember.ArrayController, Ember.Controller, or a custom Ember.Object that includes the
   Ember.ControllerMixin mixin.
@@ -16839,7 +16923,7 @@ var merge = function(original, hash) {
 
   The controller singletons will have their `namespace` property set to the application and their `target`
   property set to the application's router singleton for easy integration with Ember's user event system.
-  See 'Changing View Hierarchy in Response To State Change' and 'Responding to User-initiated Events'
+  See 'Changing View Hierarchy in Response To State Change' and 'Responding to User-initiated Events.'
 
   ## Responding to User-initiated Events
   Controller instances injected into the router at application initialization have their `target` property
@@ -20519,8 +20603,8 @@ Ember.onLoad('application', bootstrap);
 
 })();
 
-// Version: v0.9.8.1-734-ga2caaa3
-// Last commit: a2caaa3 (2012-08-14 10:04:46 -0700)
+// Version: v0.9.8.1-744-g7e61fe3
+// Last commit: 7e61fe3 (2012-08-21 12:10:37 -0700)
 
 
 (function() {

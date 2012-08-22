@@ -10,7 +10,7 @@ exports.YJ = Em.Application.create(
     YJ.set('god', YJ.User.createRecord("god", "yourjargon@gmail.com"))
 
   ready: ->
-    YJ.initialize()
+    @initialize()
     YJ.createGod()
     YJ.currentUser = YJ.User.createRecord()
 )
@@ -19,6 +19,8 @@ YJ.store = DS.Store.create(
   revision: 4,
   adapter: DS.RESTAdapter.create(bulkCommit: false)
 )
+
+YJ.initialize()
 
 YJ.searchTerm = Em.Object.create(term: null)
 
