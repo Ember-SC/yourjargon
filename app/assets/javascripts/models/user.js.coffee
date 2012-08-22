@@ -17,4 +17,7 @@ YJ.User = DS.Model.extend(
 
   join: (organization) ->
     organization.enroll(@)
+
+  leave: (organization) ->
+    organization.drop(@)
 )

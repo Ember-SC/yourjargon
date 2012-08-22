@@ -13,8 +13,9 @@ YJ.Organization = DS.Model.extend(
   terms: DS.hasMany("YJ.Term")
   isPublic: DS.attr("boolean", defaultValue: false)
 
-  ownedBy: ->
-    @get('ownership').get('user')
+  ownedBy: (->
+    @get('ownership.user')
+  ).property()
 
   setOwner: (owner) ->
     membership = @get('ownership')

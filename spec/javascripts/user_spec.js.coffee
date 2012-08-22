@@ -12,14 +12,19 @@ describe "User", ->
 
   it "member creates an organization", ->
     @org = @testUser.createOrganization('test organization')
-    console.log(@org.get('memberships'))
     memberships = @org.get('memberships')
     membership = memberships.objectAt(0)
     expect(membership.get('user.name')).toBe('test')
 
-#  it "member leaves an organization", ->
-#    newMember = YJ.User.createRecord(name: "description")
-#    newMember.join(@org)
-#    previousLength = @org.memberships.get('length')
-#    newMember.leave(@org)
-#    expect(@org.memberships.get('length')).toBe(previousLength-1)
+  describe "members and organization", ->
+    beforeEach ->
+      @org = @testUser.createOrganization('test organization')
+      @anotherUser = YJ.User.createRecord(name: 'another user', email: 'another@example.com')
+      @anotherUser.join(@org)
+
+    it "member joins an organization", ->
+      expect(@org.get('memberships.length')).toBe(2)
+
+    it "member leaves an organization", ->
+      @anotherUser.leave(@org)
+      expect(@org.get('memberships.length')).toBe(1)
