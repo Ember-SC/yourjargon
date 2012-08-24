@@ -4,15 +4,10 @@
 exports = this
 
 exports.YJ = Em.Application.create(
-  god: null
-
-  createGod: ->
-    YJ.set('god', YJ.User.createRecord("god", "yourjargon@gmail.com"))
 
   ready: ->
     @initialize()
-    YJ.createGod()
-    YJ.currentUser = YJ.User.createRecord()
+    YJ.currentUser = YJ.createUser("dummy", "dummy@example.com") # Stub current user until we get auth done.
 )
 
 YJ.store = DS.Store.create(
@@ -21,6 +16,11 @@ YJ.store = DS.Store.create(
 )
 
 YJ.initialize()
+
+YJ.reopen(
+  createUser: (name, email) ->
+    YJ.User.createRecord(name: name, email: email)
+)
 
 YJ.searchTerm = Em.Object.create(term: null)
 

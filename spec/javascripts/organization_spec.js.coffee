@@ -9,10 +9,7 @@
 describe "Organization", ->
 
   beforeEach ->
-    owner = YJ.User.createRecord(
-      name: 'Owner User',
-      email: 'owner.user@example.com'
-    )
+    owner = YJ.createUser('Owner User', 'owner.user@example.com')
     @org = owner.createOrganization('test organization')
 
   afterEach ->
@@ -27,7 +24,7 @@ describe "Organization", ->
     expect(@org.get('name')).toBe('An organization name')
 
   it "can enroll a user", ->
-    user = YJ.User.createRecord(name: 'Test User', email: 'test@example.com')
+    user = YJ.createUser('Test User', 'test@example.com')
     membership = @org.enroll(user)
     expect(membership.get('user')).toBe(user)
 
