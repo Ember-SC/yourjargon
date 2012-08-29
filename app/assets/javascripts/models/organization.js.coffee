@@ -48,3 +48,11 @@ YJ.Organization = DS.Model.extend(
 
 
 )
+YJ.Organization.reopenClass(
+
+  # Be sure you add the name of the organization before you commit
+  build: (owner) ->
+    organization = YJ.Organization.createRecord()
+    organization.setOwner(owner)
+    organization
+)

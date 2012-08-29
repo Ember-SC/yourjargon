@@ -7,7 +7,7 @@ exports.YJ = Em.Application.create(
 
   ready: ->
     @initialize()
-    YJ.currentUser = YJ.createUser("dummy", "dummy@example.com") # Stub current user until we get auth done.
+    @set('currentUser', YJ.createUser("dummy", "dummy@example.com")) # Stub current user until we get auth done.
 )
 
 YJ.store = DS.Store.create(

@@ -11,10 +11,10 @@ YJ.TermsRoute = Ember.Route.extend(
     #EVENTS
     allTerms: ((router, event) ->
       # The user clicked the 'all' link in the alphabet list
-      YJ.router.get('termsController').set('searchLetter', null)
+      router.get('termsController').set('searchLetter', null)
     )
     filterTerms: ((router, event) ->
-      YJ.router.get('termsController').set('searchLetter', event.context)
+      router.get('termsController').set('searchLetter', event.context)
     )
 
     connectOutlets: (router) ->

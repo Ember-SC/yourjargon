@@ -2,11 +2,21 @@ describe "organization routes", ->
 
   describe "the organizations states", ->
 
+    it "has a state to create an organization", ->
+      YJ.router.transitionTo('organizations.new')
+      expect(YJ.router.get('currentState.name')).toBe('new')
+
     it "has a state to show a list of organizations that the user belongs to", ->
       YJ.router.transitionTo('organizations.index')
       expect(YJ.router.get('currentState.name')).toBe('index')
 
     describe "has a state that shows the overall information for an organization", ->
+
+      beforeEach ->
+        YJ.router.transitionTo('organizations.show')
+
+      it "is in the state for showing an organization", ->
+        expect(YJ.router.get('currentState.name')).toBe('show')
 
       it "shows the organization name", ->
 
@@ -16,7 +26,7 @@ describe "organization routes", ->
 
       it "shows its members", ->
 
-      it "can add a member", ->
+      it "can invite a member to join", ->
 
     it "has a state to capture the information needed to make a new organization", ->
 

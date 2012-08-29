@@ -1,1 +1,4 @@
-Yo Dawg. I heard you like Organizations.
+<button {{action toOrganizationNew}} class="btn"> New Organization </button>
+{{#each organization in controller}}
+  {{organization.name}}<br />
+{{/each}}
