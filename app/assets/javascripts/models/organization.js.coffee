@@ -45,7 +45,12 @@ YJ.Organization = DS.Model.extend(
   setPublic: ->
     @set('isPublic', true)
 
-
+  definedTerms: (->
+    @get('terms').filterProperty("description", typeOf(String))
+  )
+  undefinedTerms: (->
+    @get('terms').filterProperty("description", null)
+  )
 
 )
 YJ.Organization.reopenClass(

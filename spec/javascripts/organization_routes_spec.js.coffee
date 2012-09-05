@@ -13,16 +13,25 @@ describe "organization routes", ->
     describe "has a state that shows the overall information for an organization", ->
 
       beforeEach ->
-        YJ.router.transitionTo('organizations.show')
+        user = YJ.createUser('user name', 'user@example.com')
+        @organization = user.createOrganization('an organization')
+        YJ.router.transitionTo('organizations.show', @organization)
 
       it "is in the state for showing an organization", ->
         expect(YJ.router.get('currentState.name')).toBe('show')
 
       it "shows the organization name", ->
+        expect(YJ.router.get('organizationController.content.name')).toBe('an organization')
 
       it "shows defined terms", ->
+        term = YJ.Term.createRecord(name: 'a defined term', description: 'a definition')
+        term = @organization.publish(term)
+        expect(YJ.router.get('organizationController.content.definedTerms.length')).toBe(1)
 
       it "shows undefined terms", ->
+        term = YJ.Term.createRecord(name: 'an undefined term')
+        term = @organization.publish(term)
+        expect(YJ.router.get('organizationController.content.undefinedTerms.length')).toBe(1)
 
       it "shows its members", ->
 
