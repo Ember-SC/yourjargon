@@ -19,17 +19,31 @@ YJ.OrganizationsRoute = Ember.Route.extend(
     toOrganizationNew: ((router) ->
       router.transitionTo('new')
     )
+    toEditOrganization: ((router, event) ->
+      router.transitionTo('edit', event.context)
+    )
 
 
-    connectOutlets: (router) ->
+    connectOutlets: ((router) ->
       router.get('applicationController').connectOutlet('organizations', YJ.Organization.find())
+    )
   )
 
-
+  edit: Ember.Route.extend(
+    route: '/edit/:organization_id'
+    save: ((router,context) ->
+      router.get('organizationEditController').save()
+      router.transitionTo('index')
+    )
+    connectOutlets: ((router, context) ->
+      router.get('applicationController').connectOutlet('organizationEdit', context)
+    )
+  )
 
   show: Ember.Route.extend(
-    route: '/show'
-    connectOutlets: (router) ->
-      router.get('applicationController').connectOutlet('organization', YJ.Organization.find())
+    route: '/:organization_id'
+    connectOutlets: ((router, context) ->
+      router.get('applicationController').connectOutlet('organization', context)
+    )
   )
 )
