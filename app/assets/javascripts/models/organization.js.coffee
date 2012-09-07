@@ -42,14 +42,24 @@ YJ.Organization = DS.Model.extend(
     terms = @get('terms')
     terms.pushObject(term)
 
+  publishDefinedTerm: (name, definition) ->
+    term = YJ.Term.createRecord(organization: @, name: name, definition: definition)
+    @publish(term)
+
+  publishUndefinedTerm: (name) ->
+    term = YJ.Term.createRecord(organization: @, name: name)
+    @publish(term)
+
   setPublic: ->
     @set('isPublic', true)
 
+
   definedTerms: (->
-    @get('terms').filterProperty("description", typeOf(String))
+    @get('terms').filterProperty("is_defined", true)
   )
+
   undefinedTerms: (->
-    @get('terms').filterProperty("description", null)
+    @get('terms').filterProperty("is_defined", false)
   )
 
 )
