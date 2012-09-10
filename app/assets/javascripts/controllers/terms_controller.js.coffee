@@ -12,11 +12,8 @@ YJ.TermsController = Em.ArrayController.extend(
   searchTerm: null
   content: []
   sortProperties: ['name']
-  isDefined: null
+  isDefined: true
 
-  ###
-    Returns the contents filtered by the first letter
-  ###
   filtered: (->
     noSearch = @get('searchLetter') is null
     noDefined = @get('isDefined') is null
@@ -24,9 +21,17 @@ YJ.TermsController = Em.ArrayController.extend(
     if noSearch && noDefined
       sorted
     else if !noSearch && noDefined
-      sorted.filterProperty 'firstLetter', @get('searchLetter')
+      @filterSearchLetter(sorted)
     else if noSearch && !noDefined
-      sorted.filterProperty ''
+      @filterIsDefined(sorted)
+    else
+      @filterIsDefined(@filterSearchLetter(sorted))
   ).property('searchLetter').cacheable()
+
+  filterSearchLetter: (sorted) ->
+    sorted.filterProperty('firstLetter', @get('searchLetter'))
+
+  filterIsDefined: (sorted) ->
+    sorted.filterProperty('isDefined', @get('isDefined'))
 
 )

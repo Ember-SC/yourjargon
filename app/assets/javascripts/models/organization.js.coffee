@@ -41,6 +41,7 @@ YJ.Organization = DS.Model.extend(
   publish: (term) ->
     terms = @get('terms')
     terms.pushObject(term)
+    term
 
   publishDefinedTerm: (name, definition) ->
     term = YJ.Term.createRecord(organization: @, name: name, definition: definition)

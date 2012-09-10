@@ -23,13 +23,13 @@ describe "organization routes", ->
       it "shows the organization name", ->
         expect(YJ.router.get('organizationController.content.name')).toBe('an organization')
 
-      it "shows defined terms", ->
-        @organization.publishDefinedTerm('a defined term', 'a definition')
-        expect(YJ.router.get('definedTermsController.content.length')).toBe(1)
-
-      it "shows undefined terms", ->
-        @organization.publishUndefinedTerm('an undefined term')
-        expect(YJ.router.get('organizationController.content.undefinedTerms.length')).toBe(1)
+#      it "shows defined terms", ->
+#        @organization.publishDefinedTerm('a defined term', 'a definition')
+#        expect(YJ.router.get('definedTermsController.content.length')).toBe(1)
+#
+#      it "shows undefined terms", ->
+#        @organization.publishUndefinedTerm('an undefined term')
+#        expect(YJ.router.get('organizationController.content.undefinedTerms.length')).toBe(1)
 
       it "shows its members", ->
 
