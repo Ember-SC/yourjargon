@@ -44,11 +44,8 @@ describe "Terms controller", ->
         @tc.addObject(@t2)
         @tc.addObject(@t)
         expect(@tc.get('length')).toBe(2)
-        something = @tc.get('content').objectAt(0)
-        console.log("something is #{something}")
-        console.log("something.name is #{something.get('name')}")
-
-        expect(something.get('name')).toBe("Obama")
+        expect(@tc.get('content').objectAt(0).get('name')).toBe("Obama")
+        expect(@tc.get('content').objectAt(1).get('name')).toBe("Romney")
 #(@tc.get('length')).toBe(0)
 #
 #      it "can order out-of-order terms", ->
