@@ -11,24 +11,24 @@ describe "Terms controller", ->
   it "has sortProperties as a property", ->
     expect(@tc.get('sortProperties')).toBeDefined
 
-  it "has a property filter that returns arrangedContent", ->
+  it "has an arranged content filter property", ->
     expect(@tc.get('filtered')).toBeDefined
 
   it "has content that should be empty", ->
-    expect(@tc.get('length')).toBe(0)
+    expect(@tc.get('content.length')).toBe(0)
 
   describe "contents", ->
 
     beforeEach ->
-      @t =  @org.publishDefinedTerm("Obama", "Good speaker")
+      @obama =  @org.publishDefinedTerm("Obama", "Good speaker")
 
-    it "should not have put this into the controller 'content'", ->
-      expect(@tc.get('length')).toBe(0)
+    it "should not have put this into the controller 'content' because automatic controllers updates are handled by the router", ->
+      expect(@tc.get('content.length')).toBe(0)
 
     it "can load its contents with test data", ->
-      @tc.addObject(@t)
-      expect(@tc.get('length')).toBe(1)
-      expect(@tc.objectAt(0)).toBe(@t)
+      @tc.addObject(@obama)
+      expect(@tc.get('content.length')).toBe(1)
+      expect(@tc.objectAt(0)).toBe(@obama)
 
     describe "sorted", ->
 
@@ -36,20 +36,44 @@ describe "Terms controller", ->
 
         # Jasmine doesn't reset controller arrays between tests so we have to do it ourselves.
         # I consider this to be a bug in Jasmine:
-        @tc.replaceContent(0, 1, null)
-        @t2 = @org.publishDefinedTerm("Romney", "Rich Guy")
+        @tc.set('content', [])
 
-      it "should have 'reset out' the previous tests's contents", ->
-        expect(@tc.get('length')).toBe(0)
-        @tc.addObject(@t2)
-        @tc.addObject(@t)
-        expect(@tc.get('length')).toBe(2)
-        expect(@tc.get('content').objectAt(0).get('name')).toBe("Obama")
-        expect(@tc.get('content').objectAt(1).get('name')).toBe("Romney")
-#(@tc.get('length')).toBe(0)
-#
-#      it "can order out-of-order terms", ->
+        @romney = @org.publishDefinedTerm("Romney", "Rich Guy")
+        @ryan = @org.publishUndefinedTerm("Ryan")
 
+      it "reads the arranged content in sorted order even though they were not entered that way", ->
+        expect(@tc.get('content.length')).toBe(0)
+        @tc.addObject(@romney)
+        @tc.addObject(@obama)
+        expect(@tc.get('arrangedContent.length')).toBe(2)
+        expect(@tc.get('arrangedContent').objectAt(0).get('name')).toBe("Obama")
+        expect(@tc.get('arrangedContent').objectAt(1).get('name')).toBe("Romney")
+
+      it "returns only search matches in sorted order", ->
+        expect(@tc.get('content.length')).toBe(0)
+        @tc.addObject(@ryan)
+        @tc.addObject(@romney)
+        @tc.addObject(@obama)
+        @tc.set('searchLetter', 'R')
+        sorted = @tc.get('filtered')
+        expect(sorted.get('length')).toBe(2)
+        expect(sorted.objectAt(0).get('name')).toBe("Romney")
+        expect(sorted.objectAt(1).get('name')).toBe("Ryan")
+
+      it "returns only defined terms in sorted order", ->
+        expect(@tc.get('content.length')).toBe(0)
+        @tc.addObject(@ryan)
+        @tc.addObject(@romney)
+        @tc.addObject(@obama)
+        @tc.set('searchLetter', null)
+        @tc.set('isDefined', true)
+        expect(@tc.get('content.length')).toBe(3)
+        sorted = @tc.get('filtered')
+        expect(sorted.get('length')).toBe(2)
+        expect(sorted.objectAt(0).get('name')).toBe("Obama")
+        expect(sorted.objectAt(1).get('name')).toBe("Romney")
+
+      it "returns only undefined terms starting with 'R'", ->
 
 
 

@@ -17,10 +17,9 @@ YJ.Term = DS.Model.extend(
 
   organization: DS.belongsTo("YJ.Organization")
 
-  is_defined: (->
+  isDefined: (->
     des = @get('description')
     des != undefined && des != null
-    true
   ).property('description')
 
   ###

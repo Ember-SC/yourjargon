@@ -44,7 +44,7 @@ YJ.Organization = DS.Model.extend(
     term
 
   publishDefinedTerm: (name, definition) ->
-    term = YJ.Term.createRecord(organization: @, name: name, definition: definition)
+    term = YJ.Term.createRecord(organization: @, name: name, description: definition)
     @publish(term)
 
   publishUndefinedTerm: (name) ->
