@@ -1,5 +1,4 @@
-YJ.LoginController = Em.ObjectController.extend(
-  content: null
+YJ.LoginController = Em.Controller.extend(
   email: null,
   password: null
 
