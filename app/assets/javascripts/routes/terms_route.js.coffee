@@ -33,8 +33,8 @@ YJ.TermsRoute = Ember.Route.extend(
       router.transitionTo('index')
     )
 
-    connectOutlets: (router, context) ->
-       router.get('applicationController').connectOutlet('term', context)
+    connectOutlets: (router, term) ->
+       router.get('applicationController').connectOutlet('term', term)
   )
 
   search: Ember.Route.extend(
@@ -91,7 +91,7 @@ YJ.TermsRoute = Ember.Route.extend(
       router.transitionTo('index')
     )
 
-    connectOutlets: (router, context) ->
-      router.get('applicationController').connectOutlet('editTerm', context)
+    connectOutlets: (router, term) ->
+      router.get('applicationController').connectOutlet('editTerm', term)
   )
 )
