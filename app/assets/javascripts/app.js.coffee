@@ -7,13 +7,16 @@ exports.YJ = Em.Application.create(
 
   ready: ->
     @initialize()
-    @set('currentUser', YJ.createUser("dummy", "dummy@example.com")) # Stub current user until we get auth done.
+    #@set('currentUser', YJ.createUser("dummy", "dummy@example.com")) # Stub current user until we get auth done.
+
 )
 
 YJ.store = DS.Store.create(
   revision: 4,
   adapter: DS.RESTAdapter.create(bulkCommit: false)
 )
+
+
 
 YJ.initialize()
 

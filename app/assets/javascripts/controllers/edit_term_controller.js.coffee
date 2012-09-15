@@ -1,4 +1,4 @@
-YJ.EditTermController = Ember.Controller.extend(
+YJ.EditTermController = Ember.ObjectController.extend(
   content: null
 
   term: ->

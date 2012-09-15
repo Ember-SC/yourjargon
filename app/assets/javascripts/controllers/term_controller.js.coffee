@@ -1,3 +1,3 @@
-YJ.TermController = Ember.Controller.extend(
-
+YJ.TermController = Ember.ObjectController.extend(
+  content: null
 )
