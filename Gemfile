@@ -20,7 +20,7 @@ gem "active_model_serializers", :git => "git://github.com/josevalim/active_model
 gem 'foreman'
 gem 'thin'
 gem 'bcrypt-ruby', :require => 'bcrypt'
-gem 'bootstrap-sass', '~> 2.0.2'
+gem 'bootstrap-sass', '~> 2.1.0.0'
 
 group :production do
   gem 'pg'
