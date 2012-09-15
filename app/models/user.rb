@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
    has_many :memberships
-
+   has_many :organizations, :through => :memberships
 
    attr_accessor :password
    attr_protected :password_digest
