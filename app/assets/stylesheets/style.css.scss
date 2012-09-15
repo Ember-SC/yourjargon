@@ -2,6 +2,18 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+p {
+  font-family: 'Happy Monkey', cursive;
+}
+
+h1 h2 h3 h4 h5 {
+  font-family: 'Alegreya SC', serif;
+}
+
+body {
+  background-image: url(image_path('ricepaper2.png'));
+}
+
 .left-align {
 
 }
@@ -20,7 +32,6 @@
   list-style: none;
 }
 
-
 .footer {
   list-style: none;
   li {
@@ -29,4 +40,7 @@
 }
 
 button.disabled,
-button[disabled]{background-color:#f5f5f5; cursor:not-allowed;}
+button[disabled] {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
