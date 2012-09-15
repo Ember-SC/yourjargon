@@ -11,7 +11,10 @@ describe "Terms controller", ->
   it "has sortProperties as a property", ->
     expect(@tc.get('sortProperties')).toBeDefined
 
-  it "has an arranged content filter property", ->
+  it "has an arranged content property", ->
+    expect(@tc.get('filtered')).toBeDefined
+
+  it "has a filtered property", ->
     expect(@tc.get('filtered')).toBeDefined
 
   it "has content that should be empty", ->
@@ -29,6 +32,21 @@ describe "Terms controller", ->
       @tc.addObject(@obama)
       expect(@tc.get('content.length')).toBe(1)
       expect(@tc.objectAt(0)).toBe(@obama)
+
+    describe "filtered", ->
+
+      beforeEach ->
+
+        # Jasmine doesn't reset controller arrays between tests so we have to do it ourselves.
+        # I consider this to be a bug in Jasmine:
+        @tc.set('content', [])
+
+        @romney = @org.publishDefinedTerm("Romney", "Rich Guy")
+        @ryan = @org.publishUndefinedTerm("Ryan")
+
+      it "when adding items to content they show up in filtered", ->
+        @tc.set('content', [@romney, @obama])
+        expect(@tc.get('filtered.length')).toBe(2)
 
     describe "sorted", ->
 

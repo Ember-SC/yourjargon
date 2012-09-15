@@ -27,9 +27,10 @@ YJ.TermsController = Em.ArrayController.extend(
         myself.filterIsDefined(item)
       else
         myself.filterIsDefined(item) && myself.filterSearchLetter(item)
-  ).property('searchLetter','isDefined').cacheable()
+  ).property('@each.searchLetter','@each.isDefined')
 
   filterSearchLetter: (item) ->
+
     item.get('firstLetter') == @get('searchLetter')
 
   filterIsDefined: (item) ->
