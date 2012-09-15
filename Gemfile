@@ -47,4 +47,5 @@ group :development, :test do
   gem 'jasmine', '~> 1.2.0'
   gem 'jasminerice'
   gem 'guard-jasmine'
+  gem 'awesome_print'
 end
