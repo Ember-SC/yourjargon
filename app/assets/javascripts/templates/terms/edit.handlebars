@@ -1,6 +1,6 @@
 <div id="editTermView" class='well'>
-  <h3>Term: {{content.name}}</h3><br>
-  <h4>Definition: {{view Ember.TextArea valueBinding="content.description"}}</h4>
+  <h3>{{controller.name}}</h3><br>
+  <h4>Definition: {{view Ember.TextArea valueBinding="controller.description" class="span7" rows="7"}}</h4>
   <div class='btn-group'>
   <button {{action save }} class='btn btn-primary'> Submit </button>
   <button {{action cancel }} class='btn'> Cancel </button>

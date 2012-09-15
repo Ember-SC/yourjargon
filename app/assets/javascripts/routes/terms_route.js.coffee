@@ -3,7 +3,13 @@ YJ.TermsRoute = Ember.Route.extend(
   #EVENTS
   #defined at global level
   #newTerm: Ember.Route.transitionTo('terms.new')
-  editTerm: Ember.Route.transitionTo('edit')
+  toShow: ((router, event) ->
+    router.transitionTo('terms.show', event.context)
+  )
+
+  editTerm: ((router, event) ->
+    router.transitionTo('terms.edit', event.context)
+  )
 
 
   index: Ember.Route.extend(
@@ -19,6 +25,16 @@ YJ.TermsRoute = Ember.Route.extend(
 
     connectOutlets: (router) ->
       router.get('applicationController').connectOutlet('terms', YJ.Term.find())
+  )
+
+  show: Ember.Route.extend(
+    route: '/:term_id'
+    back: ((router) ->
+      router.transitionTo('index')
+    )
+
+    connectOutlets: (router, context) ->
+       router.get('applicationController').connectOutlet('term', context)
   )
 
   search: Ember.Route.extend(
@@ -59,7 +75,7 @@ YJ.TermsRoute = Ember.Route.extend(
   )
 
   edit: Ember.Route.extend(
-    route: ':term_id/edit'
+    route: '/:term_id/edit'
 
     #EVENTS
     save: ((router) ->
@@ -75,7 +91,7 @@ YJ.TermsRoute = Ember.Route.extend(
       router.transitionTo('index')
     )
 
-    connectOutlets: (router, term) ->
-      router.get('applicationController').connectOutlet('editTerm', term)
+    connectOutlets: (router, context) ->
+      router.get('applicationController').connectOutlet('editTerm', context)
   )
 )

@@ -3,7 +3,7 @@
     <div class="span6">
       <ul class="terms-list">
         {{#each term in controller.filtered}}
-        <li><a {{action editTerm context="term"}}> {{term.name}} </a> </li>
+        <li><a {{action toShow term}}> {{term.name}} </a> </li>
         {{/each}}
       </ul>
     </div>
