@@ -1,5 +1,7 @@
-YJ.RegistrationController = Em.ObjectController.extend(
-  content: null
+YJ.RegistrationController = Em.Controller.extend(
+  name: null
+  email: null
+  password: null
 
   register: ->
     #make a create call to the server for a user
@@ -8,14 +10,20 @@ YJ.RegistrationController = Em.ObjectController.extend(
     self = @
     $.ajax
       type: 'POST'
-      url: "/users/create"
-      data: {user: {name: @content.get('name'), email: @content.get('email'), password: @content.get('password')}}
+      url: "/users"
+      data: {user: {name: @get('name'), email: @get('email'), password: @get('password')}}
       dataType: 'json'
       success: (data) ->
-        self.content.update(data.user)
-        self.content.set('password', null)
+        loaded = YJ.store.load(YJ.User, data.user)
+        YJ.set('currentUser', YJ.User.find(loaded.id))
+        self.clearProperties()
         return true
 
       failure: ->
         return false
+
+  clearProperties: ->
+    @set('email', null)
+    @set('name', null)
+    @set('password', null)
 )

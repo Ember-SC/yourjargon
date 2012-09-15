@@ -7,7 +7,7 @@ Yourjargon::Application.routes.draw do
 
   get  'users' => 'users#index'
   post 'users' => 'users#create'
-  match 'sessions/create' => 'sessions#create'
+  match 'sessions' => 'sessions#create'
   match 'sessions/destroy' => 'sessions#destroy'
 
   # The priority is based upon order of creation:
