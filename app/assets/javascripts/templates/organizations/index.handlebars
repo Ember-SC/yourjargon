@@ -1,0 +1,4 @@
+<button {{action toOrganizationNew}} class="btn"> New Organization </button><br />
+{{#each organization in controller}}
+    <a {{action toEditOrganization organization}} href="true"> {{organization.name}} </a><br />
+{{/each}}

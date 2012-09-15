@@ -10,6 +10,6 @@
 <h4>Email: {{view Ember.TextField valueBinding="controller.email" placeholder="me@example.com"}}</h4> <br />
 <h4>Password: {{view Ember.TextField valueBinding="controller.password" type="password" placeholder="Select password"}}</h4> <br />
 <button {{action cancel}} class="btn"> Cancel </button>
-  <button {{action createUser context="controller.content"}} class="btn btn-primary"> Submit </button>
+  <button {{action createUser}} class="btn btn-primary"> Submit </button>
   or <a {{action toLogin}}> Log in </a>
 </div>

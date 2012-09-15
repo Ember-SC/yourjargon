@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+   has_many :memberships
+
 
    attr_accessor :password
    attr_protected :password_digest

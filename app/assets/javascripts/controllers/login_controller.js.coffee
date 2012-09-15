@@ -1,5 +1,7 @@
 YJ.LoginController = Em.ObjectController.extend(
   content: null
+  email: null,
+  password: null
 
   authenticate: ->
     #make a call to the server to find user with email/password
@@ -8,11 +10,12 @@ YJ.LoginController = Em.ObjectController.extend(
     self = @
     $.ajax
       type: 'POST'
-      url: '/sessions/create'
-      data: {email: @content.get('email'), password: @content.get('password')}
+      url: '/sessions'
+      data: {email: @get('email'), password: @get('password')}
       dataType: 'json'
       success: (data) ->
-        self.content.update(data.user)
+        loaded = YJ.store.load(YJ.User, data.user)
+        YJ.set('currentUser', YJ.User.find(loaded.id))
         self.set('password', null)
         true
 

@@ -1,0 +1,8 @@
+<div id="editOrganizationView" class='well'>
+    <p>Organization: {{view Ember.TextField valueBinding = "content.name"}}</p><br>
+    <div class='btn-group'>
+        <button {{action save }} class='btn btn-primary'> Submit </button>
+        <button {{action cancel }} class='btn'> Cancel </button>
+        <button {{action delete }} class='btn btn-danger'> Delete </button>
+    </div>
+</div>
