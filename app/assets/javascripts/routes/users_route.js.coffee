@@ -14,9 +14,9 @@ YJ.UsersRoute = Ember.Route.extend(
         router.send('toRegister')
     )
 
-    connectOutlets: (router, context) ->
+    connectOutlets: (router) ->
       appController = router.get('applicationController')
-      appController.connectOutlet('registration', YJ.currentUser)
+      appController.connectOutlet('registration')
   )
 
   authentication: Ember.Route.extend(
@@ -32,9 +32,9 @@ YJ.UsersRoute = Ember.Route.extend(
 
     )
 
-    connectOutlets: (router, context) ->
+    connectOutlets: (router) ->
       appController = router.get('applicationController')
-      appController.connectOutlet('login', YJ.currentUser)
+      appController.connectOutlet('login')
   )
 
   edit: Ember.Route.extend(

@@ -9,19 +9,38 @@
 describe "Organization", ->
 
   beforeEach ->
-    @org = YJ.Organization.createRecord()
+    owner = YJ.createUser('Owner User', 'owner.user@example.com')
+    @org = owner.createOrganization('test organization')
 
   afterEach ->
     @org = null
 
+
+  it "is defined", ->
+    expect(@org).toBeDefined()
+
   it "has a name", ->
+    @org.set('name', "An organization name")
+    expect(@org.get('name')).toBe('An organization name')
+
+  it "can enroll a user", ->
+    user = YJ.createUser('Test User', 'test@example.com')
+    membership = @org.enroll(user)
+    expect(membership.get('user')).toBe(user)
 
   it "has an owner", ->
+    expect(@org.get('ownedBy.name')).toBe('Owner User')
 
   it "has terms", ->
+    @org.publish(YJ.Term.createRecord(name:"Term", description: "Description"))
+    expect(@org.get('terms').get('length')).toBe(1)
 
-  it "can retrieve a list of its members", ->
+  it "retrieves a list of its members", ->
+    newMember = YJ.User.createRecord(name: "description", email: "new@example.com")
+    newMember.join(@org)
+    expect(@org.get('memberships.length')).toBe(2)
+#
+#  it "raise exception when name for creating an organization already exists", ->
+#    @org = YJ.router.get('organizationsController').add("Test Organization", owner)
 
-  it "can delete a member from a list of its members", ->
 
-  it "owner can create a member", ->

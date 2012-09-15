@@ -1,10 +1,13 @@
 Yourjargon::Application.routes.draw do
   resources :terms
+  resources :organizations
+  resources :memberships
 
   resources :home
 
-  match 'users/create' => 'users#create'
-  match 'sessions/create' => 'sessions#create'
+  get  'users' => 'users#index'
+  post 'users' => 'users#create'
+  match 'sessions' => 'sessions#create'
   match 'sessions/destroy' => 'sessions#destroy'
 
   # The priority is based upon order of creation:
