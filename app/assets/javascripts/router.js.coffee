@@ -10,6 +10,7 @@ YJ.Router = Ember.Router.extend(
     toLogin: Ember.Route.transitionTo('users.authentication')
     toRegister: Ember.Route.transitionTo('users.registration')
     toEdit: Ember.Route.transitionTo('users.edit')
+    toOrganizations: Ember.Route.transitionTo('organizations.index')
     cancel: Ember.Route.transitionTo('home')
     logout: ((router, event) ->
       router.get('userController').logout()
