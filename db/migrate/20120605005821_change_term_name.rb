@@ -8,6 +8,7 @@ class ChangeTermName < ActiveRecord::Migration
   end
 
   def down
-     add_column :terms, :term
+     #add_column :terms, :term
+     remove_column :terms, :name
   end
 end

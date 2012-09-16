@@ -21,6 +21,19 @@ class User < ActiveRecord::Base
      user && BCrypt::Password.new(user.password_digest) == password ? user : nil
    end
 
+   def create_organization(org_name)
+     org = Organization.new
+     org.name = org_name
+     org.users << self
+     org.save!
+     memberships = Membership.all(:conditions => {:organization_id => org.id, :user_id => id} )
+     raise "Couldn't find membership just created" unless memberships.count == 1
+     membership = memberships.first
+     membership.is_owner = true
+     membership.save!
+     org
+   end
+
    private
 
    def api_authenticable
