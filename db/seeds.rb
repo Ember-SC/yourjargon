@@ -5,7 +5,7 @@ user.email = "admin@yourjargon.com"
 user.password = "password11"
 user.save!
 
-org = user.create_organization(name: 'Programmer Jargon')
+org = user.create_organization('Programmer Jargon')
 
 Term.create(YAML.load_file(Rails.root.join('db/sample', 'terms.yml')))
 terms = Term.all
