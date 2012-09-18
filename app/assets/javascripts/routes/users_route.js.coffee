@@ -1,6 +1,14 @@
 YJ.UsersRoute = Ember.Route.extend(
   route: '/users'
 
+  dashboard: Ember.Route.extend(
+    route: '/'
+
+    connectOutlets: (router) ->
+      console.log("i'm in your dashboard outlets")
+      router.get('applicationController').connectOutlet('dashboard', YJ.get('currentUser'))
+  )
+
   registration: Ember.Route.extend(
     route: '/register'
     #EVENTS

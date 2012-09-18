@@ -19,3 +19,19 @@ YJ.User = DS.Model.extend(
   leave: (organization) ->
     organization.drop(@)
 )
+YJ.User.reopenClass(
+  loadFromCookie: (api_key) ->
+    self = @
+    $.ajax
+      url: "/users/#{api_key}"
+      type: "GET"
+      async: false
+      dataType: 'json'
+      success: (data) ->
+        loaded = YJ.store.load(YJ.User, data.user)
+        YJ.set('currentUser', YJ.User.find(loaded.id))
+        true
+      error: (data) ->
+        false
+
+)
