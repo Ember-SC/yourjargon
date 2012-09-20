@@ -1,5 +1,8 @@
 YJ.UsersRoute = Ember.Route.extend(
   route: '/users'
+  toDashboard: ((router, event) ->
+   router.transitionTo('dashboard')
+  )
 
   dashboard: Ember.Route.extend(
     route: '/'
@@ -16,7 +19,7 @@ YJ.UsersRoute = Ember.Route.extend(
     createUser: ((router, event) ->
       if router.get('registrationController').register()
         console.log('successfully created a user')
-        router.send('goHome')
+        router.send('toDashboard')
       else
         console.log('failure to create user')
         router.send('toRegister')
@@ -33,7 +36,7 @@ YJ.UsersRoute = Ember.Route.extend(
     authenticate: ((router, event) ->
       if router.get('loginController').authenticate()
         console.log('successfully logged in')
-        router.send('goHome')
+        router.send('toDashboard')
       else
         console.log('failure to log in')
         router.send('toLogin')

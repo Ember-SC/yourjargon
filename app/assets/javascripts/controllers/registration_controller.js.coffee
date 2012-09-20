@@ -16,6 +16,7 @@ YJ.RegistrationController = Em.Controller.extend(
       success: (data) ->
         loaded = YJ.store.load(YJ.User, data.user)
         YJ.set('currentUser', YJ.User.find(loaded.id))
+        $.cookie('account', data.api_key)
         self.clearProperties()
         return true
 

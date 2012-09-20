@@ -22,16 +22,17 @@ YJ.Router = Ember.Router.extend(
 
     checkUser: ((router, event) ->
       cookie = $.cookie('account')
-      if cookie
-        console.log("Me gots a cookie")
-        if YJ.User.loadFromCookie(cookie)
-          console.log("We be routin to dashboard")
-          router.transitionTo('users.dashboard')
+      Ember.run.next ->
+        if cookie
+          console.log("Me gots a cookie")
+          if YJ.User.loadFromCookie(cookie)
+            console.log("We be routin to dashboard")
+            router.transitionTo('users.dashboard')
+          else
+            $.removeCookie('account')
+            router.transitionTo('home')
         else
-          $.removeCookie('account')
           router.transitionTo('home')
-      else
-        router.transitionTo('home')
     )
 
     toSearch: Ember.Route.transitionTo('terms.search')
