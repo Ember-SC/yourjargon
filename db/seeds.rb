@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 user = User.create()
 user.email = "admin@yourjargon.com"
-user.password = "password11"
+user.password = "password"
 user.save!
 
 org = user.create_organization('Programmer Jargon')
