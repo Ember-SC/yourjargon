@@ -21,6 +21,7 @@ gem 'foreman'
 gem 'thin'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'bootstrap-sass', '~> 2.1.0.0'
+gem 'rb-fsevent', '~> 0.9.1'
 
 group :production do
   gem 'pg'
