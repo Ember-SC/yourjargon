@@ -16,7 +16,11 @@ YJ.Organization = DS.Model.extend(
   isPublic: DS.attr("boolean", defaultValue: false)
 
   membershipForUser: (user) ->
-    @get('memberships').findProperty('user', user)
+    console.log("This is looking for user: " + JSON.stringify(user))
+    console.log("This is looking for membership: " + JSON.stringify(@get('memberships').objectAt(0)))
+    membership = @get('memberships').findProperty('user', user)
+    # console.log("This passes back membership variable: " + JSON.stringify(membership))
+    membership
 
   ownedBy: (->
     @get('ownership.user')

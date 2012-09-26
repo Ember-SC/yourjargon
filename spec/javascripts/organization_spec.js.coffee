@@ -32,7 +32,7 @@ describe "Organization", ->
     expect(@org.get('memberships').get('firstObject').get('user')).toBe(@owner)
 
   it "finds a membership for a user", ->
-    expect(@org.membershipForUser(@owner)).get('isOwner').toBe(true)
+    expect(@org.membershipForUser(@owner).get('isOwner')).toBe(true)
 
   describe "enrollment", ->
     beforeEach ->

@@ -36,10 +36,11 @@ describe "User", ->
         anotherUser.join(@org)
         expect(anotherUser.isOwner(@org)).toBe(false)
         expect(@org.get('memberships.length')).toBe(2)
-        expect(@org.get('users.length')).toBe(2)
 
       it "member leaves an organization", ->
-        @anotherUser.leave(@org)
+        anotherUser = YJ.createUser('another user', 'another@example.com')
+        anotherUser.join(@org)
+        anotherUser.leave(@org)
         expect(@org.get('memberships.length')).toBe(1)
 
 
