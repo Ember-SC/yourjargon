@@ -12,7 +12,12 @@ class UsersController < ApplicationController
    end
 
    def show
-     @user = User.where(api_key: params[:id]).first
+     if User.exists?(api_key: params[:id])
+       @user = User.where(api_key: params[:id]).first
+     else
+       @user = User.find(params[:id])
+     end
+
      if @user
        render :json => @user
      else
