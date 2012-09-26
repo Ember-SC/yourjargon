@@ -4,9 +4,16 @@
        Members:
        <ul>
        {{#each membership in content.memberships}}
-         <li>{{membership}} <button>Remove</button></li>
+         <li>{{membership.user.email}} <button>Remove</button></li>
        {{/each}}
        </ul>
     <br />
     Terms: {{content.terms.length}}
+        Terms:
+        <ul>
+        {{#each term in content.terms}}
+            <!-- This is wrong, but it may be wrong because its missing the implementation of the event for this -->
+            <li><a href={{action toShow term}}> {{term.name}}</a></li>
+        {{/each}}
+        </ul>
 </div>
