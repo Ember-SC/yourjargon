@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
         create_user_session(@user)
         render :json => {:user => UserSerializer.new(@user).as_json[:user], :api_key => @user.api_key}
       else
-        respond_with "Incorrect email or password", status: :unprocessable_entity
+        respond_with "Incorrect email or password", status: 404
       end
    end
 
