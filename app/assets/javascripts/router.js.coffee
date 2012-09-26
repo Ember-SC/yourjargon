@@ -35,13 +35,12 @@ YJ.Router = Ember.Router.extend(
           router.transitionTo('home')
     )
 
-    toSearch: Ember.Route.transitionTo('terms.search')
-
     home: Ember.Route.extend(
       route: '/'
 
       enter: (router) ->
-        router.send('checkUser')
+        Ember.run.next ->
+          router.send('checkUser')
 
 
       connectOutlets: (router) ->

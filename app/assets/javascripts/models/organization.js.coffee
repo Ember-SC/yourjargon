@@ -9,17 +9,14 @@
 YJ.Organization = DS.Model.extend(
   name: DS.attr("string")
   ownership: DS.belongsTo("YJ.Membership")
-  memberships: DS.hasMany("YJ.Membership")
-  terms: DS.hasMany("YJ.Term")
+  memberships: DS.hasMany("YJ.Membership", embedded: true)
+  terms: DS.hasMany("YJ.Term", embedded: true)
 
   # FIXME: We aren't doing anything with 'public' organizations yet; maybe never
   isPublic: DS.attr("boolean", defaultValue: false)
 
   membershipForUser: (user) ->
-    console.log("This is looking for user: " + JSON.stringify(user))
-    console.log("This is looking for membership: " + JSON.stringify(@get('memberships').objectAt(0)))
     membership = @get('memberships').findProperty('user', user)
-    # console.log("This passes back membership variable: " + JSON.stringify(membership))
     membership
 
   ownedBy: (->

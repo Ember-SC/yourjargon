@@ -9,7 +9,7 @@
             <div class="span6">
                 <ul class="orgs-list">
                     {{#each organization in content.organizations}}
-                        <li><a {{action toShow organization}}> {{organization.name}} </a> </li>
+                        <li><a {{action toOrg organization}}> {{organization.name}} </a> </li>
                     {{/each}}
                 </ul>
             </div>

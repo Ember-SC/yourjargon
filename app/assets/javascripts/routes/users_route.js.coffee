@@ -1,15 +1,36 @@
 YJ.UsersRoute = Ember.Route.extend(
   route: '/users'
   toDashboard: ((router, event) ->
-   router.transitionTo('dashboard')
+    router.transitionTo('dashboard')
   )
 
   dashboard: Ember.Route.extend(
     route: '/'
+    # EVENTS
+    createOrg: ((router, event) ->
+      router.transitionTo('organizations.new');
+    )
+
+    joinOrg: ((router, event) ->
+      # should join the organization that is passed in the context
+      # org = event.context
+      # router.transitionTo('organizations.index')
+    )
+
+    toOrg: ((router, event) ->
+      router.transitionTo('organizations.show', event.context)
+    )
+
+    enter: (router) ->
+      if YJ.get('currentUser')
+        console.log("i'm in your dashboard outlets " + YJ.get('currentUser'))
+      else
+        router.send('checkUser')
+
 
     connectOutlets: (router) ->
-      console.log("i'm in your dashboard outlets " + YJ.get('currentUser'))
-      router.get('applicationController').connectOutlet('dashboard', YJ.User.find($.cookie('account')))
+      router.get('applicationController').connectOutlet('dashboard', YJ.get('currentUser'))
+
 
   )
 
@@ -35,13 +56,13 @@ YJ.UsersRoute = Ember.Route.extend(
     route: '/login'
     #EVENTS
     authenticate: ((router, event) ->
-      if router.get('loginController').authenticate()
-        console.log('successfully logged in')
-        router.send('toDashboard')
-      else
-        console.log('failure to log in')
-        router.send('toLogin')
-
+      router.get('loginController').authenticate((result) ->
+        if result
+          console.log('successfully logged in')
+          router.send('toDashboard')
+        else
+          console.log('failure to log in')
+      )
     )
 
     connectOutlets: (router) ->
