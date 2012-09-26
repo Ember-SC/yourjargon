@@ -1,14 +1,12 @@
 <div id="showOrganizationView" class='well'>
     <h1> {{content.name}} </h1>
     Memberships: {{content.memberships.length}} <br />
-    {{#with content.memberships}}
        Members:
        <ul>
        {{#each membership in content.memberships}}
          <li>{{membership}} <button>Remove</button></li>
        {{/each}}
        </ul>
-    {{/with}}
     <br />
     Terms: {{content.terms.length}}
 </div>
