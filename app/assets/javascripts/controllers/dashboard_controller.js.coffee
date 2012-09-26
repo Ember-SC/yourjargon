@@ -1,4 +1,4 @@
-YJ.DashboardController = Em.ObjectController.extend(
-  content: null
+YJ.DashboardController = Em.Controller.extend(
+  contentBinding: 'YJ.currentUser'
   organizations: []
 )
