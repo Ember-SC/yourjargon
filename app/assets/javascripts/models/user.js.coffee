@@ -18,6 +18,12 @@ YJ.User = DS.Model.extend(
 
   leave: (organization) ->
     organization.drop(@)
+
+  membershipForOrganization: (organization) ->
+    organization.membershipForUser(@)
+
+  isOwner: (organization) ->
+    @membershipForOrganization(organization).get("isOwner")
 )
 YJ.User.reopenClass(
   loadFromCookie: (api_key) ->

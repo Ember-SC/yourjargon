@@ -11,7 +11,12 @@ YJ.Organization = DS.Model.extend(
   ownership: DS.belongsTo("YJ.Membership")
   memberships: DS.hasMany("YJ.Membership")
   terms: DS.hasMany("YJ.Term")
+
+  # FIXME: We aren't doing anything with 'public' organizations yet; maybe never
   isPublic: DS.attr("boolean", defaultValue: false)
+
+  membershipForUser: (user) ->
+    @get('memberships').findProperty('user', user)
 
   ownedBy: (->
     @get('ownership.user')
@@ -27,9 +32,10 @@ YJ.Organization = DS.Model.extend(
 
   enroll: (user) ->
     memberships = @get('memberships')
-    membership = memberships.findProperty('user', user)
+    membership = @membershipForUser(user)
     unless membership?
       membership = YJ.Membership.createRecord(user: user, organization: @)
+      membership.set('isOwner', false)
       memberships.pushObject(membership)
     membership
 

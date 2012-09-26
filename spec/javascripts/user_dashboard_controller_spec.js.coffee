@@ -1,7 +1,6 @@
 describe "user_dashboard_controller", ->
   beforeEach ->
     @user = YJ.createUser('Test User', 'test@example.com')
-    expect(@user.get(''))
     @betaOrg = @user.createOrganization('Beta')
     @alphaOrg = @user.createOrganization('Alpha')
 
@@ -9,7 +8,7 @@ describe "user_dashboard_controller", ->
     dashboardController = YJ.router.get('dashboardController')
     dashboardController.set('content', @user)
     dashboardController.set('organizations', @user.get('organizations'))
-#    expect(@user.get('organizations.length')).toBe(2)
+#    expect(@user.get('memberships.length')).toBe(2)
 #    expect(dashboardController.get('organizations.length')).toBe(2)
 #
 #  it "can select an organization from the list", ->
