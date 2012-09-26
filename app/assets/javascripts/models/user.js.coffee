@@ -4,8 +4,9 @@ YJ.User = DS.Model.extend(
   memberships: DS.hasMany("YJ.Membership", embedded:true)
 
   organizations: (->
-    @get('memberships').map (item, index, self) ->
-      item.get('organization')
+    console.log(@get('memberships.length'))
+    @get('memberships').map (membership, index, memberships) ->
+      membership.get('organization')
   ).property('memberships')
 
   createOrganization: (name) ->

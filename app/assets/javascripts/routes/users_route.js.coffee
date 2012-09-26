@@ -9,7 +9,7 @@ YJ.UsersRoute = Ember.Route.extend(
 
     connectOutlets: (router) ->
       console.log("i'm in your dashboard outlets " + YJ.get('currentUser'))
-      router.get('applicationController').connectOutlet('dashboard')
+      router.get('applicationController').connectOutlet('dashboard', YJ.User.find($.cookie('account')))
 
   )
 
