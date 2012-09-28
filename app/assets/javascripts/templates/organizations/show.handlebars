@@ -13,7 +13,7 @@
         <ul>
         {{#each term in content.terms}}
             <!-- This is wrong, but it may be wrong because its missing the implementation of the event for this -->
-            <li><a href={{action toShow term}}> {{term.name}}</a></li>
+            <li><a {{action toShow term}}> {{term.name}}</a></li>
         {{/each}}
         </ul>
 </div>

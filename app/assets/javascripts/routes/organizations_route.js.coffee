@@ -42,6 +42,11 @@ YJ.OrganizationsRoute = Ember.Route.extend(
 
   show: Ember.Route.extend(
     route: '/:organization_id'
+    #EVENTS
+    toShow: ((router, event) ->
+      router.transitionTo('terms.show', event.context)
+    )
+
     connectOutlets: ((router, context) ->
       router.get('applicationController').connectOutlet('organization', context)
     )
