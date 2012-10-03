@@ -8,9 +8,12 @@
 
 YJ.Organization = DS.Model.extend(
   name: DS.attr("string")
-  ownership: DS.belongsTo("YJ.Membership")
   memberships: DS.hasMany("YJ.Membership", embedded: true)
   terms: DS.hasMany("YJ.Term", embedded: true)
+
+  ownership: (->
+    membership = @get('memberships').findProperty('isOwner', true)
+  ).property('memberships.@each.isOwner')
 
   # FIXME: We aren't doing anything with 'public' organizations yet; maybe never
   isPublic: DS.attr("boolean", defaultValue: false)
@@ -21,15 +24,14 @@ YJ.Organization = DS.Model.extend(
 
   ownedBy: (->
     @get('ownership.user')
-  ).property()
+  ).property('ownership')
 
   setOwner: (owner) ->
     membership = @get('ownership')
-    membership.clearOwner() if membership != null
+    membership.clearOwner() if membership != undefined
     # do we need to commit() here?
     membership = @enroll(owner)
     membership.setOwner()
-    @set('ownership', membership)
 
   enroll: (user) ->
     memberships = @get('memberships')

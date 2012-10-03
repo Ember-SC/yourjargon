@@ -90,6 +90,4 @@ YJ.UsersRoute = Ember.Route.extend(
         context: YJ.currentUser
       )
   )
-
-  terms: YJ.TermsRoute
 )

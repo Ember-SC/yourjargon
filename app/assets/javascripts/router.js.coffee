@@ -19,6 +19,9 @@ YJ.Router = Ember.Router.extend(
       $.removeCookie('account')
       router.send('goHome')
     )
+    termCreated: ((router, event) ->
+      router.transitionTo('terms.index')
+    )
 
     checkUser: ((router, event) ->
       cookie = $.cookie('account')
@@ -51,5 +54,7 @@ YJ.Router = Ember.Router.extend(
     users: YJ.UsersRoute
 
     organizations: YJ.OrganizationsRoute
+
+    terms: YJ.TermsRoute
   )
 )

@@ -15,6 +15,9 @@ YJ.OrganizationsRoute = Ember.Route.extend(
   index: Ember.Route.extend(
     route: '/'
     # EVENTS
+    newTerm: ((router, event) ->
+      router.transitionTo('terms.new')
+    )
     # Treating events as properties is retarded
     toOrganizationNew: ((router) ->
       router.transitionTo('new')

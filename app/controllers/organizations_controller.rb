@@ -40,7 +40,7 @@ class OrganizationsController < ApplicationController
   # POST /organizations
   # POST /organizations.json
   def create
-    @organization = Organization.new(params[:term])
+    @organization = Organization.new(params[:organization])
 
     respond_to do |format|
       if @organization.save
@@ -59,7 +59,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
 
     respond_to do |format|
-      if @organization.update_attributes(params[:term])
+      if @organization.update_attributes(params[:organization])
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { head :no_content }
       else
