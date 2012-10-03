@@ -15,7 +15,7 @@ describe "organization routes", ->
       beforeEach ->
         user = YJ.createUser('user name', 'user@example.com')
         @organization = user.createOrganization('an organization')
-        YJ.router.transitionTo('organizations.show', @organization)
+        YJ.router.transitionTo('organizations.organization.show', @organization)
 
       it "is in the state for showing an organization", ->
         expect(YJ.router.get('currentState.name')).toBe('show')
@@ -46,7 +46,7 @@ describe "organization routes", ->
         YJ.router.send('termCreated')
         Ember.run.next( ->
           currentPath = YJ.router.get('currentPath')
-          expect(currentPath).toBe('organizations.show')
+          expect(currentPath).toBe('organizations.organization.show')
         )
 
 
