@@ -38,7 +38,7 @@ class MembershipsController < ApplicationController
   # POST /memberships
   # POST /memberships.json
   def create
-    @membership = Membership.new(params[:term])
+    @membership = Membership.new(params[:membership])
 
     respond_to do |format|
       if @membership.save
@@ -57,7 +57,7 @@ class MembershipsController < ApplicationController
     @membership = Membership.find(params[:id])
 
     respond_to do |format|
-      if @membership.update_attributes(params[:term])
+      if @membership.update_attributes(params[:membership])
         format.html { redirect_to @membership, notice: 'Membership was successfully updated.' }
         format.json { head :no_content }
       else

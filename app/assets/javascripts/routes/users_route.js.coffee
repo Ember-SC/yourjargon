@@ -1,5 +1,41 @@
 YJ.UsersRoute = Ember.Route.extend(
   route: '/users'
+  #EVENTS
+  toDashboard: ((router, event) ->
+    router.transitionTo('dashboard')
+  )
+  newTerm: Ember.Route.transitionTo('terms.new')
+  viewTerms: Ember.Route.transitionTo('terms.index')
+
+  dashboard: Ember.Route.extend(
+    route: '/'
+    # EVENTS
+    createOrg: ((router, event) ->
+      router.transitionTo('organizations.new');
+    )
+
+    joinOrg: ((router, event) ->
+      # should join the organization that is passed in the context
+      # org = event.context
+      # router.transitionTo('organizations.index')
+    )
+
+    toOrg: ((router, event) ->
+      router.transitionTo('organizations.organization.show', event.context)
+    )
+
+    enter: (router) ->
+      if YJ.get('currentUser')
+        console.log("i'm in your dashboard outlets " + YJ.get('currentUser'))
+      else
+        router.send('checkUser')
+
+
+    connectOutlets: (router) ->
+      router.get('applicationController').connectOutlet('dashboard', YJ.get('currentUser'))
+
+
+  )
 
   registration: Ember.Route.extend(
     route: '/register'
@@ -8,7 +44,7 @@ YJ.UsersRoute = Ember.Route.extend(
     createUser: ((router, event) ->
       if router.get('registrationController').register()
         console.log('successfully created a user')
-        router.send('goHome')
+        router.send('toDashboard')
       else
         console.log('failure to create user')
         router.send('toRegister')
@@ -23,13 +59,13 @@ YJ.UsersRoute = Ember.Route.extend(
     route: '/login'
     #EVENTS
     authenticate: ((router, event) ->
-      if router.get('loginController').authenticate()
-        console.log('successfully logged in')
-        router.send('goHome')
-      else
-        console.log('failure to log in')
-        router.send('toLogin')
-
+      router.get('loginController').authenticate((result) ->
+        if result
+          console.log('successfully logged in')
+          router.send('toDashboard')
+        else
+          console.log('failure to log in')
+      )
     )
 
     connectOutlets: (router) ->

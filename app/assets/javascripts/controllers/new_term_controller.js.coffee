@@ -1,12 +1,15 @@
-YJ.NewTermController = Ember.ObjectController.extend(
-  content: null
-
-  term: ->
-    @get('content')
+YJ.NewTermController = Ember.Controller.extend(
+  organizationBinding: 'YJ.router.organizationController.content'
+  name: null
+  description: null
 
   addTerm: ->
-    @term().get('transaction').commit()
+  	if @get('description') is null
+  		@get('organization').publishUndefinedTerm(@get('name'))
+  	else
+  		@get('organization').publishDefinedTerm(@get('name'), @get('description'))
 
   cancel: ->
-    @term().destroy()
+    @set('name', null)
+    @set('description', null)
 )
