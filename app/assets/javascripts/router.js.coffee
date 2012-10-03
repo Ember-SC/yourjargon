@@ -50,8 +50,6 @@ YJ.Router = Ember.Router.extend(
 
     users: YJ.UsersRoute
 
-    terms: YJ.TermsRoute
-
     organizations: YJ.OrganizationsRoute
   )
 )

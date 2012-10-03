@@ -1,8 +1,11 @@
 YJ.UsersRoute = Ember.Route.extend(
   route: '/users'
+  #EVENTS
   toDashboard: ((router, event) ->
     router.transitionTo('dashboard')
   )
+  newTerm: Ember.Route.transitionTo('terms.new')
+  viewTerms: Ember.Route.transitionTo('terms.index')
 
   dashboard: Ember.Route.extend(
     route: '/'
@@ -18,7 +21,7 @@ YJ.UsersRoute = Ember.Route.extend(
     )
 
     toOrg: ((router, event) ->
-      router.transitionTo('organizations.show', event.context)
+      router.transitionTo('organizations.organization.show', event.context)
     )
 
     enter: (router) ->
@@ -87,4 +90,6 @@ YJ.UsersRoute = Ember.Route.extend(
         context: YJ.currentUser
       )
   )
+
+  terms: YJ.TermsRoute
 )
