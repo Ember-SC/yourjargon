@@ -30,7 +30,7 @@ YJ.TermsRoute = Ember.Route.extend(
   show: Ember.Route.extend(
     route: '/:term_id'
     back: ((router) ->
-      router.transitionTo('index')
+      router.send('termCreated')
     )
 
     connectOutlets: (router, term) ->
@@ -71,7 +71,7 @@ YJ.TermsRoute = Ember.Route.extend(
     )
 
     connectOutlets: (router) ->
-      router.get('applicationController').connectOutlet('newTerm', YJ.Term.createRecord())
+      router.get('applicationController').connectOutlet('newTerm')
   )
 
   edit: Ember.Route.extend(
