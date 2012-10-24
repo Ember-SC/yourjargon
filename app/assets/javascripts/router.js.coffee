@@ -9,6 +9,7 @@ YJ.Router = Ember.Router.extend(
     goHome: ((router, event) ->
       router.send('checkUser')
     )
+    toDashboard: Ember.Route.transitionTo('users.dashboard')
     toLogin: Ember.Route.transitionTo('users.authentication')
     toRegister: Ember.Route.transitionTo('users.registration')
     toEdit: Ember.Route.transitionTo('users.edit')

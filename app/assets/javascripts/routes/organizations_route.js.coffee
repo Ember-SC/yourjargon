@@ -6,7 +6,8 @@ YJ.OrganizationsRoute = Ember.Route.extend(
     route: '/new'
     # EVENTS
     create: ((router, event) ->
-       router.transitionTo('index')
+       router.get('organizationNewController').create()
+       router.send('toDashboard')
     )
     connectOutlets: (router) ->
       router.get('applicationController').connectOutlet('organizationNew', YJ.Organization.build(YJ.get('currentUser')))
@@ -25,10 +26,13 @@ YJ.OrganizationsRoute = Ember.Route.extend(
     toEditOrganization: ((router, event) ->
       router.transitionTo('edit', event.context)
     )
+    toOrganizationProfile: ((router, event) ->
+      router.transitionTo('organization.profile', event.context)
+    )
 
 
     connectOutlets: ((router) ->
-      router.get('applicationController').connectOutlet('organizations', YJ.Organization.find())
+      router.get('applicationController').connectOutlet('organizations', YJ.Organization.find(isPublic: true))
     )
   )
 
@@ -61,6 +65,15 @@ YJ.OrganizationsRoute = Ember.Route.extend(
       router.get('organizationController').set('content', context)
     )
 
+    profile: Ember.Route.extend(
+      route: '/profile'
+
+      connectOutlets: ((router) ->
+        organizationController = router.get('organizationController')
+        organization = organizationController.get('content')
+        router.get('applicationController').connectOutlet('organizationProfile', organization)
+      )
+    )
 
     show: Ember.Route.extend(
       route: '/'

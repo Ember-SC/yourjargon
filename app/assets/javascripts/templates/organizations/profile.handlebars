@@ -1,0 +1,10 @@
+
+<h1>{{controller.name}}</h1>
+
+<p> Members:  {{controller.members.length}} </p>
+
+{{#if controller.isCurrentUserMember }}
+	Congratulations You are Member!
+{{else}}
+	<button {{action join}} class="btn"> Join </button>
+{{/if}}

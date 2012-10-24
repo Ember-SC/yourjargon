@@ -22,6 +22,18 @@ YJ.Organization = DS.Model.extend(
     membership = @get('memberships').findProperty('user', user)
     membership
 
+  isCurrentUserMember: ( ->
+    currentUser = YJ.get('currentUser')
+    if currentUser
+      membership = @membershipForUser(currentUser)
+      if membership
+        true
+      else
+        false
+    else
+      false
+  ).property()
+
   ownedBy: (->
     @get('ownership.user')
   ).property('ownership')
