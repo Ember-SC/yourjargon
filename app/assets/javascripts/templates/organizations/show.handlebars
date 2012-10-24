@@ -9,11 +9,5 @@
        </ul>
     <br />
     Terms: {{content.terms.length}}&nbsp;<button {{action newTerm}}> New Term </button>
-        Terms:
-        <ul>
-        {{#each term in content.terms}}
-            <!-- This is wrong, but it may be wrong because its missing the implementation of the event for this -->
-            <li><a {{action toShow term}}> {{term.name}}</a></li>
-        {{/each}}
-        </ul>
+        {{outlet orgTerms}}
 </div>

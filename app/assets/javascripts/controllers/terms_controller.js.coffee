@@ -12,6 +12,17 @@ YJ.TermsController = Em.ArrayController.extend(
   content: []
   sortProperties: ['name']
   isDefined: null
+  alphabet: ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+
+
+  allTerms: ((event) ->
+      # The user clicked the 'all' link in the alphabet list
+      @set('searchLetter', null)
+  )
+  
+  filterTerms: ((event) ->
+      @set('searchLetter', event.context)
+  )
 
   filtered: (->
     noSearch = @get('searchLetter') is null
@@ -27,7 +38,7 @@ YJ.TermsController = Em.ArrayController.extend(
         myself.filterIsDefined(item)
       else
         myself.filterIsDefined(item) && myself.filterSearchLetter(item)
-  ).property('@each.searchLetter','@each.isDefined')
+  ).property('searchLetter','@each.isDefined')
 
   filterSearchLetter: (item) ->
 

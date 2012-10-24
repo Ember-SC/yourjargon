@@ -48,7 +48,7 @@ YJ.OrganizationsRoute = Ember.Route.extend(
     #EVENTS
     newTerm: Ember.Route.transitionTo('terms.new')
     editTerm: Ember.Route.transitionTo('terms.edit')
-    viewTerms: Ember.Route.transitionTo('terms.index')
+    viewTerms: Ember.Route.transitionTo('organization.show')
     termCreated: ((router, event) ->
       organization = YJ.router.get('organizationController.content')
       router.transitionTo('organizations.organization.show', organization)
@@ -66,8 +66,10 @@ YJ.OrganizationsRoute = Ember.Route.extend(
       route: '/'
 
       connectOutlets: ((router) ->
-        organization = router.get('organizationController.content')
+        organizationController = router.get('organizationController')
+        organization = organizationController.get('content')
         router.get('applicationController').connectOutlet('organization', organization)
+        organizationController.connectOutlet(name: 'terms', outletName: 'orgTerms', context: organization.get('terms'))
       )
 
     )
