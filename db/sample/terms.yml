@@ -34,6 +34,8 @@
   description: 'Annoyed by interruptions. Pronounced like and has a similar meaning to “irked”.'
 - name: 'Jimmy'
   description: ' A generalized name for the clueless/new developer. The submitter at Stack Overflow writes:  We found as we were developing a framework component that required minimal knowledge of how it worked for the other developers. We would always phrase our questions as: What if Jimmy forgets to update the attribute?  This led to the term Jimmy-proof when referring to well designed framework code.  It’s probably best not to use this term around IronRuby developer Jimmy Schementi.'
+- name: 'Lance Armstrong bug'
+  description: 'when the code never fails a test, but evidence shows it’s not behaving as it should.'
 - name: 'Loch Ness Monster Bug'
   description: 'A bug that isn’t reproducible and has been sighted by only one person. See Bugfoot.'
 - name: 'Megamoth'
