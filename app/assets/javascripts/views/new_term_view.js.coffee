@@ -23,8 +23,6 @@ YJ.NewTermView = Em.View.extend(
 #    YJ.stateManager.send('cancelAddTerm')
 
   didInsertElement: ->
-    console.log("didInsertElement")
-    #    @focus()
     @_super()
     @$('input:first').focus()
 )

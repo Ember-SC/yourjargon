@@ -4,6 +4,6 @@ YJ.OrganizationNewController = Ember.ObjectController.extend(
   # Persist what we've built in this controller
   create: ->
     organization = @get('content')
-    #organization.get('transaction').commit()
+    organization.get('transaction').commit()
 
 )

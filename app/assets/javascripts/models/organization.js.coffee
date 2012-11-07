@@ -8,28 +8,49 @@
 
 YJ.Organization = DS.Model.extend(
   name: DS.attr("string")
-  ownership: DS.belongsTo("YJ.Membership")
-  memberships: DS.hasMany("YJ.Membership")
-  terms: DS.hasMany("YJ.Term")
+  memberships: DS.hasMany("YJ.Membership", embedded: true)
+  terms: DS.hasMany("YJ.Term", embedded: true)
+
+  ownership: (->
+    membership = @get('memberships').findProperty('isOwner', true)
+  ).property('memberships.@each.isOwner')
+
+  # FIXME: We aren't doing anything with 'public' organizations yet; maybe never
   isPublic: DS.attr("boolean", defaultValue: false)
+
+  membershipForUser: (user) ->
+    membership = @get('memberships').findProperty('user', user)
+    membership
+
+  isCurrentUserMember: ( ->
+    currentUser = YJ.get('currentUser')
+    if currentUser
+      membership = @membershipForUser(currentUser)
+      if membership
+        true
+      else
+        false
+    else
+      false
+  ).property()
 
   ownedBy: (->
     @get('ownership.user')
-  ).property()
+  ).property('ownership')
 
   setOwner: (owner) ->
     membership = @get('ownership')
-    membership.clearOwner() if membership != null
+    membership.clearOwner() if membership != undefined
     # do we need to commit() here?
     membership = @enroll(owner)
     membership.setOwner()
-    @set('ownership', membership)
 
   enroll: (user) ->
     memberships = @get('memberships')
-    membership = memberships.findProperty('user', user)
+    membership = @membershipForUser(user)
     unless membership?
       membership = YJ.Membership.createRecord(user: user, organization: @)
+      membership.set('isOwner', false)
       memberships.pushObject(membership)
     membership
 

@@ -2,7 +2,7 @@ YJ.LoginController = Em.Controller.extend(
   email: null,
   password: null
 
-  authenticate: ->
+  authenticate: (callback) ->
     #make a call to the server to find user with email/password
     # if success set content from response and create session and return true
     # if failure return false
@@ -12,13 +12,16 @@ YJ.LoginController = Em.Controller.extend(
       url: '/sessions'
       data: {email: @get('email'), password: @get('password')}
       dataType: 'json'
-      success: (data) ->
+      success: (data, status) ->
         loaded = YJ.store.load(YJ.User, data.user)
         YJ.set('currentUser', YJ.User.find(loaded.id))
+        $.cookie('account', data.api_key)
+        self.set('email', null)
         self.set('password', null)
-        true
+        callback(true)
 
-      failure:
-        false
+      error: (error) ->
+        self.set('password', null)
+        callback(false)
 
 )

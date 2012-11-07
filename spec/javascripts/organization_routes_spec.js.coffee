@@ -15,7 +15,7 @@ describe "organization routes", ->
       beforeEach ->
         user = YJ.createUser('user name', 'user@example.com')
         @organization = user.createOrganization('an organization')
-        YJ.router.transitionTo('organizations.show', @organization)
+        YJ.router.transitionTo('organizations.organization.show', @organization)
 
       it "is in the state for showing an organization", ->
         expect(YJ.router.get('currentState.name')).toBe('show')
@@ -35,9 +35,21 @@ describe "organization routes", ->
 
       it "can invite a member to join", ->
 
-    it "has a state to capture the information needed to make a new organization", ->
+      it "has a state to capture the information needed to make a new organization", ->
 
-    it "has a state to capture the information needed to edit an organization", ->
+      it "has a state to capture the information needed to edit an organization", ->
+      
+      it "creates a term for the organization", ->
+        term = @organization.publishDefinedTerm("A term", "A description")
+        console.log(YJ.router.get("currentPath"))
+        YJ.router.transitionTo('terms.edit')
+        YJ.router.send('termCreated')
+        Ember.run.next( ->
+          currentPath = YJ.router.get('currentPath')
+          expect(currentPath).toBe('organizations.organization.show')
+        )
+
+
 
   describe "the organizations events", ->
 
@@ -50,3 +62,5 @@ describe "organization routes", ->
     it "selecting an organization from this users' organization list goes to show that organizations information", ->
 
     it "enroll a user to an organization shows a list of members", ->
+
+

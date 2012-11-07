@@ -1,7 +1,7 @@
 <ul class="alphabet-list">
-  <a {{action allTerms}}> Show All </a>
+  <a {{action allTerms target="controller"}}> Show All </a>
   <!-- 'action all' above is scary; tie it down better -->
-  {{#each letter in controller}}
-    <li><span class="badge"><a {{action filterTerms context="letter"}}> {{letter}} </a></span></li>
+  {{#each letter in controller.alphabet}}
+    <li><span class="badge"><a {{action filterTerms letter target="controller"}}> {{letter}} </a></span></li>
   {{/each}}
 </ul>

@@ -49,4 +49,5 @@ group :development, :test do
   gem 'jasminerice'
   gem 'guard-jasmine'
   gem 'awesome_print'
+  gem 'rb-fsevent', '~> 0.9.1'
 end

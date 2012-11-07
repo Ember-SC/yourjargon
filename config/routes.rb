@@ -2,11 +2,9 @@ Yourjargon::Application.routes.draw do
   resources :terms
   resources :organizations
   resources :memberships
-
+  resources :users
   resources :home
 
-  get  'users' => 'users#index'
-  post 'users' => 'users#create'
   match 'sessions' => 'sessions#create'
   match 'sessions/destroy' => 'sessions#destroy'
 
