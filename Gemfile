@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.8'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -16,12 +16,11 @@ end
 
 gem 'jquery-rails'
 gem 'ember-rails'
-gem "active_model_serializers", :git => "git://github.com/josevalim/active_model_serializers.git"
+gem "active_model_serializers"
 gem 'foreman'
 gem 'thin'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'bootstrap-sass', '~> 2.1.0.0'
-gem 'rb-fsevent', '~> 0.9.1'
 
 group :production do
   gem 'pg'
