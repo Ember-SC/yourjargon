@@ -1,12 +1,12 @@
 # Yourjargon - A Private Maintainable Glossary
 
-	This web application shows the power of Rails and [EmberJS](http://emberjs.com) to provide a powerful client side experience.  The front end is done completely in ember, including url routing.  Rails handles the asset compilation and serving up data to the ember app via a json api.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are used to drive out the functionality.
+This web application shows the power of Rails and [EmberJS](http://emberjs.com) to provide a powerful client side experience.  The front end is done completely in ember, including url routing.  Rails handles the asset compilation and serving up data to the ember app via a json api.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are used to drive out the functionality.
 
 # What Does this Web Application Do?
 
-	Yourjargon provides the ability to create a private dictionary for an organization to store their own "jargon" into.  Check out our applications seed data for some great examples pulled from a stackoverflow thread on programming jargon:  http://www.codinghorror.com/blog/2012/07/new-programming-jargon.html.
+Yourjargon provides the ability to create a private dictionary for an organization to store their own "jargon" into.  Check out our applications seed data for some great examples pulled from a stackoverflow thread on programming jargon:  http://www.codinghorror.com/blog/2012/07/new-programming-jargon.html.
 	
-	In addition, it shows off the features of EmberJS for a small application that developers learning EmberJS can easily digest:
+In addition, it shows off the features of EmberJS for a small application that developers learning EmberJS can easily digest:
 
  * Bindings
  * Observers
@@ -45,6 +45,7 @@ See the wiki to get your machine setup:
 
 ### Running the Web Application
 
+Go to your browser at localhost:3000:
 [Browse](http://localhost:3000/)
 
 # Testing
@@ -62,11 +63,14 @@ all the client tests are run again.*
 
 ### Method 2
 
+go to url: localhost:3000/jasmine
 [Browse](http://localhost:3000/jasmine)
 
 This will show a **Jasmine** dashboard in which you can run tests and see results.
 
 # Contributing
+
+We'd love contributions.  Submit a pull request by following the instructions below!
 
 		1. Fork it
 		2. Create your feature branch (git checkout -b my-new-feature)
