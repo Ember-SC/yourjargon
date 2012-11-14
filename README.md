@@ -1,7 +1,5 @@
 # Yourjargon [![Build Status](https://secure.travis-ci.org/oc-emberjs/yourjargon.png?branch=develop)](http://travis-ci.org/oc-emberjs/yourjargon)
 
-# Yourjargon - A Private Maintainable Glossary
-
 This web application shows the power of Rails and [EmberJS](http://emberjs.com) to provide a powerful client side experience.  The front end is done completely in ember, including url routing.  Rails handles the asset compilation and serving up data to the ember app via a json api.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are used to drive out the functionality.
 
 # What Does this Web Application Do?
