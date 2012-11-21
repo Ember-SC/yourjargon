@@ -10,3 +10,6 @@ describe "Term", ->
 
   it "can return the first letter of name capitalized", ->
     expect(@term.get('firstLetter')).toBe("D")
+
+  it "fails", ->
+    expect(true).toBe(false)
