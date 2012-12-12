@@ -12,7 +12,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "cucumber": "latest"
+    "cucumber": "latest",
+    "buster":"latest"
   },
   "optionalDependencies": {}
 }

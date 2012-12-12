@@ -41,4 +41,16 @@ YJ.User.reopenClass(
       error: (data) ->
         false
 
+  exists?: (email) ->
+    $.ajax
+      url: "/users/exists"
+      data: {user {email: email} }
+      type: "POST"
+      async: false
+      dataType: 'json'
+      success: (data) ->
+        true
+      error: (data) ->
+        false
+
 )
