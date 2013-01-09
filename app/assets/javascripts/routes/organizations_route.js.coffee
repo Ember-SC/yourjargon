@@ -50,9 +50,18 @@ YJ.OrganizationsRoute = Ember.Route.extend(
   organization: Ember.Route.extend(
     route: '/:organization_id'
     #EVENTS
-    newTerm: Ember.Route.transitionTo('terms.new')
-    editTerm: Ember.Route.transitionTo('terms.edit')
-    viewTerms: Ember.Route.transitionTo('organization.show')
+    newTerm: ((controller) ->
+      controller.transitionTo('terms.new')
+    )
+#    newTerm: @transitionTo('terms.new')
+    editTerm: ((controller) ->
+      controller.transitionTo('terms.edit')
+    )
+#    editTerm: @transitionTo('terms.edit')
+    viewTerms: ((controller) ->
+      controller.transitionTo('organization.show')
+    )
+#    viewTerms: @transitionTo('organization.show')
     termCreated: ((router, event) ->
       organization = YJ.router.get('organizationController.content')
       router.transitionTo('organizations.organization.show', organization)

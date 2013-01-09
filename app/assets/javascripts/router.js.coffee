@@ -1,7 +1,7 @@
-YJ.Router = Ember.Router.extend(
-  enableLogging: true
-  location: 'hash'
-
+#YJ.Router = Ember.Router.extend(
+#  enableLogging: true
+#  location: 'hash'
+#
 #  root: Ember.Route.extend(
 #    # EVENTS
 #    newTerm: Ember.Route.transitionTo('terms.new')
@@ -58,8 +58,14 @@ YJ.Router = Ember.Router.extend(
 #
 #    terms: YJ.TermsRoute
 #  )
-)
 
+YJ.Router.reopenClass(
+  enableLogging: true
+)
 YJ.Router.map((match) ->
   match('/').to('home')
+  match('/users').to('users', (match) ->
+    match('/').to('dashboard')
+    match('/authentication').to('authentication')
+  )
 )
