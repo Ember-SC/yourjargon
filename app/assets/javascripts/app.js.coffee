@@ -3,12 +3,17 @@
 ###
 exports = this
 
+Ember.Router.reopen(
+  location: 'history'
+)
+
 exports.YJ = Em.Application.create(
 
 )
 
 YJ.store = DS.Store.create(
-  revision: 11,
+  revision: 11
+  LOG_TRANSITIONS: true
   adapter: DS.RESTAdapter.create(bulkCommit: false)
 )
 

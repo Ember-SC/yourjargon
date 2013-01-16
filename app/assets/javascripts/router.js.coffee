@@ -59,13 +59,8 @@
 #    terms: YJ.TermsRoute
 #  )
 
-YJ.Router.reopenClass(
-  enableLogging: true
-)
 YJ.Router.map((match) ->
-  match('/').to('home')
-  match('/users').to('users', (match) ->
-    match('/').to('dashboard')
-    match('/authentication').to('authentication')
-  )
-)
+  @route "home",
+    path: "/"
+
+    
