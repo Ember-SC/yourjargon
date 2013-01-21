@@ -59,8 +59,6 @@
 #    terms: YJ.TermsRoute
 #  )
 
-YJ.Router.map((match) ->
+YJ.Router.map ->
   @route "home",
     path: "/"
-
-    
