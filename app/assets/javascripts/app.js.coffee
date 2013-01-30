@@ -7,7 +7,7 @@ Ember.Router.reopen(
   location: 'history'
 )
 
-exports.YJ = Em.Application.create(
+window.YJ = Em.Application.create(
 
 )
 
