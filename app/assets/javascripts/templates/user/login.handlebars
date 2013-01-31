@@ -1,5 +1,5 @@
 <div class="well">
-<h4>Email: {{view Ember.TextField valueBinding="controller.email" placeholder="User email"}}</h4> <br />
-<h4>Password: {{view Ember.TextField valueBinding="controller.password" type="password" placeholder="User password"}}</h4> <br />
+<h4>Email: {{view Ember.TextField valueBinding="email" placeholder="User email"}}</h4> <br />
+<h4>Password: {{view Ember.TextField valueBinding="password" type="password" placeholder="User password"}}</h4> <br />
 <button {{action cancel}} class="btn"> Cancel </button>  <button {{action authenticate }} class="btn btn-primary"> Submit </button> or <a {{action toRegister}}> Sign up </a>
 </div>
