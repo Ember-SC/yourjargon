@@ -62,3 +62,5 @@
 YJ.Router.map ->
   @route "home",
     path: "/"
+  @resource "terms", ->
+    @route "index"
