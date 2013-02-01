@@ -5,6 +5,6 @@ YJ.OrganizationEditRoute = Ember.Route.extend(
    #   controller.transitionTo('index')
    # )
    setupController: (controller, model) ->
-     controller.get('applicationController').connectOutlet('organizationEdit', context)
+     controller.get('applicationController').connectOutlet('organizationEdit', model)
 
 )

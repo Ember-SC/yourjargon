@@ -22,6 +22,6 @@ YJ.UserDashboardRoute = Ember.Route.extend(
 
 
   setupController: ( (controller, model) ->
-    controller.set('content', YJ.get('currentUser'))
+    controller.setUser()
   )
 )

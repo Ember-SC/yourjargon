@@ -6,6 +6,6 @@ YJ.OrganizationsNewRoute = Ember.Route.extend(
 	  #  )
 
    setupController: (controller) ->
-   	 controller.set('content', YJ.Organization.build(YJ.get('currentUser')))
+   	 controller.setContentNewOrganization()
 
 )

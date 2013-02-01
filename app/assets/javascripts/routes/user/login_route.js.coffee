@@ -4,7 +4,7 @@ YJ.UserLoginRoute = Ember.Route.extend(
      ac = @controllerFor('application')
      console.log(ac)
      controller = @controllerFor('login')
-     controller.authenticate((result) ->
+     controller.authenticate( (result) ->
        if result
          console.log('successfully logged in')
          controller.transitionTo('user.dashboard')
