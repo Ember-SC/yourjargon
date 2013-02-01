@@ -1,0 +1,1 @@
+YJ.TermRoute = Ember.Route.extend()
