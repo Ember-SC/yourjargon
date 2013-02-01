@@ -1,6 +1,6 @@
 YJ.LoginController = Em.Controller.extend(
   email: null,
-  password: null
+  password: null,
 
   authenticate: (callback) ->
     #make a call to the server to find user with email/password
