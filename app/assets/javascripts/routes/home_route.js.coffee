@@ -12,7 +12,7 @@ YJ.HomeRoute = Ember.Route.extend(
    )
 
    logout: ((event) ->
-     this.controllerFor('user').logout()
+     @controllerFor('user').logout()
      $.removeCookie('account')
      @send('goHome')
    )
