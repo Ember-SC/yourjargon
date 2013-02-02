@@ -1,6 +1,1 @@
-YJ.HomeController = Ember.Controller.extend(
-
-  viewTerms: (->
-    @transitionTo('terms')
-  )
-)
+YJ.HomeController = Ember.Controller.extend()

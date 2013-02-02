@@ -1,14 +1,17 @@
- YJ.TermsIndexRoute = Ember.Route.extend(
-   # route: '/'
-   # #EVENTS
-   # allTerms: ((router, event) ->
-   #   # The user clicked the 'all' link in the alphabet list
-   #   router.get('termsController').set('searchLetter', null)
-   # )
-   # filterTerms: ((router, event) ->
-   #   router.get('termsController').set('searchLetter', event.context)
-   # )
+YJ.TermsIndexRoute = Ember.Route.extend(
 
-   # connectOutlets: (router) ->
-   #   router.get('applicationController').connectOutlet('terms', YJ.Term.find())
- )
+  events:
+
+    allTerms: ( ->
+      # The user clicked the 'all' link in the alphabet list
+      @controllerFor('terms').set('searchLetter', null)
+    )
+
+    filterTerms: ((event) ->
+      @controllerFor('terms').set('searchLetter', event.context)
+    )
+
+  connectOutlets: ((controller) ->
+    controller.connectOutlet('termsIndex', controller.retrieveAllTerms())
+  )
+)

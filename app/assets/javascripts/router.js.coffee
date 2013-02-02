@@ -3,6 +3,10 @@ YJ.Router.map ->
     path: "/"
   @resource "terms", ->
     @route "index"
+    @route "new"
+    @route "search"
+    @resource "term", ->
+      @route "edit"
   @resource "user", ->
   	@route "dashboard"
   	@route "login"
@@ -12,8 +16,3 @@ YJ.Router.map ->
   	@route "new"
   	@resource "organization", ->
   		@route "profile"
-  @resource "terms", ->
-  	@route "new"
-  	@route "search"
-  	@resource "term", ->
-  		@route "edit"
