@@ -7,13 +7,20 @@
   4. All conditions above are AND'd.  That is, if a search letter is specified AND the isDefined property is true, then only defined terms starting with the search letter are returned in sorted order.
 ###
 YJ.TermsController = Em.ArrayController.extend(
+  content: []
+
   # The place to hold the letter used to filter by the first letter
   searchLetter: null
-  content: []
-  sortProperties: ['name']
+#  sortProperties: ['name']
   isDefined: null
   alphabet: ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
+#  setUp: ->
+#    @set('content', YJ.Term.find())
+#    console.log('TermsIndexController#setUp')
+
+#  testMsg: ->
+#    console.log('The length of the content is ' + @get('content').length)
 
   allTerms: ((event) ->
       # The user clicked the 'all' link in the alphabet list
