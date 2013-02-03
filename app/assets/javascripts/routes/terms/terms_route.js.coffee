@@ -1,1 +1,5 @@
-YJ.TermsRoute = Ember.Route.extend()
+YJ.TermsRoute = Ember.Route.extend(
+
+  model: ->
+    YJ.Term.find()
+)
