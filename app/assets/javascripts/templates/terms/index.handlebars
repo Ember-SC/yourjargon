@@ -2,7 +2,7 @@
   <div class="row-fluid" id="bottom-scrollable">
     <div class="span6">
       <ul class="terms-list">
-        {{#each term in controller.filtered}}
+        {{#each term}}
         <li><a {{action toShow term}}> {{term.name}} </a> </li>
         {{/each}}
       </ul>
