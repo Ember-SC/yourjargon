@@ -15,6 +15,4 @@ YJ.TermsIndexRoute = Ember.Route.extend(
     controller.retrieveAllTerms()
   )
 
-  renderTemplate: ->
-    @render(controller: 'termsIndex')
 )
