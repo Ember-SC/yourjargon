@@ -11,12 +11,6 @@ YJ.HomeRoute = Ember.Route.extend(
      @transitionTo('user.login')
    )
 
-   logout: ((event) ->
-     @controllerFor('user').logout()
-     $.removeCookie('account')
-     @send('goHome')
-   )
-
    checkUser: ((event) ->
      controller = @controllerFor('application')
      cookie = $.cookie('account')
