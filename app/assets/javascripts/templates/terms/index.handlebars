@@ -4,7 +4,7 @@
       <b> {{hello}} </b>
       <ul class="terms-list">
         {{#each term in controller.content}}
-        <li><a {{action toShow term}}> {{term}} </a> </li>
+        <li><a {{action toShow term}}> {{term.name}} </a> </li>
         {{/each}}
       </ul>
     </div>
