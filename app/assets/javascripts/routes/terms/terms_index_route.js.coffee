@@ -11,7 +11,8 @@ YJ.TermsIndexRoute = Ember.Route.extend(
       @controllerFor('terms').set('searchLetter', event.context)
     )
 
-  connectOutlets: ((controller) ->
-    controller.connectOutlet('termsIndex', controller.retrieveAllTerms())
+  setupController: ((controller) ->
+    controller.retrieveAllTerms()
   )
+
 )
