@@ -1,4 +1,4 @@
-YJ.RegistrationController = Em.Controller.extend(
+YJ.SignupController = Em.Controller.extend(
   name: null
   email: null
   password: null
