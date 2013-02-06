@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row-fluid" id="bottom-scrollable">
     <div class="span6">
+      <b> {{hello}} </b>
       <ul class="terms-list">
         {{#each term in controller.content}}
         <li><a {{action toShow term}}> {{term.name}} </a> </li>
