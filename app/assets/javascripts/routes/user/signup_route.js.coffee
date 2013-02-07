@@ -2,14 +2,10 @@ YJ.UserSignupRoute = Ember.Route.extend(
  # route: '/register'
   events:
     createUser: (controller, event) ->
-      if controller.get('registrationController').register()
+      if @controllerFor('signup').signup()
         console.log('successfully created a user')
-        controller.send('toDashboard')
+        controller.transitionTo('user.dashboard')
       else
         console.log('failure to create user')
-        controller.send('toRegister')
-
-  renderTemplate: (controller) ->
-    @render(controller: 'signup')
 
 )

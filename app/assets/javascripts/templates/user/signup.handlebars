@@ -1,4 +1,4 @@
-<div class="navbar" id="registerView">
+<div class="navbar" id="signupView">
 <div class="navbar-inner">
 	<div class="container-fluid">
 		<h2> Sign up </h2>
@@ -8,7 +8,7 @@
 <div class="well">
 <h4>Name:  {{view Ember.TextField valueBinding="name" placeholder="Your name"}} </h4><br />
 <h4>Email: {{view Ember.TextField valueBinding="email" placeholder="me@example.com"}}</h4> <br />
-<h4>Password: {{view Ember.TextField valueBinding="password" type="password" placeholder="Select password"}}</h4> <br />
+<h4>Password: {{view Ember.TextField valueBinding="password" type="password" placeholder="Enter password"}}</h4> <br />
 {{#linkTo home class="btn"}}Cancel {{/linkTo}}
   <button {{action createUser}} class="btn btn-primary"> Submit </button>
   or {{#linkTo user.login}} Log in {{/linkTo}}

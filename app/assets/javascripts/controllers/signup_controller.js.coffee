@@ -3,7 +3,7 @@ YJ.SignupController = Em.Controller.extend(
   email: null
   password: null
 
-  register: ->
+  signup: ->
     #make a create call to the server for a user
     # if success set content from response and create session and return true
     # if failure return false
