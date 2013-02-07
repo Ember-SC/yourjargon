@@ -10,8 +10,10 @@ YJ.Router.map ->
   @resource "user", ->
   	@route "dashboard"
   	@route "login"
+  	@route "signup"
   	@route "registration"
   	@route "edit"
+  	@route "logout"
   @resource "organizations", ->
   	@route "new"
   	@resource "organization", ->
