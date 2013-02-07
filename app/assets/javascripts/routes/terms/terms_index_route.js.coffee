@@ -27,5 +27,7 @@ YJ.TermsIndexRoute = Ember.Route.extend(
     # These invokations silently break bindings and its a 'pita' to track down:
 #    @render(controller: 'terms')
 #    @render('terms')
+#    @render('termsIndex')
+#    @render('termsIndexController')
 
 )
