@@ -3,5 +3,6 @@ YJ.UserController = Em.ObjectController.extend(
 
   logout: ->
     YJ.set('currentUser', null)
+    $.removeCookie('account')
 
 )
