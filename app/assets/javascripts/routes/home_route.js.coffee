@@ -7,9 +7,6 @@ YJ.HomeRoute = Ember.Route.extend(
    viewTerms: ( ->
    	 @transitionTo('terms.index')
    )
-   toLogin: ( ->
-     @transitionTo('user.login')
-   )
 
    checkUser: ((event) ->
      controller = @controllerFor('application')
