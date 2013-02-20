@@ -5,8 +5,8 @@ YJ.Router.map ->
     @route "index"
     @route "new"
     @route "search"
-    @resource "term", ->
-      @route "edit"
+    @route "show"
+    @route "edit"
   @resource "user", ->
   	@route "dashboard"
   	@route "login"

@@ -2,6 +2,10 @@ YJ.TermsIndexRoute = Ember.Route.extend(
 
   events:
 
+    toShow: ((controller, event) ->
+      @controller.transitionTo('term.show', event.context)
+    )
+
     allTerms: ( ->
       # The user clicked the 'all' link in the alphabet list
       @controllerFor('terms').set('searchLetter', null)
