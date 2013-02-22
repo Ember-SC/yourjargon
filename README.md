@@ -1,6 +1,6 @@
 # Yourjargon [![Build Status](https://secure.travis-ci.org/OC-Emberjs/yourjargon.png?branch=develop)](https://travis-ci.org/OC-Emberjs/yourjargon)
 
-This web application shows the power of Rails and [EmberJS](http://emberjs.com) to provide a powerful client side experience.  The front end is done completely in ember, including url routing.  Rails handles the asset compilation and serving up data to the ember app via a json api.  Advanced BDD and TDD test tools such as Cucumber and Jasmine are used to drive out the functionality.
+This web application shows the power of Rails and [EmberJS](http://emberjs.com) to provide a powerful client side experience.  The front end is done completely in ember, including url routing.  Rails handles the asset compilation and serving up data to the ember app via a json api.  Advanced BDD and TDD test tools such as (future) Cucumber and (presently) Jasmine are used to drive out the functionality.
 
 # What Does this Web Application Do?
 
@@ -30,18 +30,18 @@ See the wiki to get your machine setup:
 
 ### Setup
 
-	- git clone git@github.com:OC-Emberjs/yourjargon.git
-	- cd yourjargon
-	- bundle install
-	- rake db:migrate
+  - git clone git@github.com:OC-Emberjs/yourjargon.git
+  - cd yourjargon
+  - bundle install
+  - rake db:migrate
 
 ### Running Rails Tests
 
-		rake
+    rake
 
 ### Starting Rails
 
-		rails s
+    rails s
 
 ### Running the Web Application
 
@@ -56,15 +56,15 @@ Go to your browser at localhost:3000:
 
 In your project home directory:
 
-		bundle exec guard
+    bundle exec guard
 
 Observe the test report. *NOTE: this is set up so that every time you save a javascript file,
 all the client tests are run again.*
 
 ### Method 2
 
-go to url: localhost:3000/jasmine
-[Browse](http://localhost:3000/jasmine)
+    go to url: localhost:3000/jasmine
+    [Browse](http://localhost:3000/jasmine)
 
 This will show a **Jasmine** dashboard in which you can run tests and see results.
 
@@ -72,9 +72,9 @@ This will show a **Jasmine** dashboard in which you can run tests and see result
 
 We'd love contributions.  Submit a pull request by following the instructions below!
 
-		1. Fork it
-		2. Create your feature branch (git checkout -b my-new-feature)
-		3. Commit your changes (git commit -am 'Added some feature')
-		4. Push to the branch (git push origin my-new-feature)
-		5. Create new Pull Request
+    1. Fork it
+    2. Create your feature branch (git checkout -b my-new-feature)
+    3. Commit your changes (git commit -am 'Added some feature')
+    4. Push to the branch (git push origin my-new-feature)
+    5. Create new Pull Request
 

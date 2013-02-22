@@ -14,7 +14,7 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'barber', :git => 'git://github.com/darthdeus/barber.git', :branch => 'update-handlebars-to-rc3'
+
 end
 
 gem 'jquery-rails'
