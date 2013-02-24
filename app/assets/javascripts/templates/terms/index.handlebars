@@ -4,7 +4,7 @@
       <b> {{hello}} </b>
       <ul class="terms-list">
         {{#each term in controller.content}}
-        <li>{{#linkTo 'term.show'}} {{term.name}} {{/linkTo}} </li>
+        <li>{{#linkTo terms.show term.id}} {{term.name}} {{/linkTo}} </li>
         {{/each}}
       </ul>
     </div>
