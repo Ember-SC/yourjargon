@@ -1,22 +1,21 @@
 YJ.Router.map ->
   @route "home",
     path: "/"
-  @resource 'terms',
-    path: '/term/:id'
-  , ->
+  @resource 'terms', ->
     @route "index"
     @route "new"
     @route "search"
-    @route "show"
+    @route "show",
+      path: '/:term_id'
     @route "edit"
   @resource "user", ->
-  	@route "dashboard"
-  	@route "login"
-  	@route "signup"
-  	@route "registration"
-  	@route "edit"
-  	@route "logout"
+    @route "dashboard"
+    @route "login"
+    @route "signup"
+    @route "registration"
+    @route "edit"
+    @route "logout"
   @resource "organizations", ->
-  	@route "new"
-  	@resource "organization", ->
-  		@route "profile"
+    @route "new"
+    @resource "organization", ->
+      @route "profile"

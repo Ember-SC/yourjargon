@@ -1,8 +1,7 @@
 YJ.TermsShowRoute = Ember.Route.extend(
-#  back: ((router) ->
-#    router.send('termCreated')
-#  )
+  events:
+    back: ( ->
+      @send('terms.index')
+    )
 
-#  connectOutlets: (router, term) ->
-#     router.get('applicationController').connectOutlet('term', term)
 )
