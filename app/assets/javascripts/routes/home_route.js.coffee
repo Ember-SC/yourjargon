@@ -25,9 +25,9 @@ YJ.HomeRoute = Ember.Route.extend(
        	me.transitionTo('home')
    )
 
- enter: () ->
-   me = @
-   Ember.run.next ->
-     me.send('checkUser')
+ # activate: () ->
+ #   me = @
+ #   Ember.run.next ->
+ #     me.send('checkUser')
 
 )
