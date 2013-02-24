@@ -2,10 +2,11 @@ YJ.LoginController = Em.Controller.extend(
   email: null,
   password: null,
 
-  authenticate: (callback) ->
+  login: (callback) ->
     #make a call to the server to find user with email/password
     # if success set content from response and create session and return true
     # if failure return false
+    console.log("Logging in")
     self = @
     $.ajax
       type: 'POST'
@@ -21,6 +22,7 @@ YJ.LoginController = Em.Controller.extend(
         callback(true)
 
       error: (error) ->
+        console.log("Fail")
         self.set('password', null)
         callback(false)
 
