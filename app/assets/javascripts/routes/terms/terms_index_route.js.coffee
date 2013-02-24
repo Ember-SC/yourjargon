@@ -2,8 +2,8 @@ YJ.TermsIndexRoute = Ember.Route.extend(
 
   events:
 
-    toShow: ((controller, event) ->
-      @controller.transitionTo('term.show', event.context)
+    toShow: ((term) ->
+      @transitionTo('terms.show', term)
     )
 
     allTerms: ( ->
@@ -18,6 +18,9 @@ YJ.TermsIndexRoute = Ember.Route.extend(
   setupController: ((controller) ->
     controller.retrieveAllTerms()
   )
+
+  activate: ->
+    @send('checkUser')
 
   # This method isn't necessary at all because it's covered by the naming convention,
   # but if you get it wrong, it's a 'pita' to figure out.
