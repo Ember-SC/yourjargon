@@ -1,4 +1,4 @@
- YJ.TermsNewRoute = Ember.Route.extend(
+ YJ.TermNewRoute = Ember.Route.extend(
    # route: '/new'
    # #EVENTS
    # addTerm: ((router) ->

@@ -2,7 +2,7 @@ YJ.HomeRoute = Ember.Route.extend(
 
  events:
    newTerm: ( ->
-   	@transitionTo('terms.new')
+   	@transitionTo('term.new')
    )
    viewTerms: ( ->
    	 @transitionTo('terms.index')

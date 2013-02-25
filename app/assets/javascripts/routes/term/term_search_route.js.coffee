@@ -1,4 +1,4 @@
- YJ.TermsSearchRoute = Ember.Route.extend(
+ YJ.TermSearchRoute = Ember.Route.extend(
    # route: '/search'
    # #EVENTS
    # filterTerms: ((router, event) ->
