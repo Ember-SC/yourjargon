@@ -3,7 +3,7 @@ YJ.TermsIndexRoute = Ember.Route.extend(
   events:
 
     toShow: ((term) ->
-      @transitionTo('term.show', term)
+      @transitionTo('term', term)
     )
 
     allTerms: ( ->

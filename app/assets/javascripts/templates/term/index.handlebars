@@ -1,5 +1,6 @@
 <div id="termView" class='well'>
-    <h2>{{name}}<button {{action editTerm controller.content }} class='btn btn-mini'> Edit </button></h2>
+    {{ log controller.model }}
+    <h2>{{name}}<button {{action editTerm content }} class='btn btn-mini'> Edit </button></h2>
 
     <pre>{{description}}</pre>
 

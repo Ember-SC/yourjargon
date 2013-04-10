@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require support/handlebars
-//= require support/ember-1.0.0-rc.1
+//= require support/ember
 //= require support/ember-data
 //= require support/jquery.cookie
 //= require app
