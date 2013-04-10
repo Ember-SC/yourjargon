@@ -6,7 +6,7 @@
   3. If property 'isDefined' is specified as true or false, then filters by whether a definition for the term exists or not.  true will return only defined terems; false will return only undefined terms.  null returns all terms, both defined and undefined.
   4. All conditions above are AND'd.  That is, if a search letter is specified AND the isDefined property is true, then only defined terms starting with the search letter are returned in sorted order.
 ###
-YJ.TermsController = Em.ArrayController.extend(
+YJ.TermsIndexController = Ember.ArrayController.extend(
   # The place to hold the letter used to filter by the first letter
   searchLetter: null
   content: []
@@ -14,14 +14,16 @@ YJ.TermsController = Em.ArrayController.extend(
   isDefined: null
   alphabet: ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
+  retrieveAllTerms: ->
+    @set('content', YJ.Term.find())
 
   allTerms: ((event) ->
-      # The user clicked the 'all' link in the alphabet list
-      @set('searchLetter', null)
+    # The user clicked the 'all' link in the alphabet list
+    @set('searchLetter', null)
   )
   
   filterTerms: ((event) ->
-      @set('searchLetter', event.context)
+    @set('searchLetter', event.context)
   )
 
   filtered: (->
@@ -41,10 +43,9 @@ YJ.TermsController = Em.ArrayController.extend(
   ).property('searchLetter','@each.isDefined')
 
   filterSearchLetter: (item) ->
-
-    item.get('firstLetter') == @get('searchLetter')
+     item.get('firstLetter') == @get('searchLetter')
 
   filterIsDefined: (item) ->
-    item.get('isDefined') == @get('isDefined')
+     item.get('isDefined') == @get('isDefined')
 
 )
