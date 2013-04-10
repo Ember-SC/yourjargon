@@ -1,3 +1,1 @@
-YJ.ApplicationController = Ember.Controller.extend(
-
-)
+YJ.ApplicationController = Ember.Controller.extend()
