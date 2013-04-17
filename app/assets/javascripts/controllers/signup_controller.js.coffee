@@ -1,4 +1,4 @@
-YJ.SignupController = Em.Controller.extend(
+YJ.UserSignupController = Em.Controller.extend(
   name: null
   email: null
   password: null
@@ -7,23 +7,29 @@ YJ.SignupController = Em.Controller.extend(
     #make a create call to the server for a user
     # if success set content from response and create session and return true
     # if failure return false
+    console.log(JSON.stringify({name: @get('name'), email: @get('email'), password: @get('password')}))
     self = @
-    $.ajax
+    signup = $.ajax
       type: 'POST'
       url: "/users"
       data: {user: {name: @get('name'), email: @get('email'), password: @get('password')}}
       dataType: 'json'
-      success: (data) ->
-        loaded = YJ.store.load(YJ.User, data.user)
-        YJ.set('currentUser', YJ.User.find(loaded.id))
-        $.cookie('account', data.api_key)
-        self.clearProperties()
-        return true
 
-      failure: ->
-        return false
+    signup.then ( (data) ->
+      loaded = YJ.store.load(YJ.User, data.user)
+      YJ.set('currentUser', YJ.User.find(loaded.id))
+      Ember.$.cookie('account', data.api_key)
+      self.clearFields()
+      self.transitionToRoute('user.dashboard')
+    ), ->
+      self.set('password', null)
+      alert = YJ.Alert.create(
+        message: "Woops.  An error occured signing up.",
+        type: 'error'
+      )
+      self.send('alert', alert)
 
-  clearProperties: ->
+  clearFields: ->
     @set('email', null)
     @set('name', null)
     @set('password', null)

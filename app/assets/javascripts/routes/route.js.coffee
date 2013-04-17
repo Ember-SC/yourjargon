@@ -12,7 +12,10 @@ Ember.Route.reopen(
       #       me.transitionTo('user.dashboard')
       #     else
       #       $.removeCookie('account')
-      #       me.transitionTo('home')
+      #       me.transitionTo('user.dashboard')
       #   else
       #     me.transitionTo('home')
+    alert: (alert) ->
+      @controllerFor('application').set('alert', alert)
+      
 )
