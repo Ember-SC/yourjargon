@@ -15,4 +15,10 @@ Ember.Route.reopen(
       #       me.transitionTo('home')
       #   else
       #     me.transitionTo('home')
+
+    toSearch: ((event) ->
+      searchTerm = YJ.get('searchTerm').term
+      console.log("Search is " + searchTerm)
+      @transitionTo('terms.search', searchTerm)
+    )
 )
