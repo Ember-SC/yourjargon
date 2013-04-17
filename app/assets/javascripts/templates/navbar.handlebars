@@ -1,15 +1,15 @@
 <div class="navbar">
   <div class="navbar-inner">
     <div class="container-fluid">
-      {{#linkTo home class="brand"}} YourJargon {{/linkTo}}
+      {{#linkTo terms class="brand"}} YourJargon {{/linkTo}}
 
       <form class="navbar-search pull-left">
          {{view Ember.TextField valueBinding="YJ.searchTerm.term"}}
       </form>
 
       <ul class="nav pull-left">
-        <li> <button {{action toSearch }} class="btn"> Search </button></li>
-        <li> <button {{action newTerm}} class="btn"> New Term </button></li>
+        <li> <button {{action toSearch}} class="btn"> Search </button></li>
+        <li> <button {{action newTerm target="controller"}} class="btn"> New Term </button></li>
       </ul>
       <ul class="nav pull-right">
         {{#if YJ.currentUser.id}}

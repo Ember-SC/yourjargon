@@ -1,3 +1,1 @@
-YJ.NavbarController = Ember.Controller.extend(
-
-)
+YJ.NavbarController = Ember.ObjectController.extend()
