@@ -12,7 +12,7 @@ Ember.Route.reopen(
       #       me.transitionTo('user.dashboard')
       #     else
       #       $.removeCookie('account')
-      #       me.transitionTo('home')
+      #       me.transitionTo('user.dashboard')
       #   else
       #     me.transitionTo('home')
 
@@ -21,4 +21,7 @@ Ember.Route.reopen(
       console.log("Search is " + searchTerm)
       @transitionTo('terms.search', searchTerm)
     )
+
+    alert: (alert) ->
+      @controllerFor('application').set('alert', alert)
 )
