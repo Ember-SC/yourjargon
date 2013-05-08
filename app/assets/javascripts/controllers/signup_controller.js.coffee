@@ -24,7 +24,7 @@ YJ.UserSignupController = Em.Controller.extend(
     ), ->
       self.set('password', null)
       alert = YJ.Alert.create(
-        message: "Woops.  An error occured signing up.",
+        message: "Whoops! An error occured while signing up.",
         type: 'error'
       )
       self.send('alert', alert)
