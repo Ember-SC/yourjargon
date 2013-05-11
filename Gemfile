@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+ruby "1.9.3"
+
+gem 'rails', '~> 3.2.11'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -12,15 +14,16 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
+
 end
 
 gem 'jquery-rails'
 gem 'ember-rails'
-gem "active_model_serializers", :git => "git://github.com/josevalim/active_model_serializers.git"
+gem "active_model_serializers"
 gem 'foreman'
 gem 'thin'
 gem 'bcrypt-ruby', :require => 'bcrypt'
-gem 'bootstrap-sass', '~> 2.0.2'
+gem 'bootstrap-sass', '~> 2.1.0.0'
 
 group :production do
   gem 'pg'
@@ -44,7 +47,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'jasmine'
-  gem 'jasminerice'
-  gem 'guard-jasmine'
+  gem 'konacha', git: 'git@github.com:OC-Emberjs/konacha.git', branch: 'qunit'
+  gem 'awesome_print'
+  gem 'rb-fsevent', '~> 0.9.1'
 end

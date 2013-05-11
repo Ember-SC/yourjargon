@@ -1,11 +1,15 @@
-{{view YJ.NavbarView}}
 <div class="container-fluid">
   <div class="row-fluid" id="bottom-scrollable">
     <div class="span6">
-      {{view YJ.ListTermsView action="update"}}
+      <b> {{hello}} </b>
+      <ul class="terms-list">
+        {{#each term in controller.content}}
+        <li><a {{action toShow term}} href=false > {{term.name}} </a> </li>
+        {{/each}}
+      </ul>
     </div>
     <div class="span6">
-      {{view YJ.AlphabetView}}
+      {{view YJ.AlphabetView }}
     </div>
   </div>
 </div>

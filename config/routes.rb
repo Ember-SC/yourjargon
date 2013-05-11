@@ -1,18 +1,19 @@
 Yourjargon::Application.routes.draw do
   resources :terms
-
+  resources :organizations
+  resources :memberships
+  resources :users
   resources :home
 
-  match 'users/create' => 'users#create'
-  match 'sessions/create' => 'sessions#create'
+  match 'sessions' => 'sessions#create'
   match 'sessions/destroy' => 'sessions#destroy'
+
+  root :to => 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  if ["development", "test"].include? Rails.env
-    mount Jasminerice::Engine => "/jasmine"
-  end
+  match '*path', :to => 'home#index'
 
 
 
@@ -62,7 +63,7 @@ Yourjargon::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  
 
   # See how all your routes lay out with "rake routes"
 

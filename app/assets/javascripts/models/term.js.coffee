@@ -4,48 +4,31 @@
   The object holding the information about a term.
   A term can be copied and be modified
 ###
-YJ.Term = DS.Model.extend(Em.Copyable,
-    ###
-      The term acronym, word, or phrase to look up
-    ###
-    term: DS.attr('string')
+YJ.Term = DS.Model.extend(
+  ###
+    The term acronym, word, or phrase to look up
+  ###
+  name: DS.attr('string')
 
-    ###
-      The definition for the term
-    ###
-    description: DS.attr('string')
+  ###
+    The definition for the term
+  ###
+  description: DS.attr('string')
 
-    ###
-      Indicates that Ember can make copies of this object
-    ###
-    copyable: true
+  organization: DS.belongsTo("YJ.Organization")
 
-    # Normal usage: 'Ember.copy(aTerm, false)'
-    copy: ->
-      YJ.store.createRecord(YJ.Term,
-          {term: this.get('term')
-          description: this.get('description')}
-      )
+  isDefined: (->
+    des = @get('description')
+    des != undefined && des != null
+  ).property('description')
 
-    ###
-      Returns truthy if the term has content else returns falsy
-    ###
-    hasContent: (->
-      myTerm = @get("term")
-      return myTerm != null and myTerm.length > 0
-    ).property("term")
-
-    ###
-      When sorting, sort by the term
-    ###
-    sortValue: (->
-      return @get("term")
-    ).property("term")
-
-    ###
-      Returns the first letter for use by the alphabet filter
-    ###
-    firstLetter: (->
-      return @get('term').charAt(0).toUpperCase()
-    ).property('term')
+  ###
+    Returns the first letter for use by the alphabet filter
+  ###
+  firstLetter: (->
+    if @get('name') == undefined || @get('name') == null
+      ""
+    else
+      @get('name').charAt(0).toUpperCase()
+  ).property('name')
 )

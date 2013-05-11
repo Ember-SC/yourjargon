@@ -1,0 +1,18 @@
+<h2>My Dashboard</h2>
+<div class="well">
+    <h4>Your Organizations
+    <button {{action createOrg}} class="btn"> Create Organization </button>&nbsp;&nbsp;
+    <button {{action toOrganizations}} class="btn"> Join Organization </button>
+    </h4>
+    <div class="container-fluid">
+        <div class="row-fluid" id="bottom-scrollable">
+            <div class="span6">
+                <ul class="orgs-list">
+                    {{#each organization in content.organizations}}
+                        <li><a {{action toOrg organization}}> {{organization.name}} </a> </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

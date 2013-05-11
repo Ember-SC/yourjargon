@@ -1,0 +1,9 @@
+<div id="newTermView" class="well">
+	<h3>Term: {{view Ember.TextField valueBinding="controller.name"}}</h3>
+	<br>
+	<h3>Definition: {{view Ember.TextArea valueBinding="controller.description"}}</h3>
+	<div class="btn-group">
+		<button {{bindAttr class="disabled"}} {{bindAttr disabled="isDisabled"}} {{action addTerm }} > Submit </button>
+		<button {{action cancel }}> Cancel </button>
+	</div>
+</div>

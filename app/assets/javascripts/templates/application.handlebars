@@ -1,0 +1,10 @@
+{{view YJ.NavbarView}}
+<div class="container-fluid">
+  {{#if alert}}
+	<div class="alert alert-{{unbound alert.type}}">
+	  {{alert.message}} <a class="close" {{action clearAlert target="controller"}}>&times;</a>
+	</div>
+  {{/if}}
+  {{outlet}}
+</div>
+{{view YJ.Footer}}

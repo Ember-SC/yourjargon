@@ -1,0 +1,8 @@
+rvm:
+  - "1.9.3"
+
+script: 'bundle exec guard-jasmine'
+
+branches:
+  only:
+    - develop

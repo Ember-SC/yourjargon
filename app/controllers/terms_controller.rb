@@ -4,6 +4,8 @@ class TermsController < ApplicationController
   def index
     if ids = params[:ids]
       @terms = Term.where(:id => ids)
+    elsif params[:search]
+      @terms = Term.where("name like ?", "%#{params[:search]}%")
     else
       @terms = Term.all
     end
@@ -16,10 +18,7 @@ class TermsController < ApplicationController
   def show
     @term = Term.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @term }
-    end
+    respond_with @term
   end
 
   # GET /terms/new
