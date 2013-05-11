@@ -52,6 +52,8 @@ Go to your browser at localhost:3000:
 
 ## Running the Tests
 
+_NOTE: Tests are not running at the moment._
+
 ### Method 1
 
 In console at your project home directory:
@@ -64,7 +66,7 @@ all the client tests are run again.*
 ### Method 2
 
 1. Launch server
-2. [Browse http://localhost:5000](http://localhost:3000/jasmine)
+2. [Browse http://localhost:5000](http://localhost:5000/jasmine)
 
 This will show a **Jasmine** dashboard in which you can run tests and see results.
 
