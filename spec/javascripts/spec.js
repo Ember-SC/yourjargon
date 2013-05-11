@@ -9,6 +9,18 @@
 //
 
 //= require support/sinon
-//= require application_test
-//= require_tree ./
+// Copying over application
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
+//= require support/handlebars
+//= require support/ember
+//= require support/ember-data
+//= require support/jquery.cookie
+//= require support/before_app
+//= require app
+//= require app_config
+//= require router
+// End application
+//= require support/setup
 
