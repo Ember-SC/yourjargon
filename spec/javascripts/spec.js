@@ -7,9 +7,7 @@
 // Date: 1/21/12
 // Time: 11:36 PM
 //
-//= require support/jasmine-ajax
-//= require support/jasmine-ajax-mock
-//= require support/jasmine-signon
+
 //= require support/sinon
 //= require application_test
 //= require_tree ./

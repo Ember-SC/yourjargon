@@ -13,10 +13,6 @@ Yourjargon::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  if ["development", "test"].include? Rails.env
-    mount Jasminerice::Engine => "/jasmine"
-  end
-
   match '*path', :to => 'home#index'
 
 

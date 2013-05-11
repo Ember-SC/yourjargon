@@ -47,9 +47,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'jasmine', '~> 1.2.0'
-  gem 'jasminerice'
-  gem 'guard-jasmine'
+  gem 'konacha', git: 'git@github.com:OC-Emberjs/konacha.git', branch: 'qunit'
   gem 'awesome_print'
   gem 'rb-fsevent', '~> 0.9.1'
 end
