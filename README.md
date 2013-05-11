@@ -54,7 +54,7 @@ Go to your browser at localhost:3000:
 
 ### Method 1
 
-In your project home directory:
+In console at your project home directory:
 
     bundle exec guard
 
@@ -63,8 +63,8 @@ all the client tests are run again.*
 
 ### Method 2
 
-    go to url: localhost:3000/jasmine
-    [Browse](http://localhost:3000/jasmine)
+1. Launch server
+2. [Browse http://localhost:5000](http://localhost:3000/jasmine)
 
 This will show a **Jasmine** dashboard in which you can run tests and see results.
 
@@ -72,9 +72,9 @@ This will show a **Jasmine** dashboard in which you can run tests and see result
 
 We'd love contributions.  Submit a pull request by following the instructions below!
 
-    1. Fork it
-    2. Create your feature branch (git checkout -b my-new-feature)
-    3. Commit your changes (git commit -am 'Added some feature')
-    4. Push to the branch (git push origin my-new-feature)
-    5. Create new Pull Request
+1. Fork it
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Added some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create new Pull Request
 
