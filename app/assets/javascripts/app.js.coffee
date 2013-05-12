@@ -1,24 +1,19 @@
 ###
   The creation of the Your Jargon ('YJ') namespace
 ###
-exports = this
+Ember.Router.reopen(
+  location: 'history'
+)
 
-exports.YJ = Em.Application.create(
-
-  ready: ->
-    @initialize()
-    #@set('currentUser', YJ.createUser("dummy", "dummy@example.com")) # Stub current user until we get auth done.
+window.YJ = Em.Application.create(
+  LOG_TRANSITIONS: true
 
 )
 
 YJ.store = DS.Store.create(
-  revision: 4,
+  revision: 12
   adapter: DS.RESTAdapter.create(bulkCommit: false)
 )
-
-
-
-YJ.initialize()
 
 YJ.reopen(
   createUser: (name, email) ->

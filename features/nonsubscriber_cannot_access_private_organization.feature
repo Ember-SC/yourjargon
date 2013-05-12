@@ -1,0 +1,1 @@
+Feature: Nonsubscriber cannot access private organization 

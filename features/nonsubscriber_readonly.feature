@@ -1,0 +1,1 @@
+Feature: nonsubscriber is read-only in public organization 
