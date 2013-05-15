@@ -47,7 +47,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'konacha', git: 'git@github.com:OC-Emberjs/konacha.git', branch: 'qunit'
+  gem 'konacha', git: 'git@github.com:Ember-SC/konacha.git', branch: 'qunit'
   gem 'awesome_print'
   gem 'rb-fsevent', '~> 0.9.1'
 end

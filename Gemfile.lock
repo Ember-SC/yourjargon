@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:OC-Emberjs/konacha.git
+  remote: git@github.com:Ember-SC/konacha.git
   revision: fd6903e9a3a1f9437ec67643363bdbf92cdf24ae
   branch: qunit
   specs:
