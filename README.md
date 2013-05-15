@@ -52,13 +52,16 @@ Go to your browser at localhost:3000:
 
 ## Running the Tests
 
-_NOTE: Tests are not running at the moment._
+_NOTE: Tests are not running at the moment; we're in the process of converting them
+from Jasmine to Konacha/QUnit._
 
 ### Method 1
 
 In console at your project home directory:
 
-    bundle exec guard
+    rake konacha:serve
+
+Then browse [localhost:3500](localhost:3500)
 
 Observe the test report. *NOTE: this is set up so that every time you save a javascript file,
 all the client tests are run again.*
