@@ -8,8 +8,8 @@
 
 YJ.Organization = DS.Model.extend(
   name: DS.attr("string")
-  memberships: DS.hasMany("YJ.Membership", embedded: true)
-  terms: DS.hasMany("YJ.Term", embedded: true)
+  memberships: DS.hasMany("YJ.Membership")
+  terms: DS.hasMany("YJ.Term")
 
   ownership: (->
     membership = @get('memberships').findProperty('isOwner', true)
@@ -19,8 +19,7 @@ YJ.Organization = DS.Model.extend(
   isPublic: DS.attr("boolean", defaultValue: false)
 
   membershipForUser: (user) ->
-    membership = @get('memberships').findProperty('user', user)
-    membership
+    @get('memberships').findProperty('user', user)
 
   isCurrentUserMember: ( ->
     currentUser = YJ.get('currentUser')

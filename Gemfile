@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+ruby "1.9.3"
+
+gem 'rails', '~> 3.2.11'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -12,6 +14,7 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
+
 end
 
 gem 'jquery-rails'
@@ -44,9 +47,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'jasmine', '~> 1.2.0'
-  gem 'jasminerice'
-  gem 'guard-jasmine'
+  gem 'konacha', git: 'git@github.com:OC-Emberjs/konacha.git', branch: 'qunit'
   gem 'awesome_print'
   gem 'rb-fsevent', '~> 0.9.1'
 end
