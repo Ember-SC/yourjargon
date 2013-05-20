@@ -27,5 +27,5 @@ YJ.reopen(
     YJ.User.createRecord(name: name, email: email)
 )
 
-YJ.searchTerm = Em.Object.create(term: null)
+YJ.searchPhrase = ''
 
