@@ -1,4 +1,4 @@
-class TermsController < ApplicationController
+class Api::TermsController < ApplicationController
   respond_to :json
 
   def index

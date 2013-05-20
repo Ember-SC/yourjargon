@@ -9,7 +9,7 @@ YJ.UserLoginController = Em.Controller.extend(
     self = @
     login = Ember.$.ajax
       type: 'POST'
-      url: '/sessions'
+      url: '/api/sessions'
       data: {email: @get('email'), password: @get('password')}
       dataType: 'json'
 

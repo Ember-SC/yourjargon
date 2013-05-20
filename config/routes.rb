@@ -1,19 +1,22 @@
 Yourjargon::Application.routes.draw do
-  resources :terms
-  resources :organizations
-  resources :memberships
-  resources :users
-  resources :home
+  namespace :api, defaults: { format: 'json' } do
+    resources :terms
+    resources :organizations
+    resources :memberships
+    resources :users
+    match 'sessions' => 'sessions#create'
+    match 'sessions/destroy' => 'sessions#destroy'
+  end
 
-  match 'sessions' => 'sessions#create'
-  match 'sessions/destroy' => 'sessions#destroy'
+
+
 
   root :to => 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  match '*path', :to => 'home#index'
+  match '/*path', :to => 'home#index'
 
 
 
