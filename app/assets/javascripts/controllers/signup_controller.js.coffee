@@ -11,7 +11,7 @@ YJ.UserSignupController = Em.Controller.extend(
     self = @
     signup = $.ajax
       type: 'POST'
-      url: "/users"
+      url: "/api/users"
       data: {user: {name: @get('name'), email: @get('email'), password: @get('password')}}
       dataType: 'json'
 
