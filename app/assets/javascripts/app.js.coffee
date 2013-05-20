@@ -12,7 +12,7 @@ window.YJ = Em.Application.create(
 
 YJ.store = DS.Store.create(
   revision: 12
-  adapter: DS.RESTAdapter.create(bulkCommit: false)
+  adapter: DS.RESTAdapter.create(bulkCommit: false, namespace: 'api')
 )
 
 YJ.reopen(
