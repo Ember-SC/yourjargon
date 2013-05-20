@@ -1,8 +1,15 @@
 ###
   The creation of the Your Jargon ('YJ') namespace
 ###
+
 Ember.Router.reopen(
-  location: 'history'
+  location:  Ember.computed ->
+  	history = window.history
+  	if ( history && "pushState" in history && "replaceState" in history )
+  		"history"
+  	else
+  		"hash"
+  .property()
 )
 
 window.YJ = Em.Application.create(
