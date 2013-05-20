@@ -1,10 +1,10 @@
-###
-  The creation of the Your Jargon ('YJ') namespace
-###
 Ember.Router.reopen(
   location: 'history'
 )
 
+###
+  The creation of the Your Jargon ('YJ') namespace
+###
 window.YJ = Em.Application.create(
   LOG_TRANSITIONS: true
 
