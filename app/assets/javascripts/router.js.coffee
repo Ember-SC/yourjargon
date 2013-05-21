@@ -15,6 +15,8 @@ YJ.Router.map ->
     @route "logout"
   @resource "organizations", ->
     @route "new"
-    @resource "organization", ->
+    @resource "organization"
+      path: '/:organization_id'
+    , ->
       @route "profile"
   @route "notFound", path: "/*path"

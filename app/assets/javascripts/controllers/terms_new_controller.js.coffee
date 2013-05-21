@@ -1,5 +1,6 @@
-YJ.NewTermController = Ember.Controller.extend(
-  organizationBinding: 'YJ.router.organizationController.content'
+YJ.TermsNewController = Ember.Controller.extend(
+  needs: ['organization']
+  organizationBinding: 'controllers.organization.content'
   name: null
   description: null
 

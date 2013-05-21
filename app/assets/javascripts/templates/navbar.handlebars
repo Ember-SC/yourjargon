@@ -9,10 +9,12 @@
 
       <ul class="nav pull-left">
         <li> <button {{action toSearch}} class="btn"> Search </button></li>
+        {{#if YJ.currentUser}}
         <li> <button {{action newTerm target="controller"}} class="btn"> New Term </button></li>
+        {{/if}}
       </ul>
       <ul class="nav pull-right">
-        {{#if YJ.currentUser.id}}
+        {{#if YJ.currentUser}}
         <li>
           <ul class="nav">
             <li class="dropdown">
