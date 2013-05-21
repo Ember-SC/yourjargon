@@ -17,3 +17,4 @@ YJ.Router.map ->
     @route "new"
     @resource "organization", ->
       @route "profile"
+  @route "notFound", path: "/*path"
