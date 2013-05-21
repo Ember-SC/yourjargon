@@ -5,7 +5,7 @@
 Ember.Router.reopen(
   location:  Ember.computed ->
   	history = window.history
-  	if ( history && "pushState" in history && "replaceState" in history )
+  	if ( history && "pushState" of history )
   		"history"
   	else
   		"hash"
