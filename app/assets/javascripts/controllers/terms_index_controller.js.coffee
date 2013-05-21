@@ -9,6 +9,7 @@
 YJ.TermsIndexController = Ember.ArrayController.extend(
   # The place to hold the letter used to filter by the first letter
   searchLetter: null
+  searchPhrase: null
   content: []
   sortProperties: ['name']
   isDefined: null
@@ -27,16 +28,17 @@ YJ.TermsIndexController = Ember.ArrayController.extend(
   )
 
   filtered: (->
-    noSearch = @get('searchLetter') is null
+    noSearchLetter = @get('searchLetter') is null
     noDefined = @get('isDefined') is null
+    #noSearchPhrase = @get('searchPhrase') is null
     arranged = @get('arrangedContent')
     myself = @
     arranged.filter (item, index, arranged) ->
-      if noSearch && noDefined
+      if noSearchLetter && noDefined
         true
-      else if !noSearch && noDefined
+      else if !noSearchLetter && noDefined
         myself.filterSearchLetter(item)
-      else if noSearch && !noDefined
+      else if noSearchLetter && !noDefined
         myself.filterIsDefined(item)
       else
         myself.filterIsDefined(item) && myself.filterSearchLetter(item)
@@ -48,4 +50,6 @@ YJ.TermsIndexController = Ember.ArrayController.extend(
   filterIsDefined: (item) ->
      item.get('isDefined') == @get('isDefined')
 
+  computeSearchResults: ->
+    @set('content', YJ.Term.find({search: @get('searchPhrase')}))
 )

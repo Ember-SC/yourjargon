@@ -3,9 +3,7 @@ YJ.Router.map ->
     path: "/"
   @resource 'terms', ->
     @route "index"
-    @route "search",
-      path: '/search/:search_term'
-    @resource 'term', ->
+    @resource 'term'
       path: '/:term_id'
     , ->
       @route "new"

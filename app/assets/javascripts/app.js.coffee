@@ -1,5 +1,11 @@
 Ember.Router.reopen(
-  location: 'history'
+  location:  Ember.computed ->
+  	history = window.history
+  	if ( history && "pushState" in history && "replaceState" in history )
+  		"history"
+  	else
+  		"hash"
+  .property()
 )
 
 ###
@@ -20,5 +26,4 @@ YJ.reopen(
     YJ.User.createRecord(name: name, email: email)
 )
 
-YJ.searchTerm = Em.Object.create(term: null)
-
+YJ.searchPhrase = ''
