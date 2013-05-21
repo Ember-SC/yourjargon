@@ -5,7 +5,7 @@
 Ember.Router.reopen(
   location:  Ember.computed ->
   	history = window.history
-  	if ( history && "pushState" in history && "replaceState" in history )
+  	if ( history && "pushState" of history )
   		"history"
   	else
   		"hash"
@@ -28,4 +28,8 @@ YJ.reopen(
 )
 
 YJ.searchPhrase = ''
+
+# Defer readiness here so we can do a quick check on the user and send it over if we have one.
+# see user.js.coffee for advanceReadiness() after checking for user.
+YJ.deferReadiness()
 

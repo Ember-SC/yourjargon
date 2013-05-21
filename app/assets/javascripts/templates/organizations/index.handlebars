@@ -1,4 +1,7 @@
-<button {{action toOrganizationNew}} class="btn"> New Organization </button><br />
-{{#each organization in controller}}
-    <a {{action toOrganizationProfile organization}} href="true"> {{organization.name}} </a><br />
+{{#linkTo "organizations.new" }}<button class="btn"> New Organization </button> {{/linkTo}}<br />
+<h3> Organizations list: </h3>
+<ul>
+{{#each organization in content}}
+    <li>{{#linkTo "organization" organization}} {{organization.name}} {{/linkTo}}</li>
 {{/each}}
+</ul>
