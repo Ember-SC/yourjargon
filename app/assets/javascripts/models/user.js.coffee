@@ -4,7 +4,6 @@ YJ.User = DS.Model.extend(
   memberships: DS.hasMany("YJ.Membership", embedded: true)
 
   organizations: (->
-    console.log(@get('memberships.length'))
     @get('memberships').map (membership, index, memberships) ->
       membership.get('organization')
   ).property('memberships.@each.organization')
@@ -27,33 +26,19 @@ YJ.User = DS.Model.extend(
     @membershipForOrganization(organization).get("isOwner")
 )
 YJ.User.reopenClass(
-  loadFromCookie: (api_key) ->
+  loadFromCookie: (cookie) ->
     self = @
-    $.ajax
-      url: "/users/#{api_key}"
-      type: "GET"
-      async: false
-      dataType: 'json'
-      success: (data) ->
-        loaded = YJ.store.load(YJ.User, data.user)
-        YJ.set('currentUser', YJ.User.find(loaded.id))
-        true
-      error: (data) ->
-        false
-
-  checkUser: ->
-     cookie = $.cookie('account')
-     me = @
-     Ember.run.next ->
-       if cookie
-         console.log("Me gots a cookie")
-         if YJ.User.loadFromCookie(cookie)
-           console.log("We be routin to dashboard")
-           me.transitionTo('user.dashboard')
-         else
-           $.removeCookie('account')
-           me.transitionTo('home')
-       else
-        me.transitionTo('home')
-
+    promise = Ember.$.getJSON("/api/users/#{cookie}")
+    promise.then((data)->
+      loaded = YJ.store.load(YJ.User, data.user)
+      YJ.set('currentUser', YJ.User.find(loaded.id))
+    )
+    promise
+)
+# Lets check for the user
+promise = YJ.User.loadFromCookie(Ember.$.cookie('account'))
+promise.then(->
+  YJ.advanceReadiness()
+, ->
+  YJ.advanceReadiness()
 )

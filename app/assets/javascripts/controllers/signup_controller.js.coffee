@@ -7,7 +7,6 @@ YJ.UserSignupController = Em.Controller.extend(
     #make a create call to the server for a user
     # if success set content from response and create session and return true
     # if failure return false
-    console.log(JSON.stringify({name: @get('name'), email: @get('email'), password: @get('password')}))
     self = @
     signup = $.ajax
       type: 'POST'

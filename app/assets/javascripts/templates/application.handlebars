@@ -1,4 +1,4 @@
-{{view YJ.NavbarView}}
+{{template 'navbar'}}
 <div class="container-fluid">
   {{#if alert}}
 	<div class="alert alert-{{unbound alert.type}}">
@@ -7,4 +7,4 @@
   {{/if}}
   {{outlet}}
 </div>
-{{view YJ.Footer}}
+{{template 'footer'}}
