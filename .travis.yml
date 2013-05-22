@@ -1,8 +1,8 @@
 rvm:
   - "1.9.3"
 
-script: 'bundle exec guard-jasmine'
+script: 'bundle exec rake konacha:run'
 
 branches:
   only:
-    - develop
+    - master
