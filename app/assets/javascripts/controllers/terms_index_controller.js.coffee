@@ -12,7 +12,6 @@ YJ.TermsIndexController = Ember.ArrayController.extend(
   searchPhrase: null
   content: []
   sortProperties: ['name']
-  isDefined: null
   alphabet: ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
   retrieveAllTerms: ->
@@ -31,28 +30,19 @@ YJ.TermsIndexController = Ember.ArrayController.extend(
     @transitionToRoute('term', term)
 
 
-  filtered: (->
+  filtered: Ember.computed ->
     noSearchLetter = @get('searchLetter') is null
-    noDefined = @get('isDefined') is null
-    #noSearchPhrase = @get('searchPhrase') is null
     arranged = @get('arrangedContent')
-    myself = @
-    arranged.filter (item, index, arranged) ->
-      if noSearchLetter && noDefined
-        true
-      else if !noSearchLetter && noDefined
-        myself.filterSearchLetter(item)
-      else if noSearchLetter && !noDefined
-        myself.filterIsDefined(item)
-      else
-        myself.filterIsDefined(item) && myself.filterSearchLetter(item)
-  ).property('searchLetter','@each.isDefined')
+    controller = @
+    if noSearchLetter
+      arranged
+    else
+      arranged.filter (item) ->
+        controller.filterSearchLetter(item)
+  .property('searchLetter', 'arrangedContent')
 
   filterSearchLetter: (item) ->
      item.get('firstLetter') == @get('searchLetter')
-
-  filterIsDefined: (item) ->
-     item.get('isDefined') == @get('isDefined')
 
   computeSearchResults: ->
     @set('content', YJ.Term.find({search: @get('searchPhrase')}))
