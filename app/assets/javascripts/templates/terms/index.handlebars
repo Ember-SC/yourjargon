@@ -1,14 +1,15 @@
 <div class="container-fluid">
   <div class="row-fluid" id="bottom-scrollable">
-    <div class="span6">
+    <div class="span9">
       <b> {{hello}} </b>
-      <ul class="terms-list">
-        {{#each term in controller.content}}
-        <li><a {{action toShow term}} href=false > {{term.name}} </a> </li>
+      <dl class="terms-list">
+        {{#each term in controller itemViewClass="YJ.TermItemView"}}
+          <dt><dfn>{{#linkTo "term" term}}{{term.name}}{{/linkTo}}</dfn></dt>
+          <dd> {{view.description}}</dd>
         {{/each}}
-      </ul>
+      </dl>
     </div>
-    <div class="span6">
+    <div class="span3">
       {{template "alphabet" }}
     </div>
   </div>

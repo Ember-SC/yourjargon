@@ -18,14 +18,18 @@ YJ.TermsIndexController = Ember.ArrayController.extend(
   retrieveAllTerms: ->
     @set('content', YJ.Term.find())
 
-  allTerms: ((event) ->
+  allTerms: ( ->
     # The user clicked the 'all' link in the alphabet list
     @set('searchLetter', null)
   )
   
-  filterTerms: ((event) ->
-    @set('searchLetter', event.context)
+  filterTerms: ((letter) ->
+    @set('searchLetter', letter)
   )
+
+  toTerm: (term) ->
+    @transitionToRoute('term', term)
+
 
   filtered: (->
     noSearchLetter = @get('searchLetter') is null
