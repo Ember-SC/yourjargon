@@ -45,6 +45,7 @@ end
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development, :test do
+  gem 'poltergeist'
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'konacha', git: 'git@github.com:Ember-SC/konacha.git', branch: 'qunit'
