@@ -14,14 +14,6 @@ YJ.UserDashboardRoute = Ember.Route.extend(
       @transitionTo('organizations.organization.show', event.context)
     )
 
-  activate: ->
-    if YJ.get('currentUser')
-      console.log("i'm in your dashboard outlets " + YJ.get('currentUser'))
-    else
-      @send('checkUser')
-
-
-  setupController: ( (controller, model) ->
-    controller.setUser()
-  )
+  model: ->
+    YJ.get('currentUser')
 )
