@@ -38,5 +38,7 @@ Yourjargon::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  # ember-rails config.  Serves up development versions of libraries.
+  config.ember.variant = :development
 
 end

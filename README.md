@@ -11,17 +11,15 @@ In addition, it shows off the features of EmberJS for a small application that d
  * Bindings
  * Observers
  * Computed Properties
- * Dynamic filtering & sorting in an ember array controller
  * Use of Ember-Data's RESTAdapter
- * Rails 3.2 application w/ active-model-serializer gem in coordination w/ ember-data
- * Jasmine test suite
+ * Rails application w/ active-model-serializer gem in coordination w/ ember-data
  * Use of Twitter Bootstrap
 
 # Installation
 
 See the wiki to get your machine setup:
 
- * https://github.com/OC-Emberjs/yourjargon/wiki/Installation-&-Preparation
+ * https://github.com/Ember-SC/yourjargon/wiki/Installation-&-Preparation
 
 ## Prerequisites
 
@@ -60,6 +58,12 @@ Then browse [localhost:3500](localhost:3500)
 
 Observe the test report. *NOTE: this is set up so that every time you save a javascript file,
 all the client tests are run again.*
+
+# Updating dependencies
+
+Using the ember-rails gem you can pull ember & ember-data to the latest w/ this command:
+
+rails generate ember:install --head
 
 # Contributing
 
