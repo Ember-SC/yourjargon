@@ -1,13 +1,12 @@
 <h2>My Dashboard</h2>
 <div class="well">
     <h4>Your Organizations
-    {{#linkTo "organizations.new"}} <button class="btn"> Create Organization </button>&nbsp;&nbsp; {{/linkTo}}
-    {{#linkTo "organizations"}} <button class="btn"> Search Organizations </button> {{/linkTo}}
+    {{#linkTo "organizations.new"}} <button class="btn"> Create </button>&nbsp;&nbsp; {{/linkTo}}
+    {{#linkTo "organizations"}} <button class="btn"> Search </button> {{/linkTo}}
     </h4>
     <div class="container-fluid">
         <div class="row-fluid" id="bottom-scrollable">
             <div class="span6">
-                <h5> My Organizations </h5>
                 <ul class="orgs-list">
                     {{#each organization in organizations}}
                         <li>{{#linkTo "organization" organization}} {{organization.name}} {{/linkTo}}</li>
