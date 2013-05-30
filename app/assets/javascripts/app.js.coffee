@@ -13,6 +13,7 @@ Ember.Router.reopen(
 ###
 window.YJ = Em.Application.create(
   LOG_TRANSITIONS: true
+  LOG_ACTIVE_GENERATIONS: true
 
 )
 
