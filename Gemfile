@@ -26,6 +26,7 @@ gem 'foreman'
 gem 'thin'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'bootstrap-sass', '~> 2.1.0.0'
+gem 'paper_trail'
 
 group :production do
   gem 'pg'
