@@ -42,7 +42,7 @@ Teabag.setup do |config|
     # Available frameworks: teabag-jasmine, teabag-mocha, teabag-qunit
     #
     # Note: To use the CoffeeScript source files use `"teabag/jasmine"` etc.
-    suite.javascripts = ["teabag-jasmine"]
+    suite.javascripts = ["teabag-mocha"]
 
     # If you want to change how Teabag looks, or include your own stylesheets you can do that here. The default is the
     # stylesheet for the HTML reporter.

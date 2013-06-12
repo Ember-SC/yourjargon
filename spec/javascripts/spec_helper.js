@@ -1,7 +1,4 @@
 // Teabag includes some support files, but you can use anything from your own support path too.
-// require support/jasmine-jquery
-// require support/sinon
-// require support/your-support-file
 //
 // Deferring execution
 // If you're using CommonJS, RequireJS or some other asynchronous library you can defer execution. Call Teabag.execute()
@@ -22,5 +19,24 @@
 // For more information: http://github.com/modeset/teabag
 //
 // You can require javascript files here. A good place to start is by requiring your application.js.
-//= require application
+
+
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
+//= require handlebars
+//= require ember
+//= require ember-data
+//= require support/jquery.cookie
+//= require app
+//= require app_config
+//= require router
+
+//= require support/chai
+//= require support/chai-jquery
+//= require support/sinon
+//= require support/ember-test-helpers
+//= require support/adapter
+//= require support/setup
+//= require support/test_helper
 

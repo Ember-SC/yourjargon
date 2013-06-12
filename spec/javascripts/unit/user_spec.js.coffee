@@ -2,7 +2,7 @@
 
 describe("User", ->
   it("is ok", ->
-    expect(true).toBeTruthy
+    expect(true).to.be.ok
   )
 )
 
