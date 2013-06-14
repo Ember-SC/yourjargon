@@ -1,12 +1,11 @@
 YJ.User = DS.Model.extend(
   name: DS.attr("string")
   email: DS.attr("string")
-  memberships: DS.hasMany("YJ.Membership", embedded: true)
-
-  organizations: (->
-    @get('memberships').map (membership, index, memberships) ->
-      membership.get('organization')
-  ).property('memberships.@each.organization')
+  memberships: DS.hasMany("YJ.Membership")
+  organizations: Ember.computed ->
+    if memberships = @get('memberships').filterProperty('relationshipsLoaded', true)
+      memberships.getEach('organization')
+  .property('memberships.@each.relationshipsLoaded')
 
   createOrganization: (name) ->
     org = YJ.Organization.createRecord(name: name)
@@ -23,22 +22,10 @@ YJ.User = DS.Model.extend(
     organization.membershipForUser(@)
 
   isOwner: (organization) ->
-    @membershipForOrganization(organization).get("isOwner")
+    membership = @memberships.findProperty('organization_id', organization.get('id'))
+    if membership
+      membership.get('isOwner')
+    else
+      false
 )
-YJ.User.reopenClass(
-  loadFromCookie: (cookie) ->
-    self = @
-    promise = Ember.$.getJSON("/api/users/#{cookie}")
-    promise.then((data)->
-      loaded = YJ.store.load(YJ.User, data.user)
-      YJ.set('currentUser', YJ.User.find(loaded.id))
-    )
-    promise
-)
-# Lets check for the user
-promise = YJ.User.loadFromCookie(Ember.$.cookie('account'))
-promise.then(->
-  YJ.advanceReadiness()
-, ->
-  YJ.advanceReadiness()
-)
+
