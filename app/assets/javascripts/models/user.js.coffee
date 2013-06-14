@@ -1,12 +1,9 @@
 YJ.User = DS.Model.extend(
   name: DS.attr("string")
   email: DS.attr("string")
-  memberships: DS.hasMany("YJ.Membership", embedded: true)
-
-  organizations: (->
-    @get('memberships').map (membership, index, memberships) ->
-      membership.get('organization')
-  ).property('memberships.@each.organization')
+  organizations: DS.hasMany("YJ.Organization",
+    inverse: "users"
+  )
 
   createOrganization: (name) ->
     org = YJ.Organization.createRecord(name: name)

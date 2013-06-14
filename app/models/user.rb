@@ -22,11 +22,10 @@ class User < ActiveRecord::Base
    end
 
    def create_organization(org_name)
-     org = Organization.new
-     org.name = org_name
+     org = Organization.create(name: org_name)
      org.users << self
      org.save!
-     memberships = Membership.all(:conditions => {:organization_id => org.id, :user_id => id} )
+     memberships = org.memberships
      raise "Couldn't find membership just created" unless memberships.count == 1
      membership = memberships.first
      membership.is_owner = true
