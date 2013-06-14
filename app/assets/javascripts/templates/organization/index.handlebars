@@ -1,9 +1,9 @@
 <div id="showOrganizationView" class='well'>
     <h1> {{name}} </h1>
-       <h5> Members: {{users.length}} </h5>
+       <h5> Members: {{users.length}} {{#unless isMember}}<button {{action join}}> Join </button>{{/unless}}</h5>
        <ul>
        {{#each user in users}}
-         <li>{{user.email}} <button>Remove</button></li>
+         <li>{{user.email}} {{#if isOwner}} <button>Remove</button>{{/if}}</li>
        {{/each}}
        </ul>
     <br />

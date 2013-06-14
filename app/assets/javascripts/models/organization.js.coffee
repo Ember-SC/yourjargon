@@ -8,9 +8,11 @@
 
 YJ.Organization = DS.Model.extend(
   name: DS.attr("string")
-  users: DS.hasMany("YJ.User",
-    inverse: 'organizations'
-  )
+  memberships: DS.hasMany("YJ.Membership")
+  users: Ember.computed ->
+    if memberships = @get('memberships').filterProperty('relationshipsLoaded', true)
+      memberships.getEach('user')
+  .property('memberships')
   terms: DS.hasMany("YJ.Term")
   owner: DS.belongsTo("YJ.User")
 
@@ -18,12 +20,19 @@ YJ.Organization = DS.Model.extend(
     @get('users').someProperty('id', YJ.get('currentUser.id'))
   .property('users')
 
+  isOwner: Ember.computed ->
+    @get('owner.id') == YJ.get('currentUser.id')
+  .property('owner', 'YJ.currentUser')
+
   enroll: (user) ->
-    @get('users').pushObject(user)
-    user
+    membership = YJ.Membership.createRecord(
+      user: user
+      organization: @
+    )
+    membership.save()
 
   drop: (user) ->
-    @get('users').removeObject(user)
+    #FIXME
 
   publish: (term) ->
     terms = @get('terms')
