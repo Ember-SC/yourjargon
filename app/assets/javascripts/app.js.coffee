@@ -28,7 +28,3 @@ YJ.reopen(
 )
 
 YJ.searchPhrase = ''
-
-# Defer readiness here so we can do a quick check on the user and send it over if we have one.
-# see user.js.coffee for advanceReadiness() after checking for user.
-YJ.deferReadiness()
