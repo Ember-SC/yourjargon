@@ -3,10 +3,7 @@ YJ.Membership = DS.Model.extend(
   user: DS.belongsTo("YJ.User")
   isOwner: DS.attr("boolean")
   canModify: DS.attr("boolean")
-
-  setOwner: ->
-    @set('isOwner', true)
-
-  clearOwner: ->
-    @set('isOwner', false)
+  relationshipsLoaded: Ember.computed ->
+  	@get('user.isLoaded') and @get('organization.isLoaded')
+  .property('user.isLoaded', 'organization.isLoaded')
 )
