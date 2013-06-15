@@ -3,7 +3,7 @@ YJ.Router.map ->
     path: "/"
   @resource 'terms', ->
     @route('new')
-    @resource 'term'
+    @resource 'term',
       path: '/:term_id'
     , ->
       @route "edit"
@@ -15,7 +15,7 @@ YJ.Router.map ->
     @route "logout"
   @resource "organizations", ->
     @route "new"
-    @resource "organization"
+    @resource "organization",
       path: '/:organization_id'
     , ->
       @route "profile"

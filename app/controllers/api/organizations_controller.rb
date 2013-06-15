@@ -1,5 +1,6 @@
 class Api::OrganizationsController < ApplicationController
   respond_to :json
+  before_filter :authorize, :only => [:create, :update]
 
   def index
     if ids = params[:ids]
@@ -22,9 +23,7 @@ class Api::OrganizationsController < ApplicationController
 
   # POST api/organizations
   def create
-    @organization = Organization.new(params[:organization])
-
-    if @organization.save
+    if @organization = current_user.create_organization(params[:organization][:name])
       render json: @organization, status: :created
     else
       render json: @organization.errors, status: :unprocessable_entity
@@ -33,6 +32,7 @@ class Api::OrganizationsController < ApplicationController
 
   # PUT api/organizations/1
   def update
+
     @organization = Organization.find(params[:id])
 
     if @organization.update_attributes(params[:organization])
@@ -47,6 +47,15 @@ class Api::OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     @organization.destroy
     render json: @organization, status: :no_content
+  end
+
+  private
+
+  def authorize
+    # We should actually check that the user has permission on the resource also
+    if !current_user
+      render status: 401
+    end
   end
 
 end
